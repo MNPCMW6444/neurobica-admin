@@ -114,8 +114,8 @@ tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-tr:hover {
-  background-color: #ddd;
+tr:nth-child(odd) {
+  background-color: #abed5bc5;
 }
 
 th {
