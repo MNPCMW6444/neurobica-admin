@@ -13,8 +13,7 @@ function Ras() {
 
   useEffect(() => {
     async function getit() {
-      const res = await Axios.get(`https://asdasdasd/all`);
-      debugger;
+      const res = await Axios.get("https://neuronbica-admin.herokuapp.com/all");
       if (res.data.length > 0) setitems(res.data);
     }
     getit();
