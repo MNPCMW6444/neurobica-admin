@@ -9,10 +9,21 @@ body {
 }
 h1 {
   color: blue;
-
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   font-weight: 900;
   font-size: 50pt;
   background-color: rgba(248, 253, 255, 0.425);
+  border-radius: 100px;
+}
+
+h2 {
+  color: blue;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-weight: 900;
+  font-size: 30pt;
+  background-color: rgba(141, 225, 138, 0.64);
+  color: rgb(0, 56, 35);
+  border-radius: 100px;
 }
 
 .process {
@@ -76,4 +87,41 @@ h1 {
   to {
     transform: rotate(360deg);
   }
+}
+
+.rbutton {
+  font-size: 50pt;
+  border-radius: 30px;
+  background-color: rgb(141, 225, 138);
+  color: rgb(0, 56, 35);
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04aa6d;
+  color: white;
 }
