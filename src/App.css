@@ -1,0 +1,79 @@
+body {
+  background-image: url("logo.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.App {
+  text-align: center;
+}
+h1 {
+  color: blue;
+
+  font-weight: 900;
+  font-size: 50pt;
+  background-color: rgba(248, 253, 255, 0.425);
+}
+
+.process {
+  background-color: rgba(248, 253, 255, 0.425);
+}
+
+.taskred {
+  background-color: red;
+  font-size: 30pt;
+  border-radius: 18%;
+}
+
+.taskred2 {
+  background-color: rgb(0, 255, 234);
+  font-size: 30pt;
+  border-radius: 18%;
+}
+
+.taskgreen {
+  background-color: rgb(53, 230, 53);
+  font-size: 30pt;
+  border-radius: 18%;
+}
+
+.arrow {
+  color: blue;
+  font-size: 40pt;
+  font-weight: 900;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
