@@ -18,7 +18,7 @@ function Login(props) {
       await Axios.post("http://localhost:5000/login", loginData);
       async function getUser() {
         const userRes = await Axios.get("http://localhost:5000/loggedIn");
-        props.set0user(userRes.data);
+        props.setuser(userRes.data);
       }
       await getUser();
     } catch (err) {

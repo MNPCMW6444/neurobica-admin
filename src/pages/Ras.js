@@ -5,13 +5,12 @@ import Modal from "react-modal";
 function Ras() {
   const [in1, setin1] = useState();
   const [in2, setin2] = useState();
-  const [in3, setin3] = useState();
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const [items, setitems] = useState([
     {
-      Publishedby: "checking what is the Publishedby with server",
+      name: "checking what is the Publishedby with server",
       PublishTime: "checking what is the PublishTime with server",
       Signedby: "checking what is the Signedby with server",
       TargetTime: "checking what is the TargetTime with server",
@@ -50,6 +49,13 @@ function Ras() {
     setIsOpen(false);
   }
 
+  async function send() {
+    const res = await Axios.post("http://localhost:5000/publish", {
+      desc: in1,
+      time: in2,
+    });
+  }
+
   return (
     <div className="Ras">
       <h2>Read & Sign</h2>
@@ -61,22 +67,27 @@ function Ras() {
         contentLabel="Example Modal"
       >
         <div style={{}}>
-          <h2 style={{ fontSize: "30pt", textAlign: "center" }}>
-            טופס הוספת משתמש חדש:
-          </h2>
+          <h3 style={{ fontSize: "30pt", textAlign: "center" }}>
+            Publish a new publication:
+          </h3>
           <br /> <br />
           <div style={{ display: "flex" }}>
             <div style={{ width: "50%", textAlign: "center" }}>
-              <h2>מספר אישי:</h2>
+              <h3 style={{ height: "250px" }}>Description:</h3>
               <br />
-              <h2>כינוי:</h2>
-              <br />
-              <h2>סיסמה ראשונית:</h2>
+              <h3>Target Date:</h3>
               <br />
             </div>
-            <div style={{ width: "50%", float: "left", textAlign: "center" }}>
+            <div
+              style={{
+                width: "50%",
+                float: "left",
+                textAlign: "center",
+                height: "200px",
+              }}
+            >
               <br />{" "}
-              <input
+              <textarea
                 onChange={(e) => {
                   setin1(e.target.value);
                 }}
@@ -85,7 +96,7 @@ function Ras() {
                   textAlign: "center",
                   fontSize: "18pt",
                   width: "70%",
-                  height: "23px",
+                  height: "230px",
                 }}
               />
               <br /> <br />
@@ -95,6 +106,7 @@ function Ras() {
                   setin2(e.target.value);
                 }}
                 value={in2}
+                type="date"
                 style={{
                   textAlign: "center",
                   fontSize: "18pt",
@@ -103,54 +115,6 @@ function Ras() {
                 }}
               />
               <br /> <br />
-              <br /> <br />
-              <input
-                onChange={(e) => {
-                  setin3(e.target.value);
-                }}
-                value={in3}
-                style={{
-                  textAlign: "center",
-                  fontSize: "18pt",
-                  width: "30%",
-                  height: "23px",
-                }}
-              />{" "}
-              <button
-                onClick={() => {
-                  var result = "";
-                  var characters =
-                    /* "ABCDEFGHIJKLMNOPQRSTUVWXYZ4567890abcdefghijklmnopqrstuv" +*/ "wxyz123";
-                  var charactersLength = characters.length;
-                  for (var i = 0; i < 6; i++) {
-                    result += characters.charAt(
-                      Math.floor(Math.random() * charactersLength)
-                    );
-                  }
-                  setin3(result);
-                }}
-                style={{ width: "20%", fontSize: "18pt" }}
-              >
-                צור קל
-              </button>
-              <button
-                onClick={() => {
-                  var result = "";
-                  var characters =
-                    "ABCDEFGHIJKLMNOPQRSTUVWXYZ4567890abcdefghijklmnopqrstuv" +
-                    "wxyz123";
-                  var charactersLength = characters.length;
-                  for (var i = 0; i < 10; i++) {
-                    result += characters.charAt(
-                      Math.floor(Math.random() * charactersLength)
-                    );
-                  }
-                  setin3(result);
-                }}
-                style={{ width: "20%", fontSize: "18pt" }}
-              >
-                צור קשה
-              </button>
             </div>
           </div>
           <br />
@@ -167,47 +131,48 @@ function Ras() {
               height: "50px",
             }}
           >
-            בטל
-          </button>
+            Cancel
+          </button>{" "}
           <button
             style={{
               width: "87px",
               height: "50px",
               backgroundColor: "unset",
+              border: "0px solid black",
               cursor: "unset",
             }}
           ></button>
           <button
             onClick={async () => {
-              if (/* await send() */ true) {
+              if (await send()) {
                 setin1("");
                 setin2("");
-                setin3("");
               } else {
               }
             }}
             style={{ fontSize: "16pt", width: "300px", height: "50px" }}
           >
-            שמור והוסף משתמש חדש
-          </button>
+            Save
+          </button>{" "}
           <button
             style={{
               width: "87px",
               height: "50px",
               backgroundColor: "unset",
+              border: "0px solid black",
               cursor: "unset",
             }}
           ></button>
           <button
             onClick={async () => {
-              if (/* await send() */ true) {
+              if (await send()) {
                 closeModal();
               } else {
               }
             }}
             style={{ fontSize: "16pt", width: "300px", height: "50px" }}
           >
-            שמור וחזור לספר טלפונים
+            Save and close
           </button>
         </div>
       </Modal>
@@ -237,7 +202,7 @@ function Ras() {
           {items &&
             items.map((item, i) => (
               <tr key={i}>
-                <td>{item.Publishedby}</td>
+                <td>{item.name}</td>
                 <td>{item.PublishTime}</td>
                 <td>{item.Signedby}</td>
                 <td>{item.TargetTime}</td>
