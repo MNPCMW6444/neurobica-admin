@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Ras from "./pages/Ras";
 import Tasks from "./pages/Tasks";
 import Login from "./pages/Login";
+import domain from "./domain";
 
 function App() {
   const [home, sethome] = useState(true);
@@ -15,9 +16,7 @@ function App() {
   Axios.defaults.withCredentials = true;
 
   async function getUser() {
-    const userRes = await Axios.get(
-      "https://neuronbica-admin.herokuapp.com/loggedIn"
-    );
+    const userRes = await Axios.get(domain + "/loggedIn");
     setUser(userRes.data);
   }
   useEffect(() => {

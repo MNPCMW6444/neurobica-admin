@@ -18,7 +18,7 @@ function Ras() {
   ]);
   useEffect(() => {
     async function getit() {
-      const res = await Axios.get("https://neuronbica-admin.herokuapp.com/all");
+      const res = await Axios.get(domain + "/all");
       if (res.data.length > 0) setitems(res.data);
     }
 
@@ -49,13 +49,10 @@ function Ras() {
   }
 
   async function send() {
-    const res = await Axios.post(
-      "https://neuronbica-admin.herokuapp.com/publish",
-      {
-        desc: in1,
-        time: in2,
-      }
-    );
+    const res = await Axios.post(domain + "/publish", {
+      desc: in1,
+      time: in2,
+    });
   }
 
   return (
