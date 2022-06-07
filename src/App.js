@@ -15,7 +15,9 @@ function App() {
   Axios.defaults.withCredentials = true;
 
   async function getUser() {
-    const userRes = await Axios.get("http://localhost:5000/loggedIn");
+    const userRes = await Axios.get(
+      "https://neuronbica-admin.herokuapp.com/loggedIn"
+    );
     setUser(userRes.data);
   }
   useEffect(() => {

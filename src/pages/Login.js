@@ -15,9 +15,14 @@ function Login(props) {
     };
 
     try {
-      await Axios.post("http://localhost:5000/login", loginData);
+      await Axios.post(
+        "https://neuronbica-admin.herokuapp.com/login",
+        loginData
+      );
       async function getUser() {
-        const userRes = await Axios.get("http://localhost:5000/loggedIn");
+        const userRes = await Axios.get(
+          "https://neuronbica-admin.herokuapp.com/loggedIn"
+        );
         props.setuser(userRes.data);
       }
       await getUser();
@@ -31,7 +36,7 @@ function Login(props) {
       {props.user ? (
         <button
           onClick={async () => {
-            Axios.get("http://localhost:5000/logout");
+            Axios.get("https://neuronbica-admin.herokuapp.com/logout");
             props.setuser(null);
           }}
           style={{ color: "red", width: "10%" }}
