@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Axios from "axios";
 import Modal from "react-modal";
+import domain from "../domain";
 
 function Ras() {
   const [in1, setin1] = useState();
