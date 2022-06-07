@@ -1,3 +1,3 @@
-export default process.env.NODE_ENV === "asd"
+export default process.env.NODE_ENV === "production"
   ? "https://neuronbica-admin.herokuapp.com"
-  : "http://localhasdost:5000";
+  : "http://XXXlocalhost:5000";
