@@ -202,10 +202,16 @@ function Ras() {
           {items &&
             items.map((item, i) => (
               <tr key={i}>
-                <td>{item.name}</td>
-                <td>{item.PublishTime}</td>
-                <td>{item.Signedby}</td>
-                <td>{item.TargetTime}</td>
+                <td>{item.owner}</td>
+                <td>{item.CreatedAt}</td>
+                <td>
+                  {1 +
+                    (item.sign1 ? 1 : 0) +
+                    (item.sign2 ? 1 : 0) +
+                    (item.sign3 ? 1 : 0) +
+                    "/4"}
+                </td>
+                <td>{item.time}</td>
               </tr>
             ))}
         </tbody>
