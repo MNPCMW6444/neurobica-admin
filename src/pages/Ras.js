@@ -6,21 +6,20 @@ import domain from "../domain";
 function Ras() {
   const [in1, setin1] = useState();
   const [in2, setin2] = useState();
+  const [mouse, setmouse] = useState(new Array());
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
-  const [items, setitems] = useState([
-    {
-      name: "checking what is the Publishedby with server",
-      PublishTime: "checking what is the PublishTime with server",
-      Signedby: "checking what is the Signedby with server",
-      TargetTime: "checking what is the TargetTime with server",
-    },
-  ]);
+  const [items, setitems] = useState([{}]);
   useEffect(() => {
     async function getit() {
       const res = await Axios.get(domain + "/all");
       if (res.data.length > 0) setitems(res.data);
+      let newarray = new Array();
+      for (let i = 0; i < res.data.length; i++) {
+        newarray.push(false);
+      }
+      setmouse(newarray);
     }
 
     getit();
@@ -202,16 +201,43 @@ function Ras() {
           {items &&
             items.map((item, i) => (
               <tr key={i}>
-                <td>{item.owner}</td>
-                <td>{new Date(item.createdAt).toLocaleString()}</td>
+                <td>{item.owner || "Loading..."}</td>
                 <td>
-                  {1 +
-                    (item.sign1 ? 1 : 0) +
-                    (item.sign2 ? 1 : 0) +
-                    (item.sign3 ? 1 : 0) +
-                    "/4"}
+                  {item.createdAt
+                    ? new Date(item.createdAt).toLocaleString()
+                    : "Loading..."}
                 </td>
-                <td>{new Date(item.time).toLocaleString()}</td>
+                <td
+                  onMouseEnter={() => {
+                    let mousese = mouse;
+                    mousese[i] = true;
+                    setmouse(mousese);
+                  }}
+                  onMouseLeave={() => {
+                    let mousese = mouse;
+                    mousese[i] = false;
+                    setmouse(mousese);
+                  }}
+                >
+                  {item.owner
+                    ? 1 +
+                      (item.sign1 ? 1 : 0) +
+                      (item.sign2 ? 1 : 0) +
+                      (item.sign3 ? 1 : 0) +
+                      "/4"
+                    : "Loading..."}
+                  <div
+                    className="hover"
+                    style={{ visibility: mouse[i] ? "unset" : "hidden" }}
+                  >
+                    asasdsad
+                  </div>
+                </td>
+                <td>
+                  {item.time
+                    ? new Date(item.time).toLocaleString()
+                    : "Loading..."}
+                </td>
               </tr>
             ))}
         </tbody>
