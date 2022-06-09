@@ -203,7 +203,7 @@ function Ras() {
             items.map((item, i) => (
               <tr key={i}>
                 <td>{item.owner}</td>
-                <td>{item.CreatedAt}</td>
+                <td>{new Date(item.createdAt).toLocaleString()}</td>
                 <td>
                   {1 +
                     (item.sign1 ? 1 : 0) +
@@ -211,7 +211,7 @@ function Ras() {
                     (item.sign3 ? 1 : 0) +
                     "/4"}
                 </td>
-                <td>{item.time}</td>
+                <td>{new Date(item.time).toLocaleString()}</td>
               </tr>
             ))}
         </tbody>
