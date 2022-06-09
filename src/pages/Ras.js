@@ -226,16 +226,13 @@ function Ras() {
                       (item.sign3 ? 1 : 0) +
                       "/4"
                     : "Loading..."}
-                  <div
-                    className="hover"
-                    style={{ visibility: mouse[i] ? "unset" : "hidden" }}
-                  >
-                    asasdsad
-                  </div>
+                  <div className={"hover" + mouse[i]}>asasdsad</div>
                 </td>
                 <td>
-                  {item.time
-                    ? new Date(item.time).toLocaleString()
+                  {item.owner
+                    ? item.time
+                      ? new Date(item.time).toLocaleString()
+                      : "-"
                     : "Loading..."}
                 </td>
               </tr>

@@ -111,11 +111,11 @@ th {
 }
 
 tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #f2f2f2ce;
 }
 
 tr:nth-child(odd) {
-  background-color: #abed5bc5;
+  background-color: #abed5bd5;
 }
 
 th {
@@ -126,7 +126,14 @@ th {
   color: white;
 }
 
-.hover {
+.hoverfalse {
+  position: absolute;
+  background-color: rgba(13, 167, 64, 0.567);
+  padding: 50px;
+  visibility: hidden;
+}
+
+.hovertrue {
   position: absolute;
   background-color: rgba(13, 167, 64, 0.567);
   padding: 50px;
