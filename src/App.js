@@ -8,6 +8,8 @@ import Tasks from "./pages/Tasks";
 import Login from "./pages/Login";
 import domain from "./domain";
 
+import { requestPermission } from "./push-notification";
+
 function App() {
   const [home, sethome] = useState(true);
   const [rasortasks, setrasortasks] = useState(false);
@@ -34,6 +36,9 @@ function App() {
       ) : (
         <Tasks />
       )}
+      <button onClick={requestPermission}>
+        Click to receive notifications
+      </button>
     </div>
   );
 }
