@@ -6,7 +6,7 @@ import domain from "../domain";
 function Ras() {
   const [in1, setin1] = useState();
   const [in2, setin2] = useState();
-  const [mouse, setmouse] = useState(new Array());
+  //const [mouse, setmouse] = useState(new Array());
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -14,12 +14,12 @@ function Ras() {
   useEffect(() => {
     async function getit() {
       const res = await Axios.get(domain + "/all");
-      if (res.data.length > 0) setitems(res.data);
-      let newarray = new Array();
-      for (let i = 0; i < res.data.length; i++) {
-        newarray.push(false);
+      let itemsb = new Array();
+      if (res.data.length > 0) itemsb = res.data;
+      for (let i = 0; i < itemsb.length; i++) {
+        itemsb[i].mouse = false;
       }
-      setmouse(newarray);
+      setitems(itemsb);
     }
 
     getit();
@@ -209,14 +209,14 @@ function Ras() {
                 </td>
                 <td
                   onMouseEnter={() => {
-                    let mousese = mouse;
-                    mousese[i] = true;
-                    setmouse(mousese);
+                    let a = items;
+                    items[i].mouse = true;
+                    setitems(a);
                   }}
                   onMouseLeave={() => {
-                    let mousese = mouse;
-                    mousese[i] = false;
-                    setmouse(mousese);
+                    let a = items;
+                    items[i].mouse = false;
+                    setitems(a);
                   }}
                 >
                   {item.owner
@@ -226,7 +226,7 @@ function Ras() {
                       (item.sign3 ? 1 : 0) +
                       "/4"
                     : "Loading..."}
-                  <div className={"hover" + mouse[i]}>asasdsad</div>
+                  <div className={"hover" + item.mouse}>asasdsad</div>
                 </td>
                 <td>
                   {item.owner
