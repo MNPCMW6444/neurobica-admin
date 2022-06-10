@@ -27,7 +27,7 @@ function App() {
     // ...
     Store.addNotification({
       title: payload.notification.title,
-      message: payload.notification.message,
+      message: payload.notification.body,
       type: "success",
       insert: "top",
       container: "top-right",
