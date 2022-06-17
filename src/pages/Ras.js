@@ -3,9 +3,10 @@ import Axios from "axios";
 import Modal from "react-modal";
 import domain from "../domain";
 
-function Ras() {
+function Ras(props) {
   const [in1, setin1] = useState();
   const [in2, setin2] = useState();
+  const [me, setme] = useState();
   //const [mouse, setmouse] = useState(new Array());
 
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -53,6 +54,7 @@ function Ras() {
       desc: in1,
       time: in2,
     });
+    return res.data;
   }
 
   return (
@@ -114,6 +116,8 @@ function Ras() {
                 }}
               />
               <br /> <br />
+              <p style={{ color: "green", backgroundColor: "yellow" }}>{me}</p>
+              <br /> <br />
             </div>
           </div>
           <br />
@@ -122,6 +126,10 @@ function Ras() {
           <button
             className="footercancelbutton"
             onClick={() => {
+              setme("");
+
+              setin1("");
+              setin2("");
               closeModal();
             }}
             style={{
@@ -143,9 +151,12 @@ function Ras() {
           ></button>
           <button
             onClick={async () => {
+              setme("");
+
               if (await send()) {
                 setin1("");
                 setin2("");
+                setme("Succsesfully Saved");
               } else {
               }
             }}
@@ -164,7 +175,11 @@ function Ras() {
           ></button>
           <button
             onClick={async () => {
+              setme("");
+
               if (await send()) {
+                setin1("");
+                setin1("");
                 closeModal();
               } else {
               }
@@ -175,6 +190,24 @@ function Ras() {
           </button>
         </div>
       </Modal>
+
+      <div>
+        <button
+          style={{
+            color: "white",
+            fontSize: "15pt",
+            backgroundColor: "red",
+            borderRadius: "100px",
+          }}
+          onClick={() => {
+            const back = props.sethome;
+            back(true);
+          }}
+        >
+          Return Home
+        </button>
+      </div>
+      <br />
       <button
         style={{
           color: "yellow",

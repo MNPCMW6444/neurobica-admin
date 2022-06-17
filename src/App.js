@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 import Home from "./pages/Home";
 import Ras from "./pages/Ras";
-import Tasks from "./pages/Tasks";
+import Notifications from "./pages/Notifications";
 import Login from "./pages/Login";
 import domain from "./domain";
 
@@ -13,8 +13,6 @@ import { ReactNotifications } from "react-notifications-component";
 import { Store } from "react-notifications-component";
 
 import { getMessaging, onMessage } from "firebase/messaging";
-
-import { requestPermission } from "./push-notification";
 
 function App() {
   const [home, sethome] = useState(true);
@@ -55,16 +53,15 @@ function App() {
       <h1 style={{ textAlign: "center" }}>Neurobica Adminnistration</h1>
       <ReactNotifications />
       <Login user={user} setuser={setUser} />
-      {home ? (
-        <Home sethome={sethome} setrasortasks={setrasortasks} />
-      ) : rasortasks ? (
-        <Ras />
-      ) : (
-        <Tasks />
-      )}
-      <button onClick={requestPermission}>
-        Click to receive notifications
-      </button>
+      {user ? (
+        home ? (
+          <Home sethome={sethome} setrasortasks={setrasortasks} />
+        ) : rasortasks ? (
+          <Ras sethome={sethome} setrasortasks={setrasortasks} />
+        ) : (
+          <Notifications sethome={sethome} setrasortasks={setrasortasks} />
+        )
+      ) : null}
     </div>
   );
 }

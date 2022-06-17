@@ -15,13 +15,13 @@ function Home(props) {
       <br />
       <br />
       <button
-        className="rbutton"
+        className="rbuttonsmall"
         onClick={() => {
           props.sethome(false);
           props.setrasortasks(false);
         }}
       >
-        Tasks
+        Notification Settings
       </button>
     </div>
   );
