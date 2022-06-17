@@ -43,7 +43,9 @@ function Login(props) {
         <div className="auth-form">
           <h2>כניסה</h2>
           {error && (
-            <div style={{ color: "red", fontSize: "20pt" }}>{"שגיאה"}</div>
+            <div style={{ color: "red", fontSize: "20pt" }}>
+              "שגיאה: " + {error.toString()}
+            </div>
           )}
           <form className="form" onSubmit={login}>
             <label htmlFor="form-ma">Name:</label>
@@ -64,7 +66,7 @@ function Login(props) {
             />{" "}
             <br></br> <br></br>
             <button className="btn-submit" type="submit">
-              היכנס
+              היכנס OW
             </button>{" "}
             <br></br>
             <br /> <br /> <br></br>
