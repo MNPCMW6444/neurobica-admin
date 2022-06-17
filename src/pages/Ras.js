@@ -7,6 +7,7 @@ function Ras(props) {
   const [in1, setin1] = useState();
   const [in2, setin2] = useState();
   const [me, setme] = useState();
+  const [r, setr] = useState();
   //const [mouse, setmouse] = useState(new Array());
 
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -24,7 +25,7 @@ function Ras(props) {
     }
 
     getit();
-  }, []);
+  }, [r]);
 
   const customStyles = {
     content: {
@@ -47,6 +48,7 @@ function Ras(props) {
 
   function closeModal() {
     setIsOpen(false);
+    setr(Math.random());
   }
 
   async function send() {
@@ -130,6 +132,7 @@ function Ras(props) {
 
               setin1("");
               setin2("");
+
               closeModal();
             }}
             style={{
@@ -159,6 +162,7 @@ function Ras(props) {
                 setme("Succsesfully Saved");
               } else {
               }
+              setr(Math.random());
             }}
             style={{ fontSize: "16pt", width: "300px", height: "50px" }}
           >
@@ -227,6 +231,7 @@ function Ras(props) {
         <tbody>
           <tr>
             <th>Published by</th>
+            <th>Description</th>
             <th>Publish Time</th>
             <th>Signed by</th>
             <th>Target Time</th>
@@ -235,6 +240,7 @@ function Ras(props) {
             items.map((item, i) => (
               <tr key={i}>
                 <td>{item.owner || "Loading..."}</td>
+                <td>{item.desc || "Loading..."}</td>
                 <td>
                   {item.createdAt
                     ? new Date(item.createdAt).toLocaleString()
@@ -243,12 +249,12 @@ function Ras(props) {
                 <td
                   onMouseEnter={() => {
                     let a = items;
-                    items[i].mouse = true;
+                    a[i].mouse = true;
                     setitems(a);
                   }}
                   onMouseLeave={() => {
                     let a = items;
-                    items[i].mouse = false;
+                    a[i].mouse = false;
                     setitems(a);
                   }}
                 >
