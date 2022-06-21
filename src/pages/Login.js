@@ -16,12 +16,16 @@ function Login(props) {
     };
 
     try {
-      await Axios.post(domain + "/login", loginData);
+      const r = ////////
+        await Axios.post(domain + "/login", loginData);
+      const tok = r.data.unsec; //////
+
       async function getUser() {
         const userRes = await Axios.get(domain + "/loggedIn");
         props.setuser(userRes.data);
       }
-      await getUser();
+      //await getUser();
+      props.setuser(tok); /////////
     } catch (err) {
       seterror(err);
     }
