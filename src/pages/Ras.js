@@ -15,7 +15,7 @@ function Ras(props) {
   const [items, setitems] = useState([{}]);
   useEffect(() => {
     async function getit() {
-      const res = await Axios.get(domain + "/all");
+      const res = await Axios.get(domain + "/all/" + props.tok);
       let itemsb = new Array();
       if (res.data.length > 0) itemsb = res.data;
       for (let i = 0; i < itemsb.length; i++) {
@@ -53,6 +53,7 @@ function Ras(props) {
 
   async function send() {
     const res = await Axios.post(domain + "/publish", {
+      tok: props.tok,
       desc: in1,
       time: in2,
     });

@@ -1,5 +1,5 @@
 import Axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import domain from "../domain";
 
 function Login(props) {
@@ -21,11 +21,11 @@ function Login(props) {
       const tok = r.data.unsec; //////
 
       async function getUser() {
-        const userRes = await Axios.get(domain + "/loggedIn");
+        const userRes = await Axios.get(domain + "/loggedIn/" + tok);
         props.setuser(userRes.data);
       }
-      //await getUser();
-      props.setuser(tok); /////////
+      await getUser();
+      props.settoken(tok); /////////
     } catch (err) {
       seterror(err);
     }
@@ -36,8 +36,9 @@ function Login(props) {
       {props.user ? (
         <button
           onClick={async () => {
-            await Axios.get(domain + "/logout");
+            // await Axios.get(domain + "/logout");
             props.setuser(null);
+            props.settoken(null);
           }}
           style={{ color: "red", width: "10%" }}
         >

@@ -19,7 +19,7 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firebase Cloud Messaging and get a reference to the service
 const messaging = getMessaging(app);
 
-export function requestPermission(setmes) {
+export function requestPermission(setmes, tok) {
   console.log("Requesting permission...");
   Notification.requestPermission().then((permission) => {
     if (permission === "granted") {
@@ -31,6 +31,7 @@ export function requestPermission(setmes) {
         if (currentToken) {
           console.log(currentToken);
           const res = await Axios.post(domain + "/notify", {
+            tok: tok,
             token2: currentToken,
           });
           setmes(
