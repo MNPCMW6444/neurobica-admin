@@ -41,7 +41,7 @@ export function requestPermission(setmes) {
                 </div>
                 {res.data.token.map((tok, i) => (
                   <>
-                    <div style={{ fontSize: "13pt" }}>Device {i}: </div>
+                    <div style={{ fontSize: "13pt" }}>Device {i + 1}: </div>
                     <div style={{ fontSize: "9pt" }}>{tok}</div>
                   </>
                 ))}
