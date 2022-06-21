@@ -27,7 +27,7 @@ function Notifications(props) {
       <br />
       <button
         onClick={() => {
-          requestPermission(setmes, props.tok);
+          requestPermission(setmes);
         }}
         style={{
           color: "black",
