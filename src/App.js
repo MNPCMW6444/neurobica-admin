@@ -7,6 +7,7 @@ import Ras from "./pages/Ras";
 import Notifications from "./pages/Notifications";
 import Login from "./pages/Login";
 import domain from "./domain";
+import YoadHeader from "./YoadHeader";
 
 import "react-notifications-component/dist/theme.css";
 import { ReactNotifications } from "react-notifications-component";
@@ -51,7 +52,8 @@ function App() {
 
   return (
     <div className="App">
-      <h1 style={{ textAlign: "center" }}>Neurobica Adminnistration</h1>
+      {/* <h1 style={{ textAlign: "center" }}>Neurobica Adminnistration</h1> */}
+      <YoadHeader />
       <ReactNotifications />
       <Login user={user} setuser={setUser} token={token} settoken={setToken} />
       {user ? (
