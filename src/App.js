@@ -57,7 +57,6 @@ function App() {
       <YoadHeaderlogo />
       <ReactNotifications />
       <Login user={user} setuser={setUser} token={token} settoken={setToken} />
-      <YoadHeadermas />
 
       {user ? (
         home ? (
@@ -72,6 +71,7 @@ function App() {
           />
         )
       ) : null}
+      <YoadHeadermas />
     </div>
   );
 }
