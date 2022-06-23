@@ -70,7 +70,7 @@ function Ras(props) {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <div style={{}}>
+        <div>
           <h3 style={{ fontSize: "30pt", textAlign: "center" }}>
             Publish a new publication:
           </h3>
@@ -228,57 +228,59 @@ function Ras(props) {
       </button>
       <br />
       <br />
-      <table>
-        <tbody>
-          <tr>
-            <th>Published by</th>
-            <th>Description</th>
-            <th>Publish Time</th>
-            <th>Signed by</th>
-            <th>Target Time</th>
-          </tr>
-          {items &&
-            items.map((item, i) => (
-              <tr key={i}>
-                <td>{item.owner || "Loading..."}</td>
-                <td>{item.desc || "Loading..."}</td>
-                <td>
-                  {item.createdAt
-                    ? new Date(item.createdAt).toLocaleString()
-                    : "Loading..."}
-                </td>
-                <td
-                  onMouseEnter={() => {
-                    let a = items;
-                    a[i].mouse = true;
-                    setitems(a);
-                  }}
-                  onMouseLeave={() => {
-                    let a = items;
-                    a[i].mouse = false;
-                    setitems(a);
-                  }}
-                >
-                  {item.owner
-                    ? 1 +
-                      (item.sign1 ? 1 : 0) +
-                      (item.sign2 ? 1 : 0) +
-                      (item.sign3 ? 1 : 0) +
-                      "/4"
-                    : "Loading..."}
-                  <div className={"hover" + item.mouse}>asasdsad</div>
-                </td>
-                <td>
-                  {item.owner
-                    ? item.time
-                      ? new Date(item.time).toLocaleString()
-                      : "-"
-                    : "Loading..."}
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+      <div style={{ padding: "5vw", width: "90vw" }}>
+        <table>
+          <tbody>
+            <tr>
+              <th>Published by</th>
+              <th>Description</th>
+              <th>Publish Time</th>
+              <th>Signed by</th>
+              <th>Target Time</th>
+            </tr>
+            {items &&
+              items.map((item, i) => (
+                <tr key={i}>
+                  <td>{item.owner || "Loading..."}</td>
+                  <td>{item.desc || "Loading..."}</td>
+                  <td>
+                    {item.createdAt
+                      ? new Date(item.createdAt).toLocaleString()
+                      : "Loading..."}
+                  </td>
+                  <td
+                    onMouseEnter={() => {
+                      let a = items;
+                      a[i].mouse = true;
+                      setitems(a);
+                    }}
+                    onMouseLeave={() => {
+                      let a = items;
+                      a[i].mouse = false;
+                      setitems(a);
+                    }}
+                  >
+                    {item.owner
+                      ? 1 +
+                        (item.sign1 ? 1 : 0) +
+                        (item.sign2 ? 1 : 0) +
+                        (item.sign3 ? 1 : 0) +
+                        "/4"
+                      : "Loading..."}
+                    <div className={"hover" + item.mouse}>asasdsad</div>
+                  </td>
+                  <td>
+                    {item.owner
+                      ? item.time
+                        ? new Date(item.time).toLocaleString()
+                        : "-"
+                      : "Loading..."}
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
