@@ -274,7 +274,7 @@ function Ras(props) {
       </button>
       <br />
       <br />
-      <div style={{ padding: "5vw", width: "90vw" }}>
+      <div style={{ padding: "5vw", width: "90vw", overflowX: "auto" }}>
         <table>
           <tbody>
             <tr>
@@ -302,14 +302,36 @@ function Ras(props) {
                   </td>
                   <td
                     onMouseEnter={() => {
-                      let a = items;
-                      a[i].mouse = true;
-                      setitems(a);
+                      let itemscopy = new Array();
+                      for (let j = 0; j < items.length; j++) {
+                        itemscopy.push(items[j]);
+                      }
+                      let firstitem = { ...itemscopy[i] };
+                      firstitem.mouse = true;
+                      itemscopy[i] = firstitem;
+                      for (let j = 0; j < itemscopy.length; j++) {
+                        if (i !== j) itemscopy[j].mouse = false;
+                      }
+                      setitems(itemscopy);
                     }}
                     onMouseLeave={() => {
-                      let a = items;
-                      a[i].mouse = false;
-                      setitems(a);
+                      let itemscopy = new Array();
+                      for (let i = 0; i < items.length; i++) {
+                        itemscopy.push(items[i]);
+                      }
+                      let firstitem = { ...itemscopy[i] };
+                      firstitem.mouse = false;
+                      itemscopy[i] = firstitem;
+                      setitems(itemscopy);
+                    }}
+                    style={{
+                      backgroundColor:
+                        (item.sign1 ? 1 : 0) +
+                          (item.sign2 ? 1 : 0) +
+                          (item.sign3 ? 1 : 0) ===
+                        3
+                          ? "green"
+                          : "red",
                     }}
                   >
                     {item.owner
@@ -319,7 +341,35 @@ function Ras(props) {
                         (item.sign3 ? 1 : 0) +
                         "/3"
                       : "Loading..."}
-                    <div className={"hover" + item.mouse}>asasdsad</div>
+                    <div className={"hover" + item.mouse}>
+                      <table>
+                        <tr>
+                          <th>name:</th>
+                          <th>signiture:</th>
+                        </tr>
+                        <tr>
+                          {" "}
+                          <td>yoda</td>
+                          <td style={{ color: item.sign1 ? "green" : "red" }}>
+                            {item.sign1 ? "V" : "X"}
+                          </td>
+                        </tr>
+                        <tr>
+                          {" "}
+                          <td>nelson</td>
+                          <td style={{ color: item.sign2 ? "green" : "red" }}>
+                            {item.sign2 ? "V" : "X"}
+                          </td>{" "}
+                        </tr>
+                        <tr>
+                          {" "}
+                          <td>ovadov</td>
+                          <td style={{ color: item.sign3 ? "green" : "red" }}>
+                            {item.sign3 ? "V" : "X"}
+                          </td>{" "}
+                        </tr>
+                      </table>
+                    </div>
                   </td>
                   <td>
                     {item.owner
