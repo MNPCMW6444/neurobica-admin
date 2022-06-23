@@ -15,16 +15,13 @@ h1 {
   background-color: rgba(248, 253, 255, 0.425);
   border-radius: 100px;
 }
-.yd {
-  display: flex;
-  justify-content: center;
-}
-.y {
-  background-image: url("logo.png");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  width: 50vw;
-  height: 30vh;
+img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 55%;
+  max-height: 55a%;
+  margin: 20px auto;
 }
 
 h2 {

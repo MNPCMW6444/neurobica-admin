@@ -1,9 +1,6 @@
 import React from "react";
+import l from "./logo.png";
 
 export default function YoadHeader() {
-  return (
-    <div className="yd">
-      <div className="y"></div>
-    </div>
-  );
+  return <img src={require("./logo.png")}></img>;
 }
