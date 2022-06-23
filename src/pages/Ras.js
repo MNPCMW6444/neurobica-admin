@@ -34,6 +34,7 @@ function Ras(props) {
       id: pub._id,
       tok: props.tok,
     });
+    setr(Math.random());
   }
 
   const customStyles = {
