@@ -286,16 +286,29 @@ function Ras(props) {
             </tr>
             {items &&
               items.map((item, i) => (
-                <tr
-                  key={i}
-                  onClick={() => {
-                    setpublication(item);
-                    openModal2();
-                  }}
-                >
-                  <td>{item.owner || "Loading..."}</td>
-                  <td>{item.desc || "Loading..."}</td>
+                <tr key={i}>
+                  <td
+                    onClick={() => {
+                      setpublication(item);
+                      openModal2();
+                    }}
+                  >
+                    {item.owner || "Loading..."}
+                  </td>
                   <td>
+                    onClick=
+                    {() => {
+                      setpublication(item);
+                      openModal2();
+                    }}
+                    {item.desc || "Loading..."}
+                  </td>
+                  <td
+                    onClick={() => {
+                      setpublication(item);
+                      openModal2();
+                    }}
+                  >
                     {item.createdAt
                       ? new Date(item.createdAt).toLocaleString()
                       : "Loading..."}
@@ -371,7 +384,12 @@ function Ras(props) {
                       </table>
                     </div>
                   </td>
-                  <td>
+                  <td
+                    onClick={() => {
+                      setpublication(item);
+                      openModal2();
+                    }}
+                  >
                     {item.owner
                       ? item.time
                         ? new Date(item.time).toLocaleString()
