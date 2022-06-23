@@ -18,6 +18,7 @@ function App() {
   const [home, sethome] = useState(true);
   const [rasortasks, setrasortasks] = useState(false);
   const [user, setUser] = useState(false);
+  const [token, setToken] = useState(false);
 
   const messaging = getMessaging();
   onMessage(messaging, (payload) => {
@@ -41,7 +42,7 @@ function App() {
   Axios.defaults.withCredentials = true;
 
   async function getUser() {
-    const userRes = await Axios.get(domain + "/loggedIn");
+    const userRes = await Axios.get(domain + "/loggedIn", token);
     setUser(userRes.data);
   }
   useEffect(() => {
@@ -52,14 +53,18 @@ function App() {
     <div className="App">
       <h1 style={{ textAlign: "center" }}>Neurobica Adminnistration</h1>
       <ReactNotifications />
-      <Login user={user} setuser={setUser} />
+      <Login user={user} setuser={setUser} token={token} settoken={setToken} />
       {user ? (
         home ? (
           <Home sethome={sethome} setrasortasks={setrasortasks} />
         ) : rasortasks ? (
-          <Ras sethome={sethome} setrasortasks={setrasortasks} />
+          <Ras tok={token} sethome={sethome} setrasortasks={setrasortasks} />
         ) : (
-          <Notifications sethome={sethome} setrasortasks={setrasortasks} />
+          <Notifications
+            tok={token}
+            sethome={sethome}
+            setrasortasks={setrasortasks}
+          />
         )
       ) : null}
     </div>
