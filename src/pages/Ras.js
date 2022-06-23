@@ -8,9 +8,11 @@ function Ras(props) {
   const [in2, setin2] = useState();
   const [me, setme] = useState();
   const [r, setr] = useState();
+  const [publication, setpublication] = useState();
   //const [mouse, setmouse] = useState(new Array());
 
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen2, setIsOpen2] = useState(false);
 
   const [items, setitems] = useState([{}]);
   useEffect(() => {
@@ -26,6 +28,10 @@ function Ras(props) {
 
     getit();
   }, [r]);
+
+  async function sign(pub) {
+    const res = await Axios.post(domain + "/sign", { id: pub._id });
+  }
 
   const customStyles = {
     content: {
@@ -49,6 +55,16 @@ function Ras(props) {
   function closeModal() {
     setIsOpen(false);
     setr(Math.random());
+  }
+
+  function openModal2() {
+    setIsOpen2(true);
+  }
+
+  function afterOpenModal2() {}
+
+  function closeModal2() {
+    setIsOpen2(false);
   }
 
   async function send() {
@@ -195,6 +211,31 @@ function Ras(props) {
           </button>
         </div>
       </Modal>
+      <Modal
+        isOpen={modalIsOpen2}
+        onAfterOpen={afterOpenModal2}
+        onRequestClose={closeModal2}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <div>Are you sure you have read the folowing publication:</div>
+        <br />
+        <div style={{ color: "red" }}>
+          {publication && publication.desc}
+        </div>{" "}
+        <br />
+        <div>And you want to sign it?</div>
+        <br />
+        <button onClick={closeModal2}>No</button>
+        <span style={{ width: "5vw", color: "white" }}> </span>
+        <button
+          onClick={() => {
+            sign(publication);
+          }}
+        >
+          Yes
+        </button>
+      </Modal>
 
       <div>
         <button
@@ -240,7 +281,13 @@ function Ras(props) {
             </tr>
             {items &&
               items.map((item, i) => (
-                <tr key={i}>
+                <tr
+                  key={i}
+                  onClick={() => {
+                    setpublication(item);
+                    openModal2();
+                  }}
+                >
                   <td>{item.owner || "Loading..."}</td>
                   <td>{item.desc || "Loading..."}</td>
                   <td>
