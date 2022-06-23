@@ -11,7 +11,7 @@ h1 {
   color: blue;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   font-weight: 900;
-  font-size: 50pt;
+  font-size: 3em;
   background-color: rgba(248, 253, 255, 0.425);
   border-radius: 100px;
 }
