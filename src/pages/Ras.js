@@ -30,7 +30,10 @@ function Ras(props) {
   }, [r]);
 
   async function sign(pub) {
-    const res = await Axios.post(domain + "/sign", { id: pub._id });
+    const res = await Axios.post(domain + "/sign", {
+      id: pub._id,
+      tok: props.tok,
+    });
   }
 
   const customStyles = {
@@ -231,6 +234,7 @@ function Ras(props) {
         <button
           onClick={() => {
             sign(publication);
+            closeModal2();
           }}
         >
           Yes
@@ -308,11 +312,11 @@ function Ras(props) {
                     }}
                   >
                     {item.owner
-                      ? 1 +
+                      ? 0 +
                         (item.sign1 ? 1 : 0) +
                         (item.sign2 ? 1 : 0) +
                         (item.sign3 ? 1 : 0) +
-                        "/4"
+                        "/3"
                       : "Loading..."}
                     <div className={"hover" + item.mouse}>asasdsad</div>
                   </td>
