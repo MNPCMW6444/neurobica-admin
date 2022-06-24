@@ -8,16 +8,14 @@ function Ras(props) {
   const [in2, setin2] = useState();
   const [me, setme] = useState();
   const [r, setr] = useState();
-  const [publication, setpublication] = useState();
   //const [mouse, setmouse] = useState(new Array());
 
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [modalIsOpen2, setIsOpen2] = useState(false);
 
   const [items, setitems] = useState([{}]);
   useEffect(() => {
     async function getit() {
-      const res = await Axios.get(domain + "/all/" + props.tok);
+      const res = await Axios.get(domain + "/all");
       let itemsb = new Array();
       if (res.data.length > 0) itemsb = res.data;
       for (let i = 0; i < itemsb.length; i++) {
@@ -28,14 +26,6 @@ function Ras(props) {
 
     getit();
   }, [r]);
-
-  async function sign(pub) {
-    const res = await Axios.post(domain + "/sign", {
-      id: pub._id,
-      tok: props.tok,
-    });
-    setr(Math.random());
-  }
 
   const customStyles = {
     content: {
@@ -61,19 +51,8 @@ function Ras(props) {
     setr(Math.random());
   }
 
-  function openModal2() {
-    setIsOpen2(true);
-  }
-
-  function afterOpenModal2() {}
-
-  function closeModal2() {
-    setIsOpen2(false);
-  }
-
   async function send() {
     const res = await Axios.post(domain + "/publish", {
-      tok: props.tok,
       desc: in1,
       time: in2,
     });
@@ -90,7 +69,7 @@ function Ras(props) {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <div>
+        <div style={{}}>
           <h3 style={{ fontSize: "30pt", textAlign: "center" }}>
             Publish a new publication:
           </h3>
@@ -215,32 +194,6 @@ function Ras(props) {
           </button>
         </div>
       </Modal>
-      <Modal
-        isOpen={modalIsOpen2}
-        onAfterOpen={afterOpenModal2}
-        onRequestClose={closeModal2}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <div>Are you sure you have read the folowing publication:</div>
-        <br />
-        <div style={{ color: "red" }}>
-          {publication && publication.desc}
-        </div>{" "}
-        <br />
-        <div>And you want to sign it?</div>
-        <br />
-        <button onClick={closeModal2}>No</button>
-        <span style={{ width: "5vw", color: "white" }}> </span>
-        <button
-          onClick={() => {
-            sign(publication);
-            closeModal2();
-          }}
-        >
-          Yes
-        </button>
-      </Modal>
 
       <div>
         <button
@@ -274,133 +227,57 @@ function Ras(props) {
       </button>
       <br />
       <br />
-      <div style={{ padding: "5vw", width: "90vw", overflowX: "auto" }}>
-        <table>
-          <tbody>
-            <tr>
-              <th>Published by</th>
-              <th>Description</th>
-              <th>Publish Time</th>
-              <th>Signed by</th>
-              <th>Target Time</th>
-            </tr>
-            {items &&
-              items.map((item, i) => (
-                <tr key={i}>
-                  <td
-                    onClick={() => {
-                      setpublication(item);
-                      openModal2();
-                    }}
-                  >
-                    {item.owner || "Loading..."}
-                  </td>
-                  <td>
-                    onClick=
-                    {() => {
-                      setpublication(item);
-                      openModal2();
-                    }}
-                    {item.desc || "Loading..."}
-                  </td>
-                  <td
-                    onClick={() => {
-                      setpublication(item);
-                      openModal2();
-                    }}
-                  >
-                    {item.createdAt
-                      ? new Date(item.createdAt).toLocaleString()
-                      : "Loading..."}
-                  </td>
-                  <td
-                    onMouseEnter={() => {
-                      let itemscopy = new Array();
-                      for (let j = 0; j < items.length; j++) {
-                        itemscopy.push(items[j]);
-                      }
-                      let firstitem = { ...itemscopy[i] };
-                      firstitem.mouse = true;
-                      itemscopy[i] = firstitem;
-                      for (let j = 0; j < itemscopy.length; j++) {
-                        if (i !== j) itemscopy[j].mouse = false;
-                      }
-                      setitems(itemscopy);
-                    }}
-                    onMouseLeave={() => {
-                      let itemscopy = new Array();
-                      for (let i = 0; i < items.length; i++) {
-                        itemscopy.push(items[i]);
-                      }
-                      let firstitem = { ...itemscopy[i] };
-                      firstitem.mouse = false;
-                      itemscopy[i] = firstitem;
-                      setitems(itemscopy);
-                    }}
-                    style={{
-                      backgroundColor:
-                        (item.sign1 ? 1 : 0) +
-                          (item.sign2 ? 1 : 0) +
-                          (item.sign3 ? 1 : 0) ===
-                        3
-                          ? "green"
-                          : "red",
-                    }}
-                  >
-                    {item.owner
-                      ? 0 +
-                        (item.sign1 ? 1 : 0) +
-                        (item.sign2 ? 1 : 0) +
-                        (item.sign3 ? 1 : 0) +
-                        "/3"
-                      : "Loading..."}
-                    <div className={"hover" + item.mouse}>
-                      <table>
-                        <tr>
-                          <th>name:</th>
-                          <th>signiture:</th>
-                        </tr>
-                        <tr>
-                          {" "}
-                          <td>yoda</td>
-                          <td style={{ color: item.sign1 ? "green" : "red" }}>
-                            {item.sign1 ? "V" : "X"}
-                          </td>
-                        </tr>
-                        <tr>
-                          {" "}
-                          <td>nelson</td>
-                          <td style={{ color: item.sign2 ? "green" : "red" }}>
-                            {item.sign2 ? "V" : "X"}
-                          </td>{" "}
-                        </tr>
-                        <tr>
-                          {" "}
-                          <td>ovadov</td>
-                          <td style={{ color: item.sign3 ? "green" : "red" }}>
-                            {item.sign3 ? "V" : "X"}
-                          </td>{" "}
-                        </tr>
-                      </table>
-                    </div>
-                  </td>
-                  <td
-                    onClick={() => {
-                      setpublication(item);
-                      openModal2();
-                    }}
-                  >
-                    {item.owner
-                      ? item.time
-                        ? new Date(item.time).toLocaleString()
-                        : "-"
-                      : "Loading..."}
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-      </div>
+      <table>
+        <tbody>
+          <tr>
+            <th>Published by</th>
+            <th>Description</th>
+            <th>Publish Time</th>
+            <th>Signed by</th>
+            <th>Target Time</th>
+          </tr>
+          {items &&
+            items.map((item, i) => (
+              <tr key={i}>
+                <td>{item.owner || "Loading..."}</td>
+                <td>{item.desc || "Loading..."}</td>
+                <td>
+                  {item.createdAt
+                    ? new Date(item.createdAt).toLocaleString()
+                    : "Loading..."}
+                </td>
+                <td
+                  onMouseEnter={() => {
+                    let a = items;
+                    a[i].mouse = true;
+                    setitems(a);
+                  }}
+                  onMouseLeave={() => {
+                    let a = items;
+                    a[i].mouse = false;
+                    setitems(a);
+                  }}
+                >
+                  {item.owner
+                    ? 1 +
+                      (item.sign1 ? 1 : 0) +
+                      (item.sign2 ? 1 : 0) +
+                      (item.sign3 ? 1 : 0) +
+                      "/4"
+                    : "Loading..."}
+                  <div className={"hover" + item.mouse}>asasdsad</div>
+                </td>
+                <td>
+                  {item.owner
+                    ? item.time
+                      ? new Date(item.time).toLocaleString()
+                      : "-"
+                    : "Loading..."}
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
     </div>
   );
 }
