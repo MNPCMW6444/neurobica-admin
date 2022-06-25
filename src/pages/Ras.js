@@ -295,12 +295,12 @@ function Ras(props) {
                   >
                     {item.owner || "Loading..."}
                   </td>
-                  <td>
-                    onClick=
-                    {() => {
+                  <td
+                    onClick={() => {
                       setpublication(item);
                       openModal2();
                     }}
+                  >
                     {item.desc || "Loading..."}
                   </td>
                   <td
