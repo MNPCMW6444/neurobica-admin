@@ -5,7 +5,6 @@ importScripts(
 importScripts(
   "https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging-compat.js"
 );
-
 // Initialize the Firebase app in the service worker by passing the generated config
 const firebaseConfig = {
   apiKey: "AIzaSyAsDaTlSLrVbHM8M1MkVgG7Dle_9866CCE",
@@ -28,6 +27,7 @@ messaging.onBackgroundMessage(function (payload) {
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
     body: payload.notification.body,
+    icon: "./Untitled.png",
   };
 
   self.registration.showNotification(notificationTitle, notificationOptions);
