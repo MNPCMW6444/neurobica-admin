@@ -27,7 +27,7 @@ function Notifications(props) {
       <br />
       <button
         onClick={() => {
-          fetchToken(props.sss, setmes, props.tok);
+          if (setmes) fetchToken(props.sss, setmes, props.tok);
         }}
         style={{
           color: "black",

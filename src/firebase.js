@@ -16,7 +16,7 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const messaging = getMessaging(firebaseApp);
 
-export const fetchToken = (setTokenFound, setmes, tok) => {
+export const fetchToken = async (setTokenFound, setmes, tok) => {
   return getToken(messaging, {
     vapidKey:
       "BNK3QHhftQUAFZSq04afuON_WAKuF-g9wPRdGp8N6s63UtZDBs12OorqmhlhpkBnwqZ2eQLBvbcbwKVCkzskxAg",
