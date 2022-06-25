@@ -10,13 +10,41 @@ import domain from "./domain";
 import YoadHeaderlogo from "./YoadHeaderlogo";
 import YoadHeadermas from "./YoadHeadermas";
 
-import "react-notifications-component/dist/theme.css";
+import { fetchToken, onMessageListener } from "./firebase";
+import { Button, Toast } from "react-bootstrap";
+//import "bootstrap/dist/css/bootstrap.min.css";
+
+//import "react-notifications-component/dist/theme.css";
 import { ReactNotifications } from "react-notifications-component";
 import { Store } from "react-notifications-component";
 
 import { getMessaging, onMessage } from "firebase/messaging";
 
 function App() {
+  const [show, setShow] = useState(false);
+  const [notification, setNotification] = useState({ title: "", body: "" });
+  const [isTokenFound, setTokenFound] = useState(false);
+  fetchToken(setTokenFound);
+
+  onMessageListener()
+    .then((payload) => {
+      setNotification({
+        title: payload.notification.title,
+        body: payload.notification.body,
+      });
+      setShow(true);
+      console.log(payload);
+    })
+    .catch((err) => console.log("failed: ", err));
+
+  const onShowNotificationClicked = () => {
+    setNotification({
+      title: "Notification",
+      body: "This is a test notification",
+    });
+    setShow(true);
+  };
+
   const [home, sethome] = useState(true);
   const [rasortasks, setrasortasks] = useState(false);
   const [user, setUser] = useState(false);
@@ -54,6 +82,26 @@ function App() {
   return (
     <div className="App">
       {/* <h1 style={{ textAlign: "center" }}>Neurobica Adminnistration</h1> */}
+      <Toast
+        onClose={() => setShow(false)}
+        show={show}
+        delay={3000}
+        autohide
+        animation
+        style={{
+          position: "absolute",
+          top: 20,
+          right: 20,
+          minWidth: 200,
+        }}
+      >
+        <Toast.Header>
+          <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
+          <strong className="mr-auto">{notification.title}</strong>
+          <small>just now</small>
+        </Toast.Header>
+        <Toast.Body>{notification.body}</Toast.Body>
+      </Toast>
       <YoadHeaderlogo />
       <ReactNotifications />
       <Login user={user} setuser={setUser} token={token} settoken={setToken} />
@@ -65,6 +113,7 @@ function App() {
           <Ras tok={token} sethome={sethome} setrasortasks={setrasortasks} />
         ) : (
           <Notifications
+            sss={setTokenFound}
             tok={token}
             sethome={sethome}
             setrasortasks={setrasortasks}

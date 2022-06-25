@@ -1,4 +1,4 @@
-import { requestPermission } from "../push-notification";
+import { fetchToken } from "../firebase";
 import { useState } from "react";
 
 function Notifications(props) {
@@ -27,7 +27,7 @@ function Notifications(props) {
       <br />
       <button
         onClick={() => {
-          requestPermission(setmes, props.tok);
+          fetchToken(props.sss, setmes, props.tok);
         }}
         style={{
           color: "black",
