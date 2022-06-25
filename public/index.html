@@ -111,10 +111,10 @@ sizes="640x1136"
         "standalone" in window.navigator && window.navigator.standalone;
 
       // Checks if should display install popup notification:
-      // if (isIos() && !isInStandaloneMode()) {
-      // this.setState({ showInstallMessage: true });
-      showIosInstall();
-      // }
+      if (isIos() && !isInStandaloneMode()) {
+        // this.setState({ showInstallMessage: true });
+        showIosInstall();
+      }
     </script>
   </head>
   <body>
