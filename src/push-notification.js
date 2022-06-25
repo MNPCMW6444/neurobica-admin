@@ -48,23 +48,23 @@ export function requestPermission(setmes, tok) {
                 ))}
               </>
             ) : (
-              "Failed to register this device to notifications (Error code 1, yes yes i made different error codes)"
+              "Failed to register this device to notifications (Error code 1(token is empty), yes yes i made different error codes)"
             )
           );
         } else {
           // Show permission request UI
           console.log(
-            "Failed to register this device to notifications (Error code 2, yes yes i made different error codes)"
+            "Failed to register this device to notifications (Error code 2(no token), yes yes i made different error codes)"
           );
           // ...
           setmes(
-            "Failed to register this device to notifications (Error code 3, yes yes i made different error codes)"
+            "Failed to register this device to notifications (Error code 3(no token), yes yes i made different error codes)"
           );
         }
       });
     }
     setmes(
-      "Failed to register this device to notifications (Error code 4, yes yes i made different error codes)"
+      "Failed to register this device to notifications (Error code 4(Premission not granted, ), yes yes i made different error codes)"
     );
   });
 }
