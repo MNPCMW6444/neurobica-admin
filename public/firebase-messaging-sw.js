@@ -6,11 +6,8 @@ importScripts(
   "https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging-compat.js"
 );
 
-import { initializeApp } from "firebase/app";
-import { getMessaging, getToken } from "firebase/messaging";
-
 // Initialize the Firebase app in the service worker by passing the generated config
-const firebaseApp = initializeApp({
+const firebaseConfig = {
   apiKey: "AIzaSyAsDaTlSLrVbHM8M1MkVgG7Dle_9866CCE",
   authDomain: "neurobica-admin.firebaseapp.com",
   projectId: "neurobica-admin",
@@ -18,7 +15,8 @@ const firebaseApp = initializeApp({
   messagingSenderId: "406250116393",
   appId: "1:406250116393:web:de865ac78ec5d0360f9338",
   measurementId: "G-T8PLVEN74G",
-});
+};
+
 firebase.initializeApp(firebaseConfig);
 
 // Retrieve firebase messaging
