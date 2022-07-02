@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import authHeader from "./services/auth-header";
 
 import Axios from "axios";
 import domain from "./domain";
@@ -25,9 +26,13 @@ export const fetchToken = async (setTokenFound, setmes) => {
     .then(async (currentToken) => {
       if (currentToken) {
         console.log("current token for client: ", currentToken);
-        const res = await Axios.post(domain + "/notify", {
-          token2: currentToken,
-        });
+        const res = await Axios.post(
+          domain + "/notify",
+          {
+            token2: currentToken,
+          },
+          { headers: authHeader() }
+        );
         if (typeof setmes === typeof new Function())
           setmes(
             res.data.token && res.data.token.length > 0 ? (

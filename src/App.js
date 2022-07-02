@@ -71,7 +71,6 @@ function App() {
 
   async function getUser() {
     const userRes = AuthService.getCurrentUser();
-    debugger;
     setUser(userRes.accessToken);
   }
   useEffect(() => {
