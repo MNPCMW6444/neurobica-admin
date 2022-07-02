@@ -1,100 +1,107 @@
-import Axios from "axios";
-import React, { useState } from "react";
-import domain from "../domain";
-
-function Login(props) {
-  const [name, setname] = useState();
-  const [password, setpassword] = useState();
-  const [error, seterror] = useState();
-
-  async function login(e) {
-    e.preventDefault();
-
-    const loginData = {
-      name: name,
-      password: password,
-    };
-
-    try {
-      const r = ////////
-        await Axios.post(domain + "/login", loginData);
-      const tok = r.data.unsec; //////
-
-      async function getUser() {
-        const userRes = await Axios.get(domain + "/loggedIn/" + tok);
-        props.setuser(userRes.data);
-      }
-      await getUser();
-      props.settoken(tok); /////////
-    } catch (err) {
-      seterror(err);
-    }
+import React, { useState, useRef } from "react";
+import Form from "react-validation/build/form";
+import Input from "react-validation/build/input";
+import CheckButton from "react-validation/build/button";
+import AuthService from "../services/auth.service";
+const required = (value) => {
+  if (!value) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        This field is required!
+      </div>
+    );
   }
-
+};
+const Login = () => {
+  const form = useRef();
+  const checkBtn = useRef();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const onChangeUsername = (e) => {
+    const username = e.target.value;
+    setUsername(username);
+  };
+  const onChangePassword = (e) => {
+    const password = e.target.value;
+    setPassword(password);
+  };
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setMessage("");
+    setLoading(true);
+    form.current.validateAll();
+    if (checkBtn.current.context._errors.length === 0) {
+      AuthService.login(username, password).then(
+        () => {
+          window.location.reload();
+        },
+        (error) => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+          setLoading(false);
+          setMessage(resMessage);
+        }
+      );
+    } else {
+      setLoading(false);
+    }
+  };
   return (
-    <div>
-      {props.user ? (
-        <button
-          onClick={async () => {
-            // await Axios.get(domain + "/logout");
-            props.setuser(null);
-            props.settoken(null);
-          }}
-          style={{ color: "red", width: "30%" }}
-        >
-          Logout
-        </button>
-      ) : (
-        <div className="auth-form">
-          <h2>כניסה</h2>
-          {error && (
-            <>
-              <div
-                style={{
-                  color: "red",
-                  fontSize: "20pt",
-                  backgroundColor: "white",
-                  opacity: 0.8,
-                }}
-              >
-                {"שגיאה: " +
-                  error.response.data.errorMessage +
-                  " (" +
-                  error.response.status +
-                  ")"}
-              </div>{" "}
-              <br />
-            </>
-          )}
-          <form className="form" onSubmit={login}>
-            <label htmlFor="form-ma">Name:</label>
-            <input
-              id="form-ma"
-              type="string"
-              value={name}
-              onChange={(e) => setname(e.target.value)}
+    <div className="col-md-12">
+      <div className="card card-container">
+        <img
+          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+          alt="profile-img"
+          className="profile-img-card"
+        />
+        <Form onSubmit={handleLogin} ref={form}>
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <Input
+              type="text"
+              className="form-control"
+              name="username"
+              value={username}
+              onChange={onChangeUsername}
+              validations={[required]}
             />
-            <br></br>
-            <br />
-            <label htmlFor="form-password">Password: </label>
-            <input
-              id="form-password"
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <Input
               type="password"
+              className="form-control"
+              name="password"
               value={password}
-              onChange={(e) => setpassword(e.target.value)}
-            />{" "}
-            <br></br> <br></br>
-            <button className="btn-submit" type="submit">
-              היכנס
-            </button>{" "}
-            <br></br>
-            <br /> <br /> <br></br>
-            <br /> <br />
-          </form>
-        </div>
-      )}
+              onChange={onChangePassword}
+              validations={[required]}
+            />
+          </div>
+          <div className="form-group">
+            <button className="btn btn-primary btn-block" disabled={loading}>
+              {loading && (
+                <span className="spinner-border spinner-border-sm"></span>
+              )}
+              <span>Login</span>
+            </button>
+          </div>
+          {message && (
+            <div className="form-group">
+              <div className="alert alert-danger" role="alert">
+                {message}
+              </div>
+            </div>
+          )}
+          <CheckButton style={{ display: "none" }} ref={checkBtn} />
+        </Form>
+      </div>
     </div>
   );
-}
-
+};
 export default Login;

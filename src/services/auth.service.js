@@ -1,5 +1,5 @@
 import axios from "axios";
-import domain from "./domain";
+import domain from "../domain";
 
 const API_URL = domain + "/";
 /* const register = (username, email, password) => {
