@@ -31,7 +31,7 @@ const Login = (props) => {
     e.preventDefault();
     setMessage("");
     setLoading(true);
-    form.current.validateAll();
+    //form.current.validateAll();
     if (checkBtn.current.context._errors.length === 0) {
       AuthService.login(username, password).then(
         () => {
