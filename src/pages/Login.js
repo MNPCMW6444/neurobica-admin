@@ -73,10 +73,10 @@ const Login = (props) => {
           alt="profile-img"
           className="profile-img-card"
         />
-        <form onSubmit={handleLogin} ref={form}>
+        <Form onSubmit={handleLogin} ref={form}>
           <div className="form-group">
             <label htmlFor="username">Username</label>
-            <input
+            <Input
               type="text"
               className="form-control"
               name="username"
@@ -87,7 +87,7 @@ const Login = (props) => {
           </div>
           <div className="form-group">
             <label htmlFor="password">Password</label>
-            <input
+            <Input
               type="password"
               className="form-control"
               name="password"
@@ -112,7 +112,7 @@ const Login = (props) => {
             </div>
           )}
           <button style={{ display: "none" }} ref={checkBtn} />
-        </form>
+        </Form>
       </div>
     </div>
   );
