@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 import Modal from "react-modal";
 import domain from "../domain";
+import authHeader from "../services/auth-header";
 
 function Ras(props) {
   const [in1, setin1] = useState();
@@ -17,7 +18,7 @@ function Ras(props) {
   const [items, setitems] = useState([{}]);
   useEffect(() => {
     async function getit() {
-      const res = await Axios.get(domain + "/all/" + props.tok);
+      const res = await Axios.get(domain + "/all/", { headers: authHeader() });
       let itemsb = new Array();
       if (res.data.length > 0) itemsb = res.data;
       for (let i = 0; i < itemsb.length; i++) {
@@ -30,10 +31,13 @@ function Ras(props) {
   }, [r]);
 
   async function sign(pub) {
-    const res = await Axios.post(domain + "/sign", {
-      id: pub._id,
-      tok: props.tok,
-    });
+    const res = await Axios.post(
+      domain + "/sign",
+      {
+        id: pub._id,
+      },
+      { headers: authHeader() }
+    );
     setr(Math.random());
   }
 
@@ -72,11 +76,14 @@ function Ras(props) {
   }
 
   async function send() {
-    const res = await Axios.post(domain + "/publish", {
-      tok: props.tok,
-      desc: in1,
-      time: in2,
-    });
+    const res = await Axios.post(
+      domain + "/publish",
+      {
+        desc: in1,
+        time: in2,
+      },
+      { headers: authHeader() }
+    );
     return res.data;
   }
 
