@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 import Home from "./pages/Home";
 import Ras from "./pages/Ras";
-import Planner from "./pages/Planner";
+import Planner from "./pages/Planner/Planner";
 import Notifications from "./pages/Notifications";
 import Login from "./pages/Login";
 import domain from "./domain";

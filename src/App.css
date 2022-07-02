@@ -152,3 +152,9 @@ th {
   background-color: rgba(13, 167, 64, 0.567);
   padding: 50px;
 }
+
+.rp {
+  background-color: rgb(255, 224, 255);
+  margin: 1%;
+  padding: 1%;
+}
