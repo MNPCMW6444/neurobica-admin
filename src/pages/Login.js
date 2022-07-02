@@ -52,15 +52,16 @@ const Login = (props) => {
   ) : (
     <div className="col-md-12">
       <div className="card card-container">
-        <img
+        {/*  <img
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
           alt="profile-img"
           className="profile-img-card"
-        />
+        /> */}
         <form onSubmit={handleLogin}>
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <input
+              style={{ textAlign: "center" }}
               type="text"
               className="form-control"
               name="username"
@@ -71,6 +72,7 @@ const Login = (props) => {
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
+              style={{ textAlign: "center" }}
               type="password"
               className="form-control"
               name="password"
