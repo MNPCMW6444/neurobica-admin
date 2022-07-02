@@ -34,7 +34,10 @@ const Login = (props) => {
     setMessage("");
     setLoading(true);
     form.current.validateAll();
-    if (checkBtn.current.context._errors.length === 0) {
+    if (
+      checkBtn.current.context._errors &&
+      checkBtn.current.context._errors.length === 0
+    ) {
       AuthService.login(username, password).then(
         () => {
           // navigate("/profile");
