@@ -71,6 +71,7 @@ function App() {
 
   async function getUser() {
     const userRes = AuthService.getCurrentUser();
+    debugger;
     setUser(userRes.accessToken);
   }
   useEffect(() => {
@@ -109,6 +110,7 @@ function App() {
       <YoadHeaderlogo />
       <ReactNotifications />
       <Login user={user} setuser={setUser} token={token} settoken={setToken} />
+      <br />
       {user ? (
         home ? (
           <Home sethome={sethome} setrasortasks={setrasortasks} />

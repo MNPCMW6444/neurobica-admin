@@ -29,23 +29,24 @@ export const fetchToken = async (setTokenFound, setmes, tok) => {
           tok: tok,
           token2: currentToken,
         });
-        setmes(
-          res.data.token && res.data.token.length > 0 ? (
-            <>
-              <div>
-                You have {res.data.token.length} deviecs on your account:{" "}
-              </div>
-              {res.data.token.map((tok, i) => (
-                <>
-                  <div style={{ fontSize: "13pt" }}>Device {i}: </div>
-                  <div style={{ fontSize: "9pt" }}>{tok}</div>
-                </>
-              ))}
-            </>
-          ) : (
-            "Failed to register this device to notifications (Error code 1(token is empty), yes yes i made different error codes)"
-          )
-        );
+        if (typeof setmes === typeof new Function())
+          setmes(
+            res.data.token && res.data.token.length > 0 ? (
+              <>
+                <div>
+                  You have {res.data.token.length} deviecs on your account:{" "}
+                </div>
+                {res.data.token.map((tok, i) => (
+                  <>
+                    <div style={{ fontSize: "13pt" }}>Device {i}: </div>
+                    <div style={{ fontSize: "9pt" }}>{tok}</div>
+                  </>
+                ))}
+              </>
+            ) : (
+              "Failed to register this device to notifications (Error code 1(token is empty), yes yes i made different error codes)"
+            )
+          );
         setTokenFound(true);
         // Track the token -> client mapping, by sending to backend server
         // show on the UI that permission is secured
@@ -54,16 +55,18 @@ export const fetchToken = async (setTokenFound, setmes, tok) => {
           "No registration token available. Request permission to generate one."
         );
         setTokenFound(false);
-        setmes(
-          "Failed to register this device to notifications (Error code 3(no token), yes yes i made different error codes)"
-        );
+        if (typeof setmes === typeof new Function())
+          setmes(
+            "Failed to register this device to notifications (Error code 3(no token), yes yes i made different error codes)"
+          );
         // shows on the UI that permission is required
       }
     })
     .catch((err) => {
-      setmes(
-        "Failed to register this device to notifications (Error code 4(Premission not granted, ), yes yes i made different error codes)"
-      );
+      if (typeof setmes === typeof new Function())
+        setmes(
+          "Failed to register this device to notifications (Error code 4(Premission not granted, ), yes yes i made different error codes)"
+        );
       console.log("An error occurred while retrieving token. ", err);
       // catch error while creating client token
     });

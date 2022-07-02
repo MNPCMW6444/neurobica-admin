@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
+//import Form from "react-validation/build/form";
+//import Input from "react-validation/build/input";
+//import CheckButton from "react-validation/build/button";
 import AuthService from "../services/auth.service";
 const required = (value) => {
   if (!value) {
@@ -53,6 +53,19 @@ const Login = (props) => {
     }
   };
   return props.user ? (
+    <div>
+      <button
+        onClick={async () => {
+          // await Axios.get(domain + "/logout");
+          props.setuser(null);
+          props.settoken(null);
+        }}
+        style={{ color: "red", width: "30%" }}
+      >
+        Logout
+      </button>
+    </div>
+  ) : (
     <div className="col-md-12">
       <div className="card card-container">
         <img
@@ -60,10 +73,10 @@ const Login = (props) => {
           alt="profile-img"
           className="profile-img-card"
         />
-        <Form onSubmit={handleLogin} ref={form}>
+        <form onSubmit={handleLogin} ref={form}>
           <div className="form-group">
             <label htmlFor="username">Username</label>
-            <Input
+            <input
               type="text"
               className="form-control"
               name="username"
@@ -74,7 +87,7 @@ const Login = (props) => {
           </div>
           <div className="form-group">
             <label htmlFor="password">Password</label>
-            <Input
+            <input
               type="password"
               className="form-control"
               name="password"
@@ -98,13 +111,9 @@ const Login = (props) => {
               </div>
             </div>
           )}
-          <CheckButton style={{ display: "none" }} ref={checkBtn} />
-        </Form>
+          <button style={{ display: "none" }} ref={checkBtn} />
+        </form>
       </div>
-    </div>
-  ) : (
-    <div>
-      <button></button>
     </div>
   );
 };
