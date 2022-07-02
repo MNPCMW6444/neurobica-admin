@@ -12,7 +12,7 @@ const API_URL = domain + "/";
 const login = (username, password) => {
   return axios
     .post(API_URL + "login", {
-      username,
+      name: username,
       password,
     })
     .then((response) => {

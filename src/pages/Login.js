@@ -12,7 +12,7 @@ const required = (value) => {
     );
   }
 };
-const Login = () => {
+const Login = (props) => {
   const form = useRef();
   const checkBtn = useRef();
   const [username, setUsername] = useState("");
@@ -52,7 +52,7 @@ const Login = () => {
       setLoading(false);
     }
   };
-  return (
+  return props.user ? (
     <div className="col-md-12">
       <div className="card card-container">
         <img
@@ -101,6 +101,10 @@ const Login = () => {
           <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>
       </div>
+    </div>
+  ) : (
+    <div>
+      <button></button>
     </div>
   );
 };

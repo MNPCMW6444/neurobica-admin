@@ -24,7 +24,6 @@ function App() {
   const [home, sethome] = useState(true);
   const [rasortasks, setrasortasks] = useState(false);
   const [user, setUser] = useState(false);
-  const [token, setToken] = useState(false);
 
   const messaging = getMessaging();
   onMessage(messaging, (payload) => {
@@ -107,7 +106,7 @@ function App() {
       {/* <h1 style={{ textAlign: "center" }}>Neurobica Adminnistration</h1> */}
       <YoadHeaderlogo />
       <ReactNotifications />
-      <Login user={user} setuser={setUser} token={token} settoken={setToken} />
+      {/*  <Login user={user} setuser={setUser} token={token} settoken={setToken} /> */}
       {user ? (
         home ? (
           <Home sethome={sethome} setrasortasks={setrasortasks} />

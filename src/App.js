@@ -15,6 +15,7 @@ import YoadHeadermas from "./YoadHeadermas";
 import { ReactNotifications } from "react-notifications-component";
 import { Store } from "react-notifications-component";
 import { getMessaging, onMessage } from "firebase/messaging";
+import AuthService from "./services/auth.service";
 
 function App() {
   const [show, setShow] = useState(false);
@@ -69,8 +70,8 @@ function App() {
   };
 
   async function getUser() {
-    const userRes = await Axios.get(domain + "/loggedIn", token);
-    setUser(userRes.data);
+    const userRes = AuthService.getCurrentUser();
+    setUser(userRes.accessToken);
   }
   useEffect(() => {
     getUser();
