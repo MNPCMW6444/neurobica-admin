@@ -1,20 +1,7 @@
 import React, { useState } from "react";
-//import { useNavigate } from "react-router-dom";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
 import AuthService from "../services/auth.service";
-const required = (value) => {
-  if (!value) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This field is required!
-      </div>
-    );
-  }
-};
+
 const Login = (props) => {
-  //let navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -33,8 +20,6 @@ const Login = (props) => {
     setLoading(true);
     AuthService.login(username, password).then(
       () => {
-        // navigate("/profile");
-        //window.location.reload();
         props.setuser(AuthService.getCurrentUser());
       },
       (error) => {
@@ -53,7 +38,6 @@ const Login = (props) => {
     <div>
       <button
         onClick={async () => {
-          // await Axios.get(domain + "/logout");
           localStorage.removeItem("user");
           props.setuser(null);
           setLoading(false);
@@ -80,7 +64,6 @@ const Login = (props) => {
               name="username"
               value={username}
               onChange={onChangeUsername}
-              validations={[required]}
             />
           </div>
           <div className="form-group">
@@ -91,7 +74,6 @@ const Login = (props) => {
               name="password"
               value={password}
               onChange={onChangePassword}
-              validations={[required]}
             />
           </div>
           <div className="form-group">
