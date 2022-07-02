@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 //import { useNavigate } from "react-router-dom";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -15,8 +15,6 @@ const required = (value) => {
 };
 const Login = (props) => {
   //let navigate = useNavigate();
-  const form = useRef();
-  const checkBtn = useRef();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -33,40 +31,32 @@ const Login = (props) => {
     e.preventDefault();
     setMessage("");
     setLoading(true);
-    form.current.validateAll();
-    if (
-      checkBtn.current.context._errors &&
-      checkBtn.current.context._errors.length === 0
-    ) {
-      AuthService.login(username, password).then(
-        () => {
-          // navigate("/profile");
-          //window.location.reload();
-          debugger;
-          props.setuser(AuthService.getCurrentUser());
-        },
-        (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-          setLoading(false);
-          setMessage(resMessage);
-        }
-      );
-    } else {
-      setLoading(false);
-    }
+    AuthService.login(username, password).then(
+      () => {
+        // navigate("/profile");
+        //window.location.reload();
+        props.setuser(AuthService.getCurrentUser());
+      },
+      (error) => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        setLoading(false);
+        setMessage(resMessage);
+      }
+    );
   };
   return props.user ? (
     <div>
       <button
         onClick={async () => {
           // await Axios.get(domain + "/logout");
+          localStorage.removeItem("user");
           props.setuser(null);
-          props.settoken(null);
+          setLoading(false);
         }}
         style={{ color: "red", width: "30%" }}
       >
@@ -81,10 +71,10 @@ const Login = (props) => {
           alt="profile-img"
           className="profile-img-card"
         />
-        <Form onSubmit={handleLogin} ref={form}>
+        <form onSubmit={handleLogin}>
           <div className="form-group">
             <label htmlFor="username">Username</label>
-            <Input
+            <input
               type="text"
               className="form-control"
               name="username"
@@ -95,7 +85,7 @@ const Login = (props) => {
           </div>
           <div className="form-group">
             <label htmlFor="password">Password</label>
-            <Input
+            <input
               type="password"
               className="form-control"
               name="password"
@@ -119,8 +109,8 @@ const Login = (props) => {
               </div>
             </div>
           )}
-          <CheckButton style={{ display: "none" }} ref={checkBtn} />
-        </Form>
+          <utton style={{ display: "none" }} />
+        </form>
       </div>
     </div>
   );
