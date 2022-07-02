@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 import Home from "./pages/Home";
 import Ras from "./pages/Ras";
+import Planner from "./pages/Planner";
 import Notifications from "./pages/Notifications";
 import Login from "./pages/Login";
 import domain from "./domain";
@@ -23,9 +24,8 @@ function App() {
   const [isTokenFound, setTokenFound] = useState(false);
 
   const [home, sethome] = useState(true);
-  const [rasortasks, setrasortasks] = useState(false);
+  const [page, setpage] = useState("home");
   const [user, setUser] = useState(false);
-  const [token, setToken] = useState(false);
 
   const messaging = getMessaging();
   onMessage(messaging, (payload) => {
@@ -48,7 +48,7 @@ function App() {
 
   Axios.defaults.withCredentials = true;
 
-  fetchToken(setTokenFound, null, token);
+  fetchToken(setTokenFound, null);
 
   onMessageListener()
     .then((payload) => {
@@ -71,6 +71,7 @@ function App() {
 
   async function getUser() {
     const userRes = AuthService.getCurrentUser();
+    debugger;
     setUser(userRes.accessToken);
   }
   useEffect(() => {
@@ -99,30 +100,24 @@ function App() {
         </Toast.Header>
         <Toast.Body>{notification.body}</Toast.Body>
       </Toast>
-      {/*   <header className="App-header">
-        {isTokenFound && <h1> Notification permission enabled 👍🏻 </h1>}
-        {!isTokenFound && <h1> Need notification permission ❗️ </h1>}
-        <img src={logo} className="App-logo" alt="logo" />
-        <Button onClick={() => onShowNotificationClicked()}>Show Toast</Button>
-      </header> */}
-      {/* <h1 style={{ textAlign: "center" }}>Neurobica Adminnistration</h1> */}
+
       <YoadHeaderlogo />
       <ReactNotifications />
-      <Login user={user} setuser={setUser} token={token} settoken={setToken} />
-      <br />
+      <Login user={user} setuser={setUser} />
       {user ? (
-        home ? (
-          <Home sethome={sethome} setrasortasks={setrasortasks} />
-        ) : rasortasks ? (
-          <Ras tok={token} sethome={sethome} setrasortasks={setrasortasks} />
-        ) : (
+        page === "home" ? (
+          <Home setpage={setpage} />
+        ) : page === "ras" ? (
+          <Ras setpage={setpage} />
+        ) : page === "recp" ? (
+          <Planner setpage={setpage} />
+        ) : page === "noti" ? (
           <Notifications
             sss={setTokenFound}
-            tok={token}
             sethome={sethome}
-            setrasortasks={setrasortasks}
+            setpage={setpage}
           />
-        )
+        ) : null
       ) : null}
       <YoadHeadermas />
     </div>

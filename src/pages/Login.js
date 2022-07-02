@@ -46,6 +46,8 @@ const Login = (props) => {
       >
         Logout
       </button>
+      <br />
+      <br />
     </div>
   ) : (
     <div className="col-md-12">

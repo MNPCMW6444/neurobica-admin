@@ -17,7 +17,7 @@ var firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const messaging = getMessaging(firebaseApp);
 
-export const fetchToken = async (setTokenFound, setmes, tok) => {
+export const fetchToken = async (setTokenFound, setmes) => {
   return getToken(messaging, {
     vapidKey:
       "BNK3QHhftQUAFZSq04afuON_WAKuF-g9wPRdGp8N6s63UtZDBs12OorqmhlhpkBnwqZ2eQLBvbcbwKVCkzskxAg",
@@ -26,7 +26,6 @@ export const fetchToken = async (setTokenFound, setmes, tok) => {
       if (currentToken) {
         console.log("current token for client: ", currentToken);
         const res = await Axios.post(domain + "/notify", {
-          tok: tok,
           token2: currentToken,
         });
         if (typeof setmes === typeof new Function())

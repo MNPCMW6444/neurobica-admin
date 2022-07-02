@@ -258,8 +258,8 @@ function Ras(props) {
             borderRadius: "100px",
           }}
           onClick={() => {
-            const back = props.sethome;
-            back(true);
+            const back = props.setpage;
+            back("home");
           }}
         >
           Return Home

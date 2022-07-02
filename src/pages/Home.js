@@ -2,12 +2,12 @@ function Home(props) {
   return (
     <div className="Home">
       <h2>Home</h2>
-
+      <br />
       <button
         className="rbutton"
         onClick={() => {
-          props.sethome(false);
-          props.setrasortasks(true);
+          props.setpage("ras");
+          console.log("ras");
         }}
       >
         Read & Sign
@@ -15,10 +15,21 @@ function Home(props) {
       <br />
       <br />
       <button
+        className="rbutton"
+        onClick={() => {
+          props.setpage("recp");
+          console.log("recp");
+        }}
+      >
+        Recrusive Planner
+      </button>
+      <br />
+      <br />
+      <button
         className="rbuttonsmall"
         onClick={() => {
-          props.sethome(false);
-          props.setrasortasks(false);
+          props.setpage("noti");
+          console.log("noti");
         }}
       >
         Notification Settings
