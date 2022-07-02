@@ -17,6 +17,7 @@ import { ReactNotifications } from "react-notifications-component";
 import { Store } from "react-notifications-component";
 import { getMessaging, onMessage } from "firebase/messaging";
 import AuthService from "./services/auth.service";
+import authHeader from "./services/auth-header";
 
 function App() {
   const [show, setShow] = useState(false);
@@ -26,6 +27,7 @@ function App() {
   const [home, sethome] = useState(true);
   const [page, setpage] = useState("home");
   const [user, setUser] = useState(false);
+  const [username, setUsername] = useState(false);
 
   const messaging = getMessaging();
   onMessage(messaging, (payload) => {
@@ -73,9 +75,20 @@ function App() {
     const userRes = AuthService.getCurrentUser();
     setUser(userRes.accessToken);
   }
+
+  async function getName() {
+    const u = await Axios.get(domain + "/myname", { headers: authHeader() });
+    setUsername(u.data.itis);
+    debugger;
+  }
+
   useEffect(() => {
     getUser();
   }, []);
+
+  useEffect(() => {
+    getName();
+  }, [user]);
 
   return (
     <div className="App">
@@ -109,7 +122,7 @@ function App() {
         ) : page === "ras" ? (
           <Ras setpage={setpage} />
         ) : page === "recp" ? (
-          <Planner setpage={setpage} />
+          <Planner setpage={setpage} username={username} />
         ) : page === "noti" ? (
           <Notifications
             sss={setTokenFound}

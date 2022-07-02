@@ -68,7 +68,27 @@ function Planner(props) {
             </button>
           </div>
         )}
-        {editmode && newroot && <div>asdasd</div>}
+        {editmode && newroot && (
+          <div>
+            <br />
+            <table>
+              <tr>
+                <th style={{ width: "10%" }}>E2E Responsible:</th>
+                <th style={{ width: "10%" }}>Name:</th>
+                <th style={{ width: "80%" }}>Description:</th>
+              </tr>
+              <tr>
+                <td>{props.username}</td>
+                <td>
+                  <input></input>
+                </td>
+                <td>
+                  <textarea></textarea>
+                </td>
+              </tr>
+            </table>
+          </div>
+        )}
         {res &&
           res.length &&
           res.map((task) => <div>{<Task it={task} />}</div>)}
