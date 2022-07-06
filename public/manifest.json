@@ -1,6 +1,6 @@
 {
-  "short_name": "Neurobica Exec",
-  "name": "Internal App",
+  "short_name": "Neurobica ExecAdmin",
+  "name": "R&D and Admin App",
   "icons": [
     {
       "src": "favicon.ico",
@@ -11,5 +11,5 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "purple"
 }
