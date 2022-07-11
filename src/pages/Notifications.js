@@ -1,4 +1,3 @@
-import { fetchToken } from "../firebase";
 import { useState } from "react";
 
 function Notifications(props) {
@@ -26,9 +25,7 @@ function Notifications(props) {
       <br />
       <br />
       <button
-        onClick={() => {
-          if (setmes) fetchToken(props.sss, setmes, props.tok);
-        }}
+        onClick={() => {}}
         style={{
           color: "black",
           fontSize: "25pt",

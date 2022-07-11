@@ -1,6 +1,5 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { fetchToken, onMessageListener } from "./firebase";
 import { Button, Toast } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
@@ -15,7 +14,6 @@ import YoadHeaderlogo from "./YoadHeaderlogo";
 import YoadHeadermas from "./YoadHeadermas";
 import { ReactNotifications } from "react-notifications-component";
 import { Store } from "react-notifications-component";
-import { getMessaging, onMessage } from "firebase/messaging";
 import AuthService from "./services/auth.service";
 import authHeader from "./services/auth-header";
 
@@ -29,47 +27,7 @@ function App() {
   const [user, setUser] = useState(false);
   const [username, setUsername] = useState(false);
 
-  const messaging = getMessaging();
-  onMessage(messaging, (payload) => {
-    console.log("Message received. ", payload);
-    // ...
-    Store.addNotification({
-      title: payload.notification.title,
-      message: payload.notification.body,
-      type: "success",
-      insert: "top",
-      container: "top-right",
-      animationIn: ["animate__animated", "animate__fadeIn"],
-      animationOut: ["animate__animated", "animate__fadeOut"],
-      dismiss: {
-        duration: 5000,
-        onScreen: true,
-      },
-    });
-  });
-
   Axios.defaults.withCredentials = true;
-
-  fetchToken(setTokenFound, null);
-
-  onMessageListener()
-    .then((payload) => {
-      setNotification({
-        title: payload.notification.title,
-        body: payload.notification.body,
-      });
-      setShow(true);
-      console.log(payload);
-    })
-    .catch((err) => console.log("failed: ", err));
-
-  const onShowNotificationClicked = () => {
-    setNotification({
-      title: "Notification",
-      body: "This is a test notification",
-    });
-    setShow(true);
-  };
 
   async function getUser() {
     const userRes = AuthService.getCurrentUser();
@@ -79,7 +37,6 @@ function App() {
   async function getName() {
     const u = await Axios.get(domain + "/myname", { headers: authHeader() });
     setUsername(u.data.itis);
-    debugger;
   }
 
   useEffect(() => {
