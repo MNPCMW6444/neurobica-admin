@@ -88,9 +88,17 @@ function PPT(props) {
   }
 
   return (
-    <div className="Ras">
-      <div style={{ padding: "5vw", width: "90vw", overflowX: "auto" }}>
-        <table>
+    <div>
+      <div
+        style={{
+          padding: "5vw",
+          width: "90vw",
+          overflowX: "auto",
+          width: "100%",
+          height: "100%",
+        }}
+      >
+        <table style={{ margin: "0 auto" }}>
           <tbody>
             <tr>
               <th>Published by</th>
