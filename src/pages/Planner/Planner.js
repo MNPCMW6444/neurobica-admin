@@ -12,6 +12,24 @@ function Planner(props) {
   const [editmode, seteditmode] = useState();
   const [newroot, setnewroot] = useState();
 
+  const [newname, setnewname] = useState();
+  const [newdesc, setnewdesc] = useState();
+
+  let save_aysinc = "Save";
+
+  const save = async () => {
+    if (save_aysinc === "Save") {
+      save_aysinc = "Saving...";
+      const res = await Axios.POST(domain + "/savenewtask", {
+        name: newname,
+        desc: newdesc,
+        headers: authHeader(),
+      });
+      setr(Math.random);
+      save_aysinc = "Save";
+    }
+  };
+
   useEffect(() => {
     async function getit() {
       const re = await Axios.get(domain + "/all/", { headers: authHeader() });
@@ -52,20 +70,22 @@ function Planner(props) {
       <div className="rp">
         {editmode && (
           <div>
-            <button
-              style={{
-                borderRadius: "8%",
-                border: "1px solid pink",
-                backgroundColor: "green",
-                color: "white",
-                fontSize: "2em",
-              }}
-              onClick={() => {
-                setnewroot(true);
-              }}
-            >
-              ➕ Create a new task at root
-            </button>
+            {!newroot && (
+              <button
+                style={{
+                  borderRadius: "8%",
+                  border: "1px solid pink",
+                  backgroundColor: "green",
+                  color: "white",
+                  fontSize: "2em",
+                }}
+                onClick={() => {
+                  setnewroot(true);
+                }}
+              >
+                ➕ Create a new task at root
+              </button>
+            )}
           </div>
         )}
         {editmode && newroot && (
@@ -76,14 +96,29 @@ function Planner(props) {
                 <th style={{ width: "10%" }}>E2E Responsible:</th>
                 <th style={{ width: "10%" }}>Name:</th>
                 <th style={{ width: "80%" }}>Description:</th>
+                <td rowSpan={2}>
+                  <button className="rbutton" style={{ fontSize: "2rem" }}>
+                    {save_aysinc}
+                  </button>
+                </td>
               </tr>
               <tr>
                 <td>{props.username}</td>
                 <td>
-                  <input></input>
+                  <input
+                    value={newname}
+                    onChange={(e) => {
+                      setnewname(e.target.value);
+                    }}
+                  ></input>
                 </td>
                 <td>
-                  <textarea></textarea>
+                  <textarea
+                    value={newdesc}
+                    onChange={(e) => {
+                      setnewdesc(e.target.value);
+                    }}
+                  ></textarea>
                 </td>
               </tr>
             </table>
