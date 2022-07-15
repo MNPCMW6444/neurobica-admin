@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Axios from "axios";
 import Task from "./Task";
-import Modal from "react-modal";
 import domain from "../../domain";
 import authHeader from "../../services/auth-header";
 import Switch from "react-switch";
@@ -17,10 +16,11 @@ function Planner(props) {
 
   let save_aysinc = "Save";
 
-  const save = async () => {
+  async function save() {
+    console.log("Asdasd");
     if (save_aysinc === "Save") {
       save_aysinc = "Saving...";
-      const res = await Axios.POST(domain + "/savenewtask", {
+      const res = await Axios.post(domain + "/savenewtask/", {
         name: newname,
         desc: newdesc,
         headers: authHeader(),
@@ -28,12 +28,12 @@ function Planner(props) {
       setr(Math.random);
       save_aysinc = "Save";
     }
-  };
+  }
 
   useEffect(() => {
     async function getit() {
-      const re = await Axios.get(domain + "/all/", { headers: authHeader() });
-      setres(re);
+      const re = await Axios.get(domain + "/allt/", { headers: authHeader() });
+      setres(re.data);
     }
     getit();
   }, [r]);
@@ -97,7 +97,13 @@ function Planner(props) {
                 <th style={{ width: "10%" }}>Name:</th>
                 <th style={{ width: "80%" }}>Description:</th>
                 <td rowSpan={2}>
-                  <button className="rbutton" style={{ fontSize: "2rem" }}>
+                  <button
+                    className="rbutton"
+                    style={{ fontSize: "2rem" }}
+                    onClick={() => {
+                      save();
+                    }}
+                  >
                     {save_aysinc}
                   </button>
                 </td>
@@ -126,7 +132,18 @@ function Planner(props) {
         )}
         {res &&
           res.length &&
-          res.map((task) => <div>{<Task it={task} />}</div>)}
+          res.map((task) => (
+            <div>
+              {
+                <Task
+                  it={task}
+                  setr={setr}
+                  username={props.username}
+                  editmode={editmode}
+                />
+              }
+            </div>
+          ))}
       </div>
     </div>
   );
