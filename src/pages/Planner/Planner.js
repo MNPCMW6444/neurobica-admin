@@ -14,19 +14,26 @@ function Planner(props) {
   const [newname, setnewname] = useState();
   const [newdesc, setnewdesc] = useState();
 
-  let save_aysinc = "Save";
+  const [save_aysinc, ssave_aysinc] = useState("Save");
 
   async function save() {
     console.log("Asdasd");
     if (save_aysinc === "Save") {
-      save_aysinc = "Saving...";
-      const res = await Axios.post(domain + "/savenewtask/", {
-        name: newname,
-        desc: newdesc,
-        headers: authHeader(),
-      });
+      ssave_aysinc("Saving...");
+      try {
+        const res = await Axios.post(domain + "/savenewtask", {
+          name: newname,
+          desc: newdesc,
+          headers: authHeader(),
+        });
+      } catch (e) {
+        ssave_aysinc("Save");
+      }
+      setnewname("");
+      setnewdesc("");
+      setnewroot(false);
       setr(Math.random);
-      save_aysinc = "Save";
+      ssave_aysinc("Save");
     }
   }
 
