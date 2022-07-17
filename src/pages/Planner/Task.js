@@ -12,7 +12,7 @@ export default function Task(props) {
   const [save_aysinc, ssave_aysinc] = useState("Save");
 
   async function save() {
-    console.log("Asdasd");
+    let flag = false;
     if (save_aysinc === "Save") {
       ssave_aysinc("Saving...");
       try {
@@ -22,11 +22,21 @@ export default function Task(props) {
           desc: newdesc,
           headers: authHeader(),
         });
+        flag = true;
       } catch (e) {
-        ssave_aysinc("Save");
+        ssave_aysinc("Error!");
+        setTimeout(() => {
+          ssave_aysinc("Save");
+        }, 1000);
+      } finally {
+        props.setr(Math.random);
+        if (flag) {
+          ssave_aysinc("Saved!");
+          setTimeout(() => {
+            ssave_aysinc("Save");
+          }, 1000);
+        }
       }
-      props.setr(Math.random);
-      ssave_aysinc("Save");
     }
   }
 
@@ -51,6 +61,7 @@ export default function Task(props) {
                   style={{ maxWidth: "100%" }}
                   value={newname}
                   onChange={(e) => {
+                    ssave_aysinc("Save");
                     setnewname(e.target.value);
                   }}
                 ></input>
@@ -64,6 +75,7 @@ export default function Task(props) {
                   style={{ maxWidth: "100%" }}
                   value={newdesc}
                   onChange={(e) => {
+                    ssave_aysinc("Save");
                     setnewdesc(e.target.value);
                   }}
                 ></textarea>
@@ -75,7 +87,18 @@ export default function Task(props) {
               <Td>
                 <button
                   className="rbutton"
-                  style={{ fontSize: "2rem", maxWidth: "100%" }}
+                  style={{
+                    fontSize: "2rem",
+                    maxWidth: "100%",
+                    backgroundColor:
+                      save_aysinc === "Save"
+                        ? ""
+                        : save_aysinc === "Error!"
+                        ? "red"
+                        : save_aysinc === "Saving..."
+                        ? "yellow"
+                        : "green",
+                  }}
                   onClick={() => {
                     save();
                   }}

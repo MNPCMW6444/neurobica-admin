@@ -19,7 +19,7 @@ function Planner(props) {
   const [save_aysinc, ssave_aysinc] = useState("Save");
 
   async function save() {
-    console.log("Asdasd");
+    let flag = false;
     if (save_aysinc === "Save") {
       ssave_aysinc("Saving...");
       try {
@@ -28,14 +28,21 @@ function Planner(props) {
           desc: newdesc,
           headers: authHeader(),
         });
+        flag = true;
       } catch (e) {
-        ssave_aysinc("Save");
+        ssave_aysinc("Error!");
+        setTimeout(() => {
+          ssave_aysinc("Save");
+        }, 1000);
+      } finally {
+        setr(Math.random);
+        if (flag) {
+          ssave_aysinc("Saved!");
+          setTimeout(() => {
+            ssave_aysinc("Save");
+          }, 1000);
+        }
       }
-      setnewname("");
-      setnewdesc("");
-      setnewroot(false);
-      setr(Math.random);
-      ssave_aysinc("Save");
     }
   }
 
@@ -118,6 +125,7 @@ function Planner(props) {
                       value={newname}
                       onChange={(e) => {
                         setnewname(e.target.value);
+                        ssave_aysinc("Save");
                       }}
                     ></input>
                   </Td>
@@ -127,6 +135,7 @@ function Planner(props) {
                       value={newdesc}
                       onChange={(e) => {
                         setnewdesc(e.target.value);
+                        ssave_aysinc("Save");
                       }}
                     ></textarea>
                   </Td>
@@ -134,7 +143,18 @@ function Planner(props) {
                     <Td>
                       <button
                         className="rbutton"
-                        style={{ fontSize: "2rem", maxWidth: "100%" }}
+                        style={{
+                          fontSize: "2rem",
+                          maxWidth: "100%",
+                          backgroundColor:
+                            save_aysinc === "Save"
+                              ? ""
+                              : save_aysinc === "Error!"
+                              ? "red"
+                              : save_aysinc === "Saving..."
+                              ? "yellow"
+                              : "green",
+                        }}
                         onClick={() => {
                           save();
                         }}
