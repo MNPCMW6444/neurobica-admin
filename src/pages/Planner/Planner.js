@@ -48,8 +48,14 @@ function Planner(props) {
 
   useEffect(() => {
     async function getit() {
-      const re = await Axios.get(domain + "/allt/", { headers: authHeader() });
-      setres(re.data);
+      const re = (await Axios.get(domain + "/allt/", { headers: authHeader() }))
+        .data;
+      let ress;
+      re.forEach((task) => {
+        if (!task.parent) ress.push(task);
+      });
+      debugger;
+      setres(ress);
     }
     getit();
   }, [r]);

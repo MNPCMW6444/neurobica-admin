@@ -110,6 +110,19 @@ export default function Task(props) {
           </Tr>
         </Tbody>
       </Table>
+      {props.it.children && props.it.children.length > 0 && (
+        <>
+          <div>Sub Tasks:</div>
+          {props.it.children.map((child) => (
+            <Task
+              it={child}
+              setr={props.setr}
+              username={props.username}
+              editmode={props.editmode}
+            />
+          ))}
+        </>
+      )}
     </div>
   );
 }
