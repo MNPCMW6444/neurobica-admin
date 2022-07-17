@@ -5,6 +5,8 @@ import domain from "../../domain";
 import authHeader from "../../services/auth-header";
 import Switch from "react-switch";
 
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+
 function Planner(props) {
   const [res, setres] = useState();
   const [r, setr] = useState();
