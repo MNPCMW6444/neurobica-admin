@@ -19,7 +19,7 @@ code {
 .hovertrue {
   display: block;
   position: absolute;
-  right: 100px;
+  right: 50vw;
 }
 
 body {
