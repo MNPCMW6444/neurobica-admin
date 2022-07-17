@@ -50,11 +50,10 @@ function Planner(props) {
     async function getit() {
       const re = (await Axios.get(domain + "/allt/", { headers: authHeader() }))
         .data;
-      let ress;
+      let ress = [];
       re.forEach((task) => {
         if (!task.parent) ress.push(task);
       });
-      debugger;
       setres(ress);
     }
     getit();
