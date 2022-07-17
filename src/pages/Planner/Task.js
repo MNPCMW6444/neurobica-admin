@@ -6,15 +6,15 @@ import authHeader from "../../services/auth-header";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 export default function Task(props) {
-  let save_aysinc = "Save";
-
   const [newname, setnewname] = useState(props.it.name);
   const [newdesc, setnewdesc] = useState(props.it.desc);
+
+  const [save_aysinc, ssave_aysinc] = useState("Save");
 
   async function save() {
     console.log("Asdasd");
     if (save_aysinc === "Save") {
-      save_aysinc = "Saving...";
+      ssave_aysinc("Saving...");
       try {
         const res = await Axios.post(domain + "/editnewtask", {
           id: props.it._id,
@@ -23,10 +23,10 @@ export default function Task(props) {
           headers: authHeader(),
         });
       } catch (e) {
-        save_aysinc = "Save";
+        ssave_aysinc("Save");
       }
       props.setr(Math.random);
-      save_aysinc = "Save";
+      ssave_aysinc("Save");
     }
   }
 
