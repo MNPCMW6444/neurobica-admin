@@ -138,7 +138,6 @@ function Planner(props) {
           </div>
         )}
         {res &&
-          res.length &&
           res.map((task) => (
             <div>
               {

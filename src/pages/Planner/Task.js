@@ -3,6 +3,9 @@ import Axios from "axios";
 import domain from "../../domain";
 import authHeader from "../../services/auth-header";
 
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
+
 export default function Task(props) {
   let save_aysinc = "Save";
 
@@ -31,13 +34,13 @@ export default function Task(props) {
   return (
     <div>
       <br />
-      <table>
-        <tr>
-          <th style={{ width: "10%" }}>E2E Responsible:</th>
-          <th style={{ width: "10%" }}>Name:</th>
-          <th style={{ width: "80%" }}>Description:</th>
+      <Table>
+        <Tr>
+          <Th style={{ width: "10%" }}>E2E Responsible:</Th>
+          <Th style={{ width: "10%" }}>Name:</Th>
+          <Th style={{ width: "80%" }}>Description:</Th>
           {props.editmode && (
-            <td rowSpan={2}>
+            <Td rowSpan={2}>
               <button
                 className="rbutton"
                 style={{ fontSize: "2rem" }}
@@ -47,12 +50,12 @@ export default function Task(props) {
               >
                 {save_aysinc}
               </button>
-            </td>
+            </Td>
           )}
-        </tr>
-        <tr>
-          <td>{props.username}</td>
-          <td>
+        </Tr>
+        <Tr>
+          <Td>{props.username}</Td>
+          <Td>
             {props.editmode ? (
               <input
                 value={newname}
@@ -63,8 +66,8 @@ export default function Task(props) {
             ) : (
               <div>{props.it.name}</div>
             )}
-          </td>
-          <td>
+          </Td>
+          <Td>
             {props.editmode ? (
               <textarea
                 value={newdesc}
@@ -75,9 +78,9 @@ export default function Task(props) {
             ) : (
               <div>{props.it.desc}</div>
             )}
-          </td>
-        </tr>
-      </table>
+          </Td>
+        </Tr>
+      </Table>
     </div>
   );
 }
