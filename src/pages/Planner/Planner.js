@@ -98,12 +98,12 @@ function Planner(props) {
         {editmode && newroot && (
           <div>
             <br />
-            <table>
-              <tr>
-                <th style={{ width: "10%" }}>E2E Responsible:</th>
-                <th style={{ width: "10%" }}>Name:</th>
-                <th style={{ width: "80%" }}>Description:</th>
-                <td rowSpan={2}>
+            <Table>
+              <Tr>
+                <Th style={{ width: "10%" }}>E2E Responsible:</Th>
+                <Th style={{ width: "10%" }}>Name:</Th>
+                <Th style={{ width: "80%" }}>Description:</Th>
+                <Td rowSpan={2}>
                   <button
                     className="rbutton"
                     style={{ fontSize: "2rem" }}
@@ -113,28 +113,28 @@ function Planner(props) {
                   >
                     {save_aysinc}
                   </button>
-                </td>
-              </tr>
-              <tr>
-                <td>{props.username}</td>
-                <td>
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>{props.username}</Td>
+                <Td>
                   <input
                     value={newname}
                     onChange={(e) => {
                       setnewname(e.target.value);
                     }}
                   ></input>
-                </td>
-                <td>
-                  <textarea
+                </Td>
+                <Td>
+                  <Textarea
                     value={newdesc}
                     onChange={(e) => {
                       setnewdesc(e.target.value);
                     }}
-                  ></textarea>
-                </td>
-              </tr>
-            </table>
+                  ></Textarea>
+                </Td>
+              </Tr>
+            </Table>
           </div>
         )}
         {res &&
