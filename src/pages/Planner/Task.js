@@ -13,12 +13,16 @@ export default function Task(props) {
     console.log("Asdasd");
     if (save_aysinc === "Save") {
       save_aysinc = "Saving...";
-      const res = await Axios.post(domain + "/editnewtask", {
-        id: props.it._id,
-        name: newname,
-        desc: newdesc,
-        headers: authHeader(),
-      });
+      try {
+        const res = await Axios.post(domain + "/editnewtask", {
+          id: props.it._id,
+          name: newname,
+          desc: newdesc,
+          headers: authHeader(),
+        });
+      } catch (e) {
+        save_aysinc = "Save";
+      }
       props.setr(Math.random);
       save_aysinc = "Save";
     }
