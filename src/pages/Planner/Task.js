@@ -39,19 +39,7 @@ export default function Task(props) {
             <Th style={{ width: "10%" }}>E2E Responsible:</Th>
             <Th style={{ width: "10%" }}>Name:</Th>
             <Th style={{ width: "80%" }}>Description:</Th>
-            {props.editmode && (
-              <Td rowSpan={2}>
-                <button
-                  className="rbutton"
-                  style={{ fontSize: "2rem" }}
-                  onClick={() => {
-                    save();
-                  }}
-                >
-                  {save_aysinc}
-                </button>
-              </Td>
-            )}
+            {props.editmode && <Th style={{ width: "80%" }}></Th>}
           </Tr>
         </Thead>
         <Tbody>
@@ -60,6 +48,7 @@ export default function Task(props) {
             <Td>
               {props.editmode ? (
                 <input
+                  style={{ maxWidth: "100%" }}
                   value={newname}
                   onChange={(e) => {
                     setnewname(e.target.value);
@@ -72,6 +61,7 @@ export default function Task(props) {
             <Td>
               {props.editmode ? (
                 <textarea
+                  style={{ maxWidth: "100%" }}
                   value={newdesc}
                   onChange={(e) => {
                     setnewdesc(e.target.value);
@@ -81,6 +71,19 @@ export default function Task(props) {
                 <div>{props.it.desc}</div>
               )}
             </Td>
+            {props.editmode && (
+              <Td>
+                <button
+                  className="rbutton"
+                  style={{ fontSize: "2rem", maxWidth: "100%" }}
+                  onClick={() => {
+                    save();
+                  }}
+                >
+                  {save_aysinc}
+                </button>
+              </Td>
+            )}
           </Tr>
         </Tbody>
       </Table>
