@@ -4,6 +4,8 @@ import Modal from "react-modal";
 import domain from "../domain";
 import authHeader from "../services/auth-header";
 
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+
 function Ras(props) {
   const [in1, setin1] = useState();
   const [in2, setin2] = useState();
@@ -282,35 +284,37 @@ function Ras(props) {
       <br />
       <br />
       <div style={{ padding: "5vw", width: "90vw", overflowX: "auto" }}>
-        <table>
-          <tbody>
-            <tr>
-              <th>Published by</th>
-              <th>Description</th>
-              <th>Publish Time</th>
-              <th>Signed by</th>
-              <th>Target Time</th>
-            </tr>
+        <Table>
+          <Thead>
+            <Tr>
+              <Th>Published by</Th>
+              <Th>Description</Th>
+              <Th>Publish Time</Th>
+              <Th>Signed by</Th>
+              <Th>Target Time</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
             {items &&
               items.map((item, i) => (
-                <tr key={i}>
-                  <td
+                <Tr key={i}>
+                  <Td
                     onClick={() => {
                       setpublication(item);
                       openModal2();
                     }}
                   >
                     {item.owner || "Loading..."}
-                  </td>
-                  <td
+                  </Td>
+                  <Td
                     onClick={() => {
                       setpublication(item);
                       openModal2();
                     }}
                   >
                     {item.desc || "Loading..."}
-                  </td>
-                  <td
+                  </Td>
+                  <Td
                     onClick={() => {
                       setpublication(item);
                       openModal2();
@@ -319,8 +323,8 @@ function Ras(props) {
                     {item.createdAt
                       ? new Date(item.createdAt).toLocaleString()
                       : "Loading..."}
-                  </td>
-                  <td
+                  </Td>
+                  <Td
                     onMouseEnter={() => {
                       let itemscopy = new Array();
                       for (let j = 0; j < items.length; j++) {
@@ -362,36 +366,36 @@ function Ras(props) {
                         "/3"
                       : "Loading..."}
                     <div className={"hover" + item.mouse}>
-                      <table>
-                        <tr>
-                          <th>name:</th>
-                          <th>signiture:</th>
-                        </tr>
-                        <tr>
+                      <Table>
+                        <Tr>
+                          <Th>name:</Th>
+                          <Th>signiture:</Th>
+                        </Tr>
+                        <Tr>
                           {" "}
-                          <td>yoda</td>
-                          <td style={{ color: item.sign1 ? "green" : "red" }}>
+                          <Td>yoda</Td>
+                          <Td style={{ color: item.sign1 ? "green" : "red" }}>
                             {item.sign1 ? "V" : "X"}
-                          </td>
-                        </tr>
-                        <tr>
+                          </Td>
+                        </Tr>
+                        <Tr>
                           {" "}
-                          <td>nelson</td>
-                          <td style={{ color: item.sign2 ? "green" : "red" }}>
+                          <Td>nelson</Td>
+                          <Td style={{ color: item.sign2 ? "green" : "red" }}>
                             {item.sign2 ? "V" : "X"}
-                          </td>{" "}
-                        </tr>
-                        <tr>
+                          </Td>{" "}
+                        </Tr>
+                        <Tr>
                           {" "}
-                          <td>ovadov</td>
-                          <td style={{ color: item.sign3 ? "green" : "red" }}>
+                          <Td>ovadov</Td>
+                          <Td style={{ color: item.sign3 ? "green" : "red" }}>
                             {item.sign3 ? "V" : "X"}
-                          </td>{" "}
-                        </tr>
-                      </table>
+                          </Td>{" "}
+                        </Tr>
+                      </Table>
                     </div>
-                  </td>
-                  <td
+                  </Td>
+                  <Td
                     onClick={() => {
                       setpublication(item);
                       openModal2();
@@ -402,11 +406,11 @@ function Ras(props) {
                         ? new Date(item.time).toLocaleString()
                         : "-"
                       : "Loading..."}
-                  </td>
-                </tr>
+                  </Td>
+                </Tr>
               ))}
-          </tbody>
-        </table>
+          </Tbody>
+        </Table>
       </div>
     </div>
   );
