@@ -14,6 +14,7 @@ import YoadHeadermas from "./YoadHeadermas";
 import { ReactNotifications } from "react-notifications-component";
 import { Store } from "react-notifications-component";
 import AuthService from "./services/auth.service";
+import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 
 import authHeader from "./services/auth-header";
 

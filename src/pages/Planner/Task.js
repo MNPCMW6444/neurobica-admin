@@ -4,7 +4,6 @@ import domain from "../../domain";
 import authHeader from "../../services/auth-header";
 
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
-import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 
 export default function Task(props) {
   let save_aysinc = "Save";
@@ -35,51 +34,55 @@ export default function Task(props) {
     <div>
       <br />
       <Table>
-        <Tr>
-          <Th style={{ width: "10%" }}>E2E Responsible:</Th>
-          <Th style={{ width: "10%" }}>Name:</Th>
-          <Th style={{ width: "80%" }}>Description:</Th>
-          {props.editmode && (
-            <Td rowSpan={2}>
-              <button
-                className="rbutton"
-                style={{ fontSize: "2rem" }}
-                onClick={() => {
-                  save();
-                }}
-              >
-                {save_aysinc}
-              </button>
+        <Thead>
+          <Tr>
+            <Th style={{ width: "10%" }}>E2E Responsible:</Th>
+            <Th style={{ width: "10%" }}>Name:</Th>
+            <Th style={{ width: "80%" }}>Description:</Th>
+            {props.editmode && (
+              <Td rowSpan={2}>
+                <button
+                  className="rbutton"
+                  style={{ fontSize: "2rem" }}
+                  onClick={() => {
+                    save();
+                  }}
+                >
+                  {save_aysinc}
+                </button>
+              </Td>
+            )}
+          </Tr>
+        </Thead>
+        <Tbody>
+          <Tr>
+            <Td>{props.username}</Td>
+            <Td>
+              {props.editmode ? (
+                <input
+                  value={newname}
+                  onChange={(e) => {
+                    setnewname(e.target.value);
+                  }}
+                ></input>
+              ) : (
+                <div>{props.it.name}</div>
+              )}
             </Td>
-          )}
-        </Tr>
-        <Tr>
-          <Td>{props.username}</Td>
-          <Td>
-            {props.editmode ? (
-              <input
-                value={newname}
-                onChange={(e) => {
-                  setnewname(e.target.value);
-                }}
-              ></input>
-            ) : (
-              <div>{props.it.name}</div>
-            )}
-          </Td>
-          <Td>
-            {props.editmode ? (
-              <textarea
-                value={newdesc}
-                onChange={(e) => {
-                  setnewdesc(e.target.value);
-                }}
-              ></textarea>
-            ) : (
-              <div>{props.it.desc}</div>
-            )}
-          </Td>
-        </Tr>
+            <Td>
+              {props.editmode ? (
+                <textarea
+                  value={newdesc}
+                  onChange={(e) => {
+                    setnewdesc(e.target.value);
+                  }}
+                ></textarea>
+              ) : (
+                <div>{props.it.desc}</div>
+              )}
+            </Td>
+          </Tr>
+        </Tbody>
       </Table>
     </div>
   );
