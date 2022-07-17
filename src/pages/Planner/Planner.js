@@ -128,12 +128,12 @@ function Planner(props) {
                   ></input>
                 </Td>
                 <Td>
-                  <Textarea
+                  <textarea
                     value={newdesc}
                     onChange={(e) => {
                       setnewdesc(e.target.value);
                     }}
-                  ></Textarea>
+                  ></textarea>
                 </Td>
               </Tr>
             </Table>
