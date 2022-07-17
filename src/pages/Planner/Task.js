@@ -41,7 +41,7 @@ export default function Task(props) {
   }
 
   return (
-    <div style={{border: "1px solid purple", margin:"3vw"}}>
+    <div style={{border: "2px solid purple", margin:"3vw"}}>
       
       <Table>
         <Thead>
