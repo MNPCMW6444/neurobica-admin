@@ -101,41 +101,50 @@ function Planner(props) {
           <div>
             <br />
             <Table>
-              <Tr>
-                <Th style={{ width: "10%" }}>E2E Responsible:</Th>
-                <Th style={{ width: "10%" }}>Name:</Th>
-                <Th style={{ width: "80%" }}>Description:</Th>
-                <Td rowSpan={2}>
-                  <button
-                    className="rbutton"
-                    style={{ fontSize: "2rem" }}
-                    onClick={() => {
-                      save();
-                    }}
-                  >
-                    {save_aysinc}
-                  </button>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>{props.username}</Td>
-                <Td>
-                  <input
-                    value={newname}
-                    onChange={(e) => {
-                      setnewname(e.target.value);
-                    }}
-                  ></input>
-                </Td>
-                <Td>
-                  <textarea
-                    value={newdesc}
-                    onChange={(e) => {
-                      setnewdesc(e.target.value);
-                    }}
-                  ></textarea>
-                </Td>
-              </Tr>
+              <Thead>
+                <Tr>
+                  <Th style={{ width: "10%" }}>E2E Responsible:</Th>
+                  <Th style={{ width: "10%" }}>Name:</Th>
+                  <Th style={{ width: "80%" }}>Description:</Th>
+                  {editmode && <Th style={{ width: "80%" }}></Th>}
+                </Tr>
+              </Thead>
+              <Tbody>
+                <Tr>
+                  <Td>{props.username}</Td>
+                  <Td>
+                    <input
+                      style={{ maxWidth: "100%" }}
+                      value={newname}
+                      onChange={(e) => {
+                        setnewname(e.target.value);
+                      }}
+                    ></input>
+                  </Td>
+                  <Td>
+                    <textarea
+                      style={{ maxWidth: "100%" }}
+                      value={newdesc}
+                      onChange={(e) => {
+                        setnewdesc(e.target.value);
+                      }}
+                    ></textarea>
+                  </Td>
+                  {editmode && (
+                    <Td>
+                      <button
+                        className="rbutton"
+                        style={{ fontSize: "2rem", maxWidth: "100%" }}
+                        onClick={() => {
+                          save();
+                        }}
+                      >
+                        {save_aysinc}
+                      </button>
+                    </Td>
+                  )}
+                </Tr>
+              </Tbody>
             </Table>
           </div>
         )}
