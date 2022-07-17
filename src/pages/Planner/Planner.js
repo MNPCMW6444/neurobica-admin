@@ -40,6 +40,9 @@ function Planner(props) {
           ssave_aysinc("Saved!");
           setTimeout(() => {
             ssave_aysinc("Save");
+            setnewroot(false);
+            setnewdesc("");
+            setnewname("");
           }, 1000);
         }
       }
@@ -48,13 +51,43 @@ function Planner(props) {
 
   useEffect(() => {
     async function getit() {
-      const re = (await Axios.get(domain + "/allt/", { headers: authHeader() }))
+      let list = (await Axios.get(domain + "/allt/", { headers: authHeader() }))
         .data;
-      let ress = [];
-      re.forEach((task) => {
-        if (!task.parent) ress.push(task);
-      });
-      setres(ress);
+      /*  let ress = [];
+      for (let i = 0; i < re.length; i++) {
+        if (!re[i].parent) {
+          ress.push(re[i]);
+          re.splice(i, 1);
+          i--;
+        }
+      }
+      while (re.length > 0)
+        for (let i = 0; i < re.length; i++) {
+          for(let j=0; j <ress.length;j++)
+          if(findParent())
+            ress[].push(re[i]);
+        } */
+
+      let map = {},
+        node,
+        roots = [],
+        i;
+      for (i = 0; i < list.length; i += 1) {
+        map[list[i]._id] = i; // initialize the map
+        list[i].children = []; // initialize the children
+      }
+      for (i = 0; i < list.length; i += 1) {
+        node = list[i];
+        debugger;
+        if (node.parentId && node.parentId !== "0") {
+          // if you have dangling branches check that map[node.parentId] exists
+          list[map[node.parentId]].children.push(node);
+        } else {
+          roots.push(node);
+        }
+      }
+      setres(roots);
+      debugger;
     }
     getit();
   }, [r]);
@@ -173,19 +206,20 @@ function Planner(props) {
             </Table>
           </div>
         )}
-        {res &&
-          res.map((task) => (
-            <div>
-              {
-                <Task
-                  it={task}
-                  setr={setr}
-                  username={props.username}
-                  editmode={editmode}
-                />
-              }
-            </div>
-          ))}
+        {res
+          ? res.map((task) => (
+              <div>
+                {
+                  <Task
+                    it={task}
+                    setr={setr}
+                    username={props.username}
+                    editmode={editmode}
+                  />
+                }
+              </div>
+            ))
+          : "Loading...."}
       </div>
     </div>
   );

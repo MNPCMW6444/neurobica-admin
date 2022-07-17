@@ -119,7 +119,7 @@ function Ras(props) {
                 height: "200px",
               }}
             >
-              <br />{" "}
+              <br />
               <textarea
                 onChange={(e) => {
                   setin1(e.target.value);
@@ -172,7 +172,7 @@ function Ras(props) {
             }}
           >
             Cancel
-          </button>{" "}
+          </button>
           <button
             style={{
               width: "87px",
@@ -197,7 +197,7 @@ function Ras(props) {
             style={{ fontSize: "16pt", width: "300px", height: "50px" }}
           >
             Save
-          </button>{" "}
+          </button>
           <button
             style={{
               width: "87px",
@@ -366,35 +366,53 @@ function Ras(props) {
                         "/3"
                       : "Loading..."}
                     <div className={"hover" + item.mouse}>
-                      <Table>
-                        <Tr>
-                          <Th>name:</Th>
-                          <Th>signiture:</Th>
-                        </Tr>
-                        <Tr>
-                          {" "}
-                          <Td>yoda</Td>
-                          <Td style={{ color: item.sign1 ? "green" : "red" }}>
-                            {item.sign1 ? "V" : "X"}
-                          </Td>
-                        </Tr>
-                        <Tr>
-                          {" "}
-                          <Td>nelson</Td>
-                          <Td style={{ color: item.sign2 ? "green" : "red" }}>
-                            {item.sign2 ? "V" : "X"}
-                          </Td>{" "}
-                        </Tr>
-                        <Tr>
-                          {" "}
-                          <Td>ovadov</Td>
-                          <Td style={{ color: item.sign3 ? "green" : "red" }}>
-                            {item.sign3 ? "V" : "X"}
-                          </Td>{" "}
-                        </Tr>
-                      </Table>
+                      {items.length > 1 && (
+                        <Table>
+                          <Thead>
+                            <Tr>
+                              <Th>name:</Th>
+                              <Th>signiture:</Th>
+                            </Tr>
+                          </Thead>
+                          {
+                            <Tbody>
+                              <Tr>
+                                <Td>yoda</Td>
+                                <Td
+                                  style={{
+                                    color: item.sign1 ? "green" : "red",
+                                  }}
+                                >
+                                  {item.sign1 ? "V" : "X"}
+                                </Td>
+                              </Tr>
+                              <Tr>
+                                <Td>nelson</Td>
+                                <Td
+                                  style={{
+                                    color: item.sign2 ? "green" : "red",
+                                  }}
+                                >
+                                  {item.sign2 ? "V" : "X"}
+                                </Td>
+                              </Tr>
+                              <Tr>
+                                <Td>ovadov</Td>
+                                <Td
+                                  style={{
+                                    color: item.sign3 ? "green" : "red",
+                                  }}
+                                >
+                                  {item.sign3 ? "V" : "X"}
+                                </Td>
+                              </Tr>
+                            </Tbody>
+                          }
+                        </Table>
+                      )}
                     </div>
                   </Td>
+
                   <Td
                     onClick={() => {
                       setpublication(item);

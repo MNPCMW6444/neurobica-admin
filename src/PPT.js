@@ -182,33 +182,32 @@ function PPT(props) {
                         "/3"
                       : "Loading..."}
                     <div className={"hover" + item.mouse}>
-                      <Table>
-                        <Tr>
-                          <Th>name:</Th>
-                          <Th>signiture:</Th>
-                        </Tr>
-                        <Tr>
-                          {" "}
-                          <Td>yoda</Td>
-                          <Td style={{ color: item.sign1 ? "green" : "red" }}>
-                            {item.sign1 ? "V" : "X"}
-                          </Td>
-                        </Tr>
-                        <Tr>
-                          {" "}
-                          <Td>nelson</Td>
-                          <Td style={{ color: item.sign2 ? "green" : "red" }}>
-                            {item.sign2 ? "V" : "X"}
-                          </Td>{" "}
-                        </Tr>
-                        <Tr>
-                          {" "}
-                          <Td>ovadov</Td>
-                          <Td style={{ color: item.sign3 ? "green" : "red" }}>
-                            {item.sign3 ? "V" : "X"}
-                          </Td>{" "}
-                        </Tr>
-                      </Table>
+                      {items.length > 1 && (
+                        <Table>
+                          <Tr>
+                            <Th>name:</Th>
+                            <Th>signiture:</Th>
+                          </Tr>
+                          <Tr>
+                            <Td>yoda</Td>
+                            <Td style={{ color: item.sign1 ? "green" : "red" }}>
+                              {item.sign1 ? "V" : "X"}
+                            </Td>
+                          </Tr>
+                          <Tr>
+                            <Td>nelson</Td>
+                            <Td style={{ color: item.sign2 ? "green" : "red" }}>
+                              {item.sign2 ? "V" : "X"}
+                            </Td>
+                          </Tr>
+                          <Tr>
+                            <Td>ovadov</Td>
+                            <Td style={{ color: item.sign3 ? "green" : "red" }}>
+                              {item.sign3 ? "V" : "X"}
+                            </Td>
+                          </Tr>
+                        </Table>
+                      )}
                     </div>
                   </Td>
                   <Td

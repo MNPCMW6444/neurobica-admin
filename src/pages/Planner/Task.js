@@ -54,7 +54,7 @@ export default function Task(props) {
         </Thead>
         <Tbody>
           <Tr>
-            <Td>{props.username}</Td>
+            <Td>{props.it.owner}</Td>
             <Td>
               {props.editmode ? (
                 <input
@@ -111,17 +111,24 @@ export default function Task(props) {
         </Tbody>
       </Table>
       {props.it.children && props.it.children.length > 0 && (
-        <>
-          <div>Sub Tasks:</div>
-          {props.it.children.map((child) => (
-            <Task
-              it={child}
-              setr={props.setr}
-              username={props.username}
-              editmode={props.editmode}
-            />
-          ))}
-        </>
+        <div
+          style={{
+            position: "relative",
+            width: "92%",
+            left: "4%",
+          }}
+        >
+          <div>
+            {props.it.children.map((child) => (
+              <Task
+                it={child}
+                setr={props.setr}
+                username={props.username}
+                editmode={props.editmode}
+              />
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );
