@@ -109,11 +109,11 @@ export default function Task(props) {
             <Tr>
               <Th style={{ width: "15%" }}>E2E Responsible:</Th>
               <Th style={{ width: "15%" }}>Name:</Th>
-              <Th style={{ width: props.editmode ? "60%" : "70%" }}>
+              <Th style={{ width: props.editmode ? "50%" : "70%" }}>
                 Description:
               </Th>
-              {props.editmode && <Th style={{ width: "5%" }}></Th>}
-              {props.editmode && <Th style={{ width: "5%" }}></Th>}
+              {props.editmode && <Th style={{ width: "10%" }}></Th>}
+              {props.editmode && <Th style={{ width: "10%" }}></Th>}
             </Tr>
           </Thead>
           <Tbody>
