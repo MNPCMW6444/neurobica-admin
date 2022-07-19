@@ -87,7 +87,7 @@ function Planner(props) {
         }
       }
       setres(roots);
-      seteditmode(false);
+      // seteditmode(false);
     }
     getit();
   }, [r]);
