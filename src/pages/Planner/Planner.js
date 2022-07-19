@@ -78,7 +78,7 @@ function Planner(props) {
       }
       for (i = 0; i < list.length; i += 1) {
         node = list[i];
-        debugger;
+
         if (node.parentId && node.parentId !== "0") {
           // if you have dangling branches check that map[node.parentId] exists
           list[map[node.parentId]].children.push(node);
@@ -87,7 +87,7 @@ function Planner(props) {
         }
       }
       setres(roots);
-      debugger;
+      seteditmode(false);
     }
     getit();
   }, [r]);
