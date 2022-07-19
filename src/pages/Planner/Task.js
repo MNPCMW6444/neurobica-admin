@@ -177,7 +177,7 @@ export default function Task(props) {
                   <button
                     className="rbutton"
                     style={{
-                      fontSize: "1rem",
+                      fontSize: "0.5rem",
                       maxWidth: "100%",
                       backgroundColor:
                         delete_aysinc === "Delete"
