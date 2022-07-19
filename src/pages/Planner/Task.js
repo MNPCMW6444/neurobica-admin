@@ -13,6 +13,7 @@ export default function Task(props) {
   const [newroot, setnewroot] = useState(false);
 
   const [save_aysinc, ssave_aysinc] = useState("Save");
+  const [status_aysinc, sstatus_aysinc] = useState("Save");
   const [delete_aysinc, sdelete_aysinc] = useState("Delete");
 
   async function save() {
@@ -38,6 +39,35 @@ export default function Task(props) {
           ssave_aysinc("Saved!");
           setTimeout(() => {
             ssave_aysinc("Save");
+          }, 1000);
+        }
+      }
+    }
+  }
+
+  async function status() {
+    let flag = false;
+    if (status_aysinc === "status") {
+      sstatus_aysinc("unicorn");
+      try {
+        const res = await Axios.post(domain + "/editnewtask", {
+          id: props.it._id,
+          name: newname,
+          desc: newdesc,
+          headers: authHeader(),
+        });
+        flag = true;
+      } catch (e) {
+        sstatus_aysinc("black");
+        setTimeout(() => {
+          sstatus_aysinc("status");
+        }, 1000);
+      } finally {
+        props.setr(Math.random);
+        if (flag) {
+          sstatus_aysinc("status");
+          setTimeout(() => {
+            sstatus_aysinc("status");
           }, 1000);
         }
       }
@@ -104,103 +134,121 @@ export default function Task(props) {
     <div>
       <br />
       <div style={{ border: "3px solid yellow" }}>
-        <Table style={{ tableLayout: "fixed" }}>
-          <Thead>
-            <Tr>
-              <Th style={{ width: "15%" }}>E2E Responsible:</Th>
-              <Th style={{ width: "15%" }}>Name:</Th>
-              <Th style={{ width: props.editmode ? "50%" : "70%" }}>
-                Description:
-              </Th>
-              {props.editmode && <Th style={{ width: "10%" }}></Th>}
-              {props.editmode && <Th style={{ width: "10%" }}></Th>}
-            </Tr>
-          </Thead>
-          <Tbody>
-            <Tr>
-              <Td>{props.it.owner}</Td>
-              <Td>
-                {props.editmode ? (
-                  <input
-                    style={{ maxWidth: "100%" }}
-                    value={newname}
-                    onChange={(e) => {
-                      ssave_aysinc("Save");
-                      setnewname(e.target.value);
-                    }}
-                  ></input>
-                ) : (
-                  <div>{props.it.name}</div>
-                )}
-              </Td>
-              <Td>
-                {props.editmode ? (
-                  <textarea
-                    style={{ maxWidth: "100%" }}
-                    value={newdesc}
-                    onChange={(e) => {
-                      ssave_aysinc("Save");
-                      setnewdesc(e.target.value);
-                    }}
-                  ></textarea>
-                ) : (
-                  <div>{props.it.desc}</div>
-                )}
-              </Td>
+        <div
+          onClick={() => {
+            status();
+          }}
+        >
+          <Table style={{ tableLayout: "fixed" }}>
+            <Thead>
+              <Tr
+                className="asd"
+                style={{
+                  backgroundColor:
+                    sstatus_aysinc === "red"
+                      ? "red"
+                      : sstatus_aysinc === "yellow"
+                      ? "yellow"
+                      : sstatus_aysinc === "green"
+                      ? "green"
+                      : "white",
+                }}
+              >
+                <Th style={{ width: "15%" }}>E2E Responsible:</Th>
+                <Th style={{ width: "15%" }}>Name:</Th>
+                <Th style={{ width: props.editmode ? "50%" : "70%" }}>
+                  Description:
+                </Th>
+                {props.editmode && <Th style={{ width: "10%" }}></Th>}
+                {props.editmode && <Th style={{ width: "10%" }}></Th>}
+              </Tr>
+            </Thead>
+            <Tbody>
+              <Tr style={{ backgroundColor: "pink" }}>
+                <Td>{props.it.owner}</Td>
+                <Td>
+                  {props.editmode ? (
+                    <input
+                      style={{ maxWidth: "100%" }}
+                      value={newname}
+                      onChange={(e) => {
+                        ssave_aysinc("Save");
+                        setnewname(e.target.value);
+                      }}
+                    ></input>
+                  ) : (
+                    <div>{props.it.name}</div>
+                  )}
+                </Td>
+                <Td>
+                  {props.editmode ? (
+                    <textarea
+                      style={{ maxWidth: "100%" }}
+                      value={newdesc}
+                      onChange={(e) => {
+                        ssave_aysinc("Save");
+                        setnewdesc(e.target.value);
+                      }}
+                    ></textarea>
+                  ) : (
+                    <div>{props.it.desc}</div>
+                  )}
+                </Td>
 
-              {props.editmode && (
-                <Td>
-                  <button
-                    className="rbutton"
-                    style={{
-                      fontSize: "1rem",
-                      maxWidth: "100%",
-                      backgroundColor:
-                        save_aysinc === "Save"
-                          ? ""
-                          : save_aysinc === "Error!"
-                          ? "red"
-                          : save_aysinc === "Saving..."
-                          ? "yellow"
-                          : "green",
-                    }}
-                    onClick={() => {
-                      setnewroot(true);
-                      save();
-                    }}
-                  >
-                    {save_aysinc}
-                  </button>
-                </Td>
-              )}
-              {props.editmode && (
-                <Td>
-                  <button
-                    className="rbutton"
-                    style={{
-                      fontSize: "0.5rem",
-                      maxWidth: "100%",
-                      backgroundColor:
-                        delete_aysinc === "Delete"
-                          ? ""
-                          : delete_aysinc === "Error!"
-                          ? "red"
-                          : delete_aysinc === "Deliting..."
-                          ? "yellow"
-                          : "green",
-                    }}
-                    onClick={() => {
-                      setnewroot(true);
-                      deletea();
-                    }}
-                  >
-                    {delete_aysinc}
-                  </button>
-                </Td>
-              )}
-            </Tr>
-          </Tbody>
-        </Table>
+                {props.editmode && (
+                  <Td>
+                    <button
+                      className="rbutton"
+                      style={{
+                        fontSize: "1rem",
+                        maxWidth: "100%",
+                        backgroundColor:
+                          save_aysinc === "Save"
+                            ? ""
+                            : save_aysinc === "Error!"
+                            ? "red"
+                            : save_aysinc === "Saving..."
+                            ? "yellow"
+                            : "green",
+                      }}
+                      onClick={() => {
+                        setnewroot(true);
+                        save();
+                      }}
+                    >
+                      {save_aysinc}
+                    </button>
+                  </Td>
+                )}
+                {props.editmode && (
+                  <Td>
+                    <button
+                      className="rbutton"
+                      style={{
+                        fontSize: "0.5rem",
+                        maxWidth: "100%",
+                        backgroundColor:
+                          delete_aysinc === "Delete"
+                            ? ""
+                            : delete_aysinc === "Error!"
+                            ? "red"
+                            : delete_aysinc === "Deliting..."
+                            ? "yellow"
+                            : "green",
+                      }}
+                      onClick={() => {
+                        setnewroot(true);
+                        deletea();
+                      }}
+                    >
+                      {delete_aysinc}
+                    </button>
+                  </Td>
+                )}
+              </Tr>
+            </Tbody>
+          </Table>
+        </div>
         {props.it.children && props.it.children.length > 0 && (
           <div
             style={{
