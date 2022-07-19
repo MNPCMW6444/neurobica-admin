@@ -10,8 +10,8 @@ import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 function Planner(props) {
   const [res, setres] = useState();
   const [r, setr] = useState();
-  const [editmode, seteditmode] = useState();
-  const [newroot, setnewroot] = useState();
+  const [editmode, seteditmode] = useState(false);
+  const [newroot, setnewroot] = useState(false);
 
   const [newname, setnewname] = useState();
   const [newdesc, setnewdesc] = useState();

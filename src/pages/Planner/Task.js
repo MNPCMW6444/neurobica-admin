@@ -10,7 +10,7 @@ export default function Task(props) {
   const [newdesc, setnewdesc] = useState(props.it.desc);
   const [newnewname, setnewnewname] = useState();
   const [newnewdesc, setnewnewdesc] = useState();
-  const [newroot, setnewroot] = useState();
+  const [newroot, setnewroot] = useState(false);
 
   const [save_aysinc, ssave_aysinc] = useState("Save");
   const [delete_aysinc, sdelete_aysinc] = useState("Delete");
