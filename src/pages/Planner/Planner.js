@@ -128,70 +128,6 @@ function Planner(props) {
       )}
 
       <div className="rp">
-        {editmode && newroot && (
-          <div>
-            <br />
-            <Table>
-              <Thead>
-                <Tr>
-                  <Th style={{ width: "10%" }}>E2E Responsible:</Th>
-                  <Th style={{ width: "10%" }}>Name:</Th>
-                  <Th style={{ width: "80%" }}>Description:</Th>
-                  {editmode && <Th style={{ width: "80%" }}></Th>}
-                </Tr>
-              </Thead>
-              <Tbody>
-                <Tr>
-                  <Td>{props.username}</Td>
-                  <Td>
-                    <input
-                      style={{ maxWidth: "100%" }}
-                      value={newname}
-                      onChange={(e) => {
-                        setnewname(e.target.value);
-                        ssave_aysinc("Save");
-                      }}
-                    ></input>
-                  </Td>
-                  <Td>
-                    <textarea
-                      style={{ maxWidth: "100%" }}
-                      value={newdesc}
-                      onChange={(e) => {
-                        setnewdesc(e.target.value);
-                        ssave_aysinc("Save");
-                      }}
-                    ></textarea>
-                  </Td>
-                  {editmode && (
-                    <Td>
-                      <button
-                        className="rbutton"
-                        style={{
-                          fontSize: "2rem",
-                          maxWidth: "100%",
-                          backgroundColor:
-                            save_aysinc === "Save"
-                              ? ""
-                              : save_aysinc === "Error!"
-                              ? "red"
-                              : save_aysinc === "Saving..."
-                              ? "yellow"
-                              : "green",
-                        }}
-                        onClick={() => {
-                          save();
-                        }}
-                      >
-                        {save_aysinc}
-                      </button>
-                    </Td>
-                  )}
-                </Tr>
-              </Tbody>
-            </Table>
-          </div>
-        )}
         {res
           ? res.map((task) => (
               <div>
@@ -207,6 +143,70 @@ function Planner(props) {
             ))
           : "Loading...."}
       </div>
+      {editmode && newroot && (
+        <div>
+          <br />
+          <Table>
+            <Thead>
+              <Tr>
+                <Th style={{ width: "10%" }}>E2E Responsible:</Th>
+                <Th style={{ width: "10%" }}>Name:</Th>
+                <Th style={{ width: "80%" }}>Description:</Th>
+                {editmode && <Th style={{ width: "80%" }}></Th>}
+              </Tr>
+            </Thead>
+            <Tbody>
+              <Tr>
+                <Td>{props.username}</Td>
+                <Td>
+                  <input
+                    style={{ maxWidth: "100%" }}
+                    value={newname}
+                    onChange={(e) => {
+                      setnewname(e.target.value);
+                      ssave_aysinc("Save");
+                    }}
+                  ></input>
+                </Td>
+                <Td>
+                  <textarea
+                    style={{ maxWidth: "100%" }}
+                    value={newdesc}
+                    onChange={(e) => {
+                      setnewdesc(e.target.value);
+                      ssave_aysinc("Save");
+                    }}
+                  ></textarea>
+                </Td>
+                {editmode && (
+                  <Td>
+                    <button
+                      className="rbutton"
+                      style={{
+                        fontSize: "2rem",
+                        maxWidth: "100%",
+                        backgroundColor:
+                          save_aysinc === "Save"
+                            ? ""
+                            : save_aysinc === "Error!"
+                            ? "red"
+                            : save_aysinc === "Saving..."
+                            ? "yellow"
+                            : "green",
+                      }}
+                      onClick={() => {
+                        save();
+                      }}
+                    >
+                      {save_aysinc}
+                    </button>
+                  </Td>
+                )}
+              </Tr>
+            </Tbody>
+          </Table>
+        </div>
+      )}
       {editmode && (
         <div>
           {!newroot && (
