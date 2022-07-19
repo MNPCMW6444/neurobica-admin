@@ -111,16 +111,22 @@ function Planner(props) {
           Return Home
         </button>
       </div>
-      <br />
-      <label style={{ fontSize: "2em" }}>
-        View only mode:<span style={{ color: "white" }}> X</span>{" "}
-      </label>
-      <Switch
-        onChange={() => {
-          seteditmode(!editmode);
-        }}
-        checked={!editmode}
-      />
+      {res && (
+        <>
+          {" "}
+          <br />
+          <label style={{ fontSize: "2em" }}>
+            View only mode:<span style={{ color: "white" }}> X</span>{" "}
+          </label>
+          <Switch
+            onChange={() => {
+              seteditmode(!editmode);
+            }}
+            checked={!editmode}
+          />
+        </>
+      )}
+
       <div className="rp">
         {editmode && newroot && (
           <div>
