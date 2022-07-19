@@ -174,7 +174,8 @@ th {
 .hovertrue {
   position: absolute;
   background-color: rgba(13, 167, 64, 0.567);
-  padding: 50px;
+  padding: 5vw;
+  width:50vw;
 }
 
 .rp {
