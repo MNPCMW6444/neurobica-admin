@@ -104,7 +104,7 @@ export default function Task(props) {
     <div>
       <br />
       <div style={{ border: "3px solid yellow" }}>
-        <Table>
+        <Table style={{ tableLayout: "fixed" }}>
           <Thead>
             <Tr>
               <Th style={{ width: "15%" }}>E2E Responsible:</Th>
