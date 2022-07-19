@@ -143,7 +143,7 @@ export default function Task(props) {
             <Thead>
               <Tr
                 className="asd"
-                style={{
+                /*   style={{
                   backgroundColor:
                     sstatus_aysinc === "red"
                       ? "red"
@@ -152,7 +152,7 @@ export default function Task(props) {
                       : sstatus_aysinc === "green"
                       ? "green"
                       : "white",
-                }}
+                }} */
               >
                 <Th style={{ width: "15%" }}>E2E Responsible:</Th>
                 <Th style={{ width: "15%" }}>Name:</Th>
