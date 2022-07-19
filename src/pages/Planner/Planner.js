@@ -122,26 +122,6 @@ function Planner(props) {
         checked={!editmode}
       />
       <div className="rp">
-        {editmode && (
-          <div>
-            {!newroot && (
-              <button
-                style={{
-                  borderRadius: "8%",
-                  border: "1px solid pink",
-                  backgroundColor: "green",
-                  color: "white",
-                  fontSize: "2em",
-                }}
-                onClick={() => {
-                  setnewroot(true);
-                }}
-              >
-                ➕ Create a new task at root
-              </button>
-            )}
-          </div>
-        )}
         {editmode && newroot && (
           <div>
             <br />
@@ -221,6 +201,26 @@ function Planner(props) {
             ))
           : "Loading...."}
       </div>
+      {editmode && (
+        <div>
+          {!newroot && (
+            <button
+              style={{
+                borderRadius: "8%",
+                border: "1px solid pink",
+                backgroundColor: "green",
+                color: "white",
+                fontSize: "2em",
+              }}
+              onClick={() => {
+                setnewroot(true);
+              }}
+            >
+              ➕ Create a new task at root
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }

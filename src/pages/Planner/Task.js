@@ -8,8 +8,12 @@ import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 export default function Task(props) {
   const [newname, setnewname] = useState(props.it.name);
   const [newdesc, setnewdesc] = useState(props.it.desc);
+  const [newnewname, setnewnewname] = useState();
+  const [newnewdesc, setnewnewdesc] = useState();
+  const [newroot, setnewroot] = useState();
 
   const [save_aysinc, ssave_aysinc] = useState("Save");
+  const [delete_aysinc, sdelete_aysinc] = useState("Delete");
 
   async function save() {
     let flag = false;
@@ -40,96 +44,273 @@ export default function Task(props) {
     }
   }
 
+  async function savesub() {
+    let flag = false;
+    if (save_aysinc === "Save") {
+      ssave_aysinc("Saving...");
+      try {
+        const res = await Axios.post(domain + "/savesub", {
+          name: newnewname,
+          desc: newnewdesc,
+          parentId: props.it._id,
+          headers: authHeader(),
+        });
+        flag = true;
+      } catch (e) {
+        ssave_aysinc("Error!");
+        setTimeout(() => {
+          ssave_aysinc("Save");
+        }, 1000);
+      } finally {
+        props.setr(Math.random);
+        if (flag) {
+          ssave_aysinc("Saved!");
+          setTimeout(() => {
+            ssave_aysinc("Save");
+          }, 1000);
+        }
+      }
+    }
+  }
+
+  async function deletea() {
+    let flag = false;
+    if (delete_aysinc === "Delete") {
+      sdelete_aysinc("Deliting...");
+      try {
+        const res = await Axios.post(domain + "/deletet", {
+          id: props.it._id,
+          headers: authHeader(),
+        });
+        flag = true;
+      } catch (e) {
+        sdelete_aysinc("Error!");
+        setTimeout(() => {
+          sdelete_aysinc("Delete");
+        }, 1000);
+      } finally {
+        props.setr(Math.random);
+        if (flag) {
+          sdelete_aysinc("Deleted!");
+          setTimeout(() => {
+            sdelete_aysinc("Delete");
+          }, 1000);
+        }
+      }
+    }
+  }
+
   return (
     <div>
       <br />
-      <Table>
-        <Thead>
-          <Tr>
-            <Th style={{ width: "10%" }}>E2E Responsible:</Th>
-            <Th style={{ width: "10%" }}>Name:</Th>
-            <Th style={{ width: "80%" }}>Description:</Th>
-            {props.editmode && <Th style={{ width: "80%" }}></Th>}
-          </Tr>
-        </Thead>
-        <Tbody>
-          <Tr>
-            <Td>{props.it.owner}</Td>
-            <Td>
-              {props.editmode ? (
-                <input
-                  style={{ maxWidth: "100%" }}
-                  value={newname}
-                  onChange={(e) => {
-                    ssave_aysinc("Save");
-                    setnewname(e.target.value);
-                  }}
-                ></input>
-              ) : (
-                <div>{props.it.name}</div>
-              )}
-            </Td>
-            <Td>
-              {props.editmode ? (
-                <textarea
-                  style={{ maxWidth: "100%" }}
-                  value={newdesc}
-                  onChange={(e) => {
-                    ssave_aysinc("Save");
-                    setnewdesc(e.target.value);
-                  }}
-                ></textarea>
-              ) : (
-                <div>{props.it.desc}</div>
-              )}
-            </Td>
-            {props.editmode && (
+      <div style={{ border: "3px solid yellow" }}>
+        <Table>
+          <Thead>
+            <Tr>
+              <Th style={{ width: "15%" }}>E2E Responsible:</Th>
+              <Th style={{ width: "15%" }}>Name:</Th>
+              <Th style={{ width: props.editmode ? "60%" : "70%" }}>
+                Description:
+              </Th>
+              {props.editmode && <Th style={{ width: "5%" }}></Th>}
+              {props.editmode && <Th style={{ width: "5%" }}></Th>}
+            </Tr>
+          </Thead>
+          <Tbody>
+            <Tr>
+              <Td>{props.it.owner}</Td>
               <Td>
-                <button
-                  className="rbutton"
-                  style={{
-                    fontSize: "2rem",
-                    maxWidth: "100%",
-                    backgroundColor:
-                      save_aysinc === "Save"
-                        ? ""
-                        : save_aysinc === "Error!"
-                        ? "red"
-                        : save_aysinc === "Saving..."
-                        ? "yellow"
-                        : "green",
-                  }}
-                  onClick={() => {
-                    save();
-                  }}
-                >
-                  {save_aysinc}
-                </button>
+                {props.editmode ? (
+                  <input
+                    style={{ maxWidth: "100%" }}
+                    value={newname}
+                    onChange={(e) => {
+                      ssave_aysinc("Save");
+                      setnewname(e.target.value);
+                    }}
+                  ></input>
+                ) : (
+                  <div>{props.it.name}</div>
+                )}
               </Td>
-            )}
-          </Tr>
-        </Tbody>
-      </Table>
-      {props.it.children && props.it.children.length > 0 && (
-        <div
-          style={{
-            position: "relative",
-            width: "92%",
-            left: "4%",
-          }}
-        >
-          <div>
-            {props.it.children.map((child) => (
-              <Task
-                it={child}
-                setr={props.setr}
-                username={props.username}
-                editmode={props.editmode}
-              />
-            ))}
+              <Td>
+                {props.editmode ? (
+                  <textarea
+                    style={{ maxWidth: "100%" }}
+                    value={newdesc}
+                    onChange={(e) => {
+                      ssave_aysinc("Save");
+                      setnewdesc(e.target.value);
+                    }}
+                  ></textarea>
+                ) : (
+                  <div>{props.it.desc}</div>
+                )}
+              </Td>
+
+              {props.editmode && (
+                <Td>
+                  <button
+                    className="rbutton"
+                    style={{
+                      fontSize: "1rem",
+                      maxWidth: "100%",
+                      backgroundColor:
+                        save_aysinc === "Save"
+                          ? ""
+                          : save_aysinc === "Error!"
+                          ? "red"
+                          : save_aysinc === "Saving..."
+                          ? "yellow"
+                          : "green",
+                    }}
+                    onClick={() => {
+                      save();
+                    }}
+                  >
+                    {save_aysinc}
+                  </button>
+                </Td>
+              )}
+              {props.editmode && (
+                <Td>
+                  <button
+                    className="rbutton"
+                    style={{
+                      fontSize: "1rem",
+                      maxWidth: "100%",
+                      backgroundColor:
+                        delete_aysinc === "Delete"
+                          ? ""
+                          : delete_aysinc === "Error!"
+                          ? "red"
+                          : delete_aysinc === "Deliting..."
+                          ? "yellow"
+                          : "green",
+                    }}
+                    onClick={() => {
+                      deletea();
+                    }}
+                  >
+                    {delete_aysinc}
+                  </button>
+                </Td>
+              )}
+            </Tr>
+          </Tbody>
+        </Table>
+        {props.it.children && props.it.children.length > 0 && (
+          <div
+            style={{
+              position: "relative",
+              width: "92%",
+              left: "4%",
+            }}
+          >
+            <div>
+              {props.it.children.map((child) => (
+                <Task
+                  it={child}
+                  setr={props.setr}
+                  username={props.username}
+                  editmode={props.editmode}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+        {props.editmode && (
+          <div>
+            {!newroot && (
+              <button
+                style={{
+                  borderRadius: "8%",
+                  border: "1px solid pink",
+                  backgroundColor: "green",
+                  color: "white",
+                  fontSize: "1em",
+                  width: "50%",
+                }}
+                onClick={() => {
+                  setnewroot(true);
+                }}
+              >
+                ➕ Create a new task here
+              </button>
+            )}
+          </div>
+        )}
+        {props.editmode && newroot && (
+          <div
+            style={{
+              position: "relative",
+              width: "92%",
+              left: "4%",
+            }}
+          >
+            <br />
+            <Table>
+              <Thead>
+                <Tr>
+                  <Th style={{ width: "10%" }}>E2E Responsible:</Th>
+                  <Th style={{ width: "10%" }}>Name:</Th>
+                  <Th style={{ width: "80%" }}>Description:</Th>
+                  {props.editmode && <Th style={{ width: "80%" }}></Th>}
+                </Tr>
+              </Thead>
+              <Tbody>
+                <Tr>
+                  <Td>{props.username}</Td>
+                  <Td>
+                    <input
+                      style={{ maxWidth: "100%" }}
+                      value={newnewname}
+                      onChange={(e) => {
+                        setnewnewname(e.target.value);
+                        ssave_aysinc("Save");
+                      }}
+                    ></input>
+                  </Td>
+                  <Td>
+                    <textarea
+                      style={{ maxWidth: "100%" }}
+                      value={newnewdesc}
+                      onChange={(e) => {
+                        setnewnewdesc(e.target.value);
+                        ssave_aysinc("Save");
+                      }}
+                    ></textarea>
+                  </Td>
+                  {props.editmode && (
+                    <Td>
+                      <button
+                        className="rbutton"
+                        style={{
+                          fontSize: "1rem",
+                          maxWidth: "100%",
+                          backgroundColor:
+                            save_aysinc === "Save"
+                              ? ""
+                              : save_aysinc === "Error!"
+                              ? "red"
+                              : save_aysinc === "Saving..."
+                              ? "yellow"
+                              : "green",
+                        }}
+                        onClick={() => {
+                          savesub();
+                        }}
+                      >
+                        {save_aysinc}
+                      </button>
+                    </Td>
+                  )}
+                </Tr>
+              </Tbody>
+            </Table>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
