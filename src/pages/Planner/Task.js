@@ -165,6 +165,7 @@ export default function Task(props) {
                           : "green",
                     }}
                     onClick={() => {
+                      setnewroot(true);
                       save();
                     }}
                   >
@@ -189,6 +190,7 @@ export default function Task(props) {
                           : "green",
                     }}
                     onClick={() => {
+                      setnewroot(true);
                       deletea();
                     }}
                   >
@@ -298,6 +300,7 @@ export default function Task(props) {
                               : "green",
                         }}
                         onClick={() => {
+                          setnewroot(true);
                           savesub();
                         }}
                       >
