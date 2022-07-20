@@ -13,11 +13,12 @@ export default function Task(props) {
   const [newroot, setnewroot] = useState(false);
 
   const [save_aysinc, ssave_aysinc] = useState("Save");
+  console.log(props.it.status);
   const [status_aysinc, sstatus_aysinc] = useState(
-    props.it.status_aysinc
-      ? props.it.status_aysinc % 3 === 0
+    props.it.status
+      ? props.it.status % 3 === 0
         ? "red"
-        : props.it.status_aysinc % 3 === 1
+        : props.it.status % 3 === 1
         ? "yellow"
         : "green"
       : "red"
@@ -78,10 +79,9 @@ export default function Task(props) {
       } finally {
         props.setr(Math.random);
         if (flag) {
-          sstatus_aysinc(scache);
-          setTimeout(() => {
-            sstatus_aysinc(scache);
-          }, 1000);
+          sstatus_aysinc(
+            scache === "red" ? "yellow" : scache === "yellow" ? "green" : "red"
+          );
         }
       }
     }
