@@ -13,7 +13,15 @@ export default function Task(props) {
   const [newroot, setnewroot] = useState(false);
 
   const [save_aysinc, ssave_aysinc] = useState("Save");
-  const [status_aysinc, sstatus_aysinc] = useState("Save");
+  const [status_aysinc, sstatus_aysinc] = useState(
+    props.it.status_aysinc
+      ? props.it.status_aysinc % 3 === 0
+        ? "red"
+        : props.it.status_aysinc % 3 === 1
+        ? "yellow"
+        : "green"
+      : "red"
+  );
   const [delete_aysinc, sdelete_aysinc] = useState("Delete");
 
   async function save() {
@@ -28,6 +36,7 @@ export default function Task(props) {
           headers: authHeader(),
         });
         flag = true;
+        props.setr(Math.random());
       } catch (e) {
         ssave_aysinc("Error!");
         setTimeout(() => {
@@ -47,27 +56,31 @@ export default function Task(props) {
 
   async function status() {
     let flag = false;
-    if (status_aysinc === "status") {
+
+    if (
+      status_aysinc === "red" ||
+      status_aysinc === "yellow" ||
+      status_aysinc === "green"
+    ) {
+      let scache = status_aysinc;
       sstatus_aysinc("unicorn");
       try {
-        const res = await Axios.post(domain + "/editnewtask", {
+        const res = await Axios.post(domain + "/status", {
           id: props.it._id,
-          name: newname,
-          desc: newdesc,
           headers: authHeader(),
         });
         flag = true;
       } catch (e) {
         sstatus_aysinc("black");
         setTimeout(() => {
-          sstatus_aysinc("status");
+          sstatus_aysinc(scache);
         }, 1000);
       } finally {
         props.setr(Math.random);
         if (flag) {
-          sstatus_aysinc("status");
+          sstatus_aysinc(scache);
           setTimeout(() => {
-            sstatus_aysinc("status");
+            sstatus_aysinc(scache);
           }, 1000);
         }
       }
@@ -141,19 +154,7 @@ export default function Task(props) {
         >
           <Table style={{ tableLayout: "fixed" }}>
             <Thead>
-              <Tr
-                className="asd"
-                /*   style={{
-                  backgroundColor:
-                    sstatus_aysinc === "red"
-                      ? "red"
-                      : sstatus_aysinc === "yellow"
-                      ? "yellow"
-                      : sstatus_aysinc === "green"
-                      ? "green"
-                      : "white",
-                }} */
-              >
+              <Tr className={status_aysinc}>
                 <Th style={{ width: "15%" }}>E2E Responsible:</Th>
                 <Th style={{ width: "15%" }}>Name:</Th>
                 <Th style={{ width: props.editmode ? "50%" : "70%" }}>
@@ -164,7 +165,7 @@ export default function Task(props) {
               </Tr>
             </Thead>
             <Tbody>
-              <Tr style={{ backgroundColor: "pink" }}>
+              <Tr className={status_aysinc + "l"}>
                 <Td>{props.it.owner}</Td>
                 <Td>
                   {props.editmode ? (
