@@ -11,6 +11,7 @@ export default function Task(props) {
   const [newnewname, setnewnewname] = useState();
   const [newnewdesc, setnewnewdesc] = useState();
   const [newroot, setnewroot] = useState(false);
+  const [hidden, hide] = useState(false);
 
   const [save_aysinc, ssave_aysinc] = useState("Save");
   console.log(props.it.status);
@@ -252,6 +253,38 @@ export default function Task(props) {
           </Table>
         </div>
         {props.it.children && props.it.children.length > 0 && (
+          <div
+            style={{
+              width: "20%",
+              borderRadius: "30%",
+            }}
+          >
+            <button
+              style={{
+                backgroundColor: "rgba(0,0,0,0.6)",
+                color: "white",
+                borderRadius: "30%",
+              }}
+              onClick={() => {
+                console.log(hidden);
+                hide(!hidden);
+              }}
+            >
+              {hidden ? (
+                <>
+                  <b>+</b>
+                  <span> Show Childern</span>
+                </>
+              ) : (
+                <>
+                  <b>-</b>
+                  <span> Hide Childern</span>
+                </>
+              )}
+            </button>
+          </div>
+        )}
+        {!hidden && props.it.children && props.it.children.length > 0 && (
           <div
             style={{
               position: "relative",
