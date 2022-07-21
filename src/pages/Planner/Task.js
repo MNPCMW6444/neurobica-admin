@@ -149,7 +149,7 @@ export default function Task(props) {
       <div style={{ border: "3px solid yellow" }}>
         <div
           onClick={() => {
-            status();
+            if (editmode && props.it.owner === props.username) status();
           }}
         >
           <Table style={{ tableLayout: "fixed" }}>
