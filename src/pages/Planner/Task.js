@@ -144,13 +144,14 @@ export default function Task(props) {
   }
 
   return (
-    <div>
+    <div style={{}}>
       <br />
-      <div style={{ border: "3px solid yellow" }}>
+      <div style={{ border: "3px solid yellow" /* borderRadius: "50px" */ }}>
         <div
           onClick={() => {
             if (props.editmode && props.it.owner === props.username) status();
           }}
+          style={{ borderRadius: "50px" }}
         >
           <Table style={{ tableLayout: "fixed" }}>
             <Thead>
