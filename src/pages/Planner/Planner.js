@@ -171,7 +171,7 @@ function Planner(props) {
           <br />
           <Table>
             <Thead>
-              <Tr>
+              <Tr className="red">
                 <Th style={{ width: "10%" }}>E2E Responsible:</Th>
                 <Th style={{ width: "10%" }}>Name:</Th>
                 <Th style={{ width: "80%" }}>Description:</Th>
@@ -179,7 +179,7 @@ function Planner(props) {
               </Tr>
             </Thead>
             <Tbody>
-              <Tr>
+              <Tr className="redl">
                 <Td>{props.username}</Td>
                 <Td>
                   <input
