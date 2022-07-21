@@ -4,8 +4,11 @@ import Task from "./Task";
 import domain from "../../domain";
 import authHeader from "../../services/auth-header";
 import Switch from "react-switch";
+import Timer from "./Timer";
 
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+
+let timeasked;
 
 function Planner(props) {
   const [res, setres] = useState();
@@ -15,6 +18,7 @@ function Planner(props) {
 
   const [newname, setnewname] = useState();
   const [newdesc, setnewdesc] = useState();
+  const [time, setime] = useState(props.time);
 
   const [save_aysinc, ssave_aysinc] = useState("Save");
 
@@ -51,9 +55,12 @@ function Planner(props) {
 
   useEffect(() => {
     async function getit() {
-      let list = (await Axios.get(domain + "/allt/", { headers: authHeader() }))
-        .data;
-      /*  let ress = [];
+      if (time !== 9999) {
+        timeasked = Date.now();
+        let list = (
+          await Axios.get(domain + "/allt/", { headers: authHeader() })
+        ).data;
+        /*  let ress = [];
       for (let i = 0; i < re.length; i++) {
         if (!re[i].parent) {
           ress.push(re[i]);
@@ -68,29 +75,43 @@ function Planner(props) {
             ress[].push(re[i]);
         } */
 
-      let map = {},
-        node,
-        roots = [],
-        i;
-      for (i = 0; i < list.length; i += 1) {
-        map[list[i]._id] = i; // initialize the map
-        list[i].children = []; // initialize the children
-      }
-      for (i = 0; i < list.length; i += 1) {
-        node = list[i];
-
-        if (node.parentId && node.parentId !== "0") {
-          // if you have dangling branches check that map[node.parentId] exists
-          list[map[node.parentId]].children.push(node);
-        } else {
-          roots.push(node);
+        let map = {},
+          node,
+          roots = [],
+          i;
+        for (i = 0; i < list.length; i += 1) {
+          map[list[i]._id] = i; // initialize the map
+          list[i].children = []; // initialize the children
         }
+        for (i = 0; i < list.length; i += 1) {
+          node = list[i];
+
+          if (node.parentId && node.parentId !== "0") {
+            // if you have dangling branches check that map[node.parentId] exists
+            list[map[node.parentId]].children.push(node);
+          } else {
+            roots.push(node);
+          }
+        }
+        setres(roots);
+        Axios.post(domain + "/letime", {
+          took: Date.now() - timeasked,
+          headers: authHeader(),
+        });
+        // seteditmode(false);
+      } else {
+        checkTime();
       }
-      setres(roots);
-      // seteditmode(false);
     }
     getit();
   }, [r]);
+
+  async function checkTime() {
+    let t = (await Axios.get(domain + "/hmtime/", { headers: authHeader() }))
+      .data.t;
+    setime(t);
+    setr(Math.random());
+  }
 
   return (
     <div className="Planner">
@@ -128,20 +149,22 @@ function Planner(props) {
       )}
 
       <div className="rp">
-        {res
-          ? res.map((task) => (
-              <div>
-                {
-                  <Task
-                    it={task}
-                    setr={setr}
-                    username={props.username}
-                    editmode={editmode}
-                  />
-                }
-              </div>
-            ))
-          : "Loading...."}
+        {res ? (
+          res.map((task) => (
+            <div>
+              {
+                <Task
+                  it={task}
+                  setr={setr}
+                  username={props.username}
+                  editmode={editmode}
+                />
+              }
+            </div>
+          ))
+        ) : (
+          <Timer time={time} />
+        )}
       </div>
       {editmode && newroot && (
         <div>

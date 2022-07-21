@@ -22,6 +22,7 @@ function App() {
   const [show, setShow] = useState(false);
   const [notification, setNotification] = useState({ title: "", body: "" });
   const [isTokenFound, setTokenFound] = useState(false);
+  const [time, setime] = useState(9999);
 
   const [home, sethome] = useState(true);
   const [page, setpage] = useState("home");
@@ -47,6 +48,19 @@ function App() {
   useEffect(() => {
     getName();
   }, [user]);
+
+  async function checkTime() {
+    let t = (await Axios.get(domain + "/hmtime/", { headers: authHeader() }))
+      .data.t;
+    setime(t);
+  }
+
+  useEffect(async () => {
+    async function a() {
+      await checkTime();
+    }
+    await a();
+  }, []);
 
   return (
     <div className="App">
@@ -80,7 +94,7 @@ function App() {
         ) : page === "ras" ? (
           <Ras setpage={setpage} />
         ) : page === "recp" ? (
-          <Planner setpage={setpage} username={username} />
+          <Planner setpage={setpage} username={username} time={time} />
         ) : page === "noti" ? (
           <Notifications
             sss={setTokenFound}
