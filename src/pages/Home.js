@@ -1,7 +1,7 @@
 function Home(props) {
   return (
     <div className="Home">
-      <h2>Home</h2>
+      <h1>BDM:</h1>
       <br />
       <button
         className="rbutton"
