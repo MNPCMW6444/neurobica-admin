@@ -17,13 +17,12 @@ export default function Task(props) {
   console.log(props.it.status);
   const [status_aysinc, sstatus_aysinc] = useState(
     props.it.status
-      ? props.it.status % 4 === 0
+      ? props.it.status % 3 === 0
         ? "red"
-        : props.it.status % 4 === 1
+        : props.it.status % 3 === 1
         ? "yellow"
-        : props.it.status % 4 === 2
-        ? "Green"
-      : "brown"
+        : "green"
+      : "red"
   );
   const [delete_aysinc, sdelete_aysinc] = useState("Delete");
 
@@ -63,8 +62,7 @@ export default function Task(props) {
     if (
       status_aysinc === "red" ||
       status_aysinc === "yellow" ||
-      status_aysinc === "green" ||
-      status_aysinc === "brown"
+      status_aysinc === "green"
     ) {
       let scache = status_aysinc;
       sstatus_aysinc("unicorn");
@@ -83,13 +81,7 @@ export default function Task(props) {
         props.setr(Math.random);
         if (flag) {
           sstatus_aysinc(
-            scache === "red"
-              ? "yellow"
-              : scache === "yellow"
-              ? "green"
-              : scache === "green"
-              ? "brown"
-              : "red"
+            scache === "red" ? "yellow" : scache === "yellow" ? "green" : "red"
           );
         }
       }
