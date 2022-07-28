@@ -25,17 +25,17 @@ function Home(props) {
       </button>
       <br />
       <br />
-      <button
-        className="rbuttonsmall"
+      <a
+        className="rbutton"
         href="https://docs.google.com/spreadsheets/d/1vgsSeyC7jBrNFhBbti38cC-i1gjR96ijB4nWr5h6fLk/edit"
       >
         PI Sheets
-      </button>
+      </a>
       <br />
       <br />
-      <button className="rbuttonsmall" href="https://neurobica.atlassian.net/">
+      <a className="rbutton" href="https://neurobica.atlassian.net/">
         Confluence
-      </button>
+      </a>
     </div>
   );
 }
