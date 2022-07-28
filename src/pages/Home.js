@@ -27,12 +27,14 @@ function Home(props) {
       <br />
       <button
         className="rbuttonsmall"
-        onClick={() => {
-          props.setpage("noti");
-          console.log("noti");
-        }}
+        href="https://docs.google.com/spreadsheets/d/1vgsSeyC7jBrNFhBbti38cC-i1gjR96ijB4nWr5h6fLk/edit"
       >
-        Notification Settings
+        PI Sheets
+      </button>
+      <br />
+      <br />
+      <button className="rbuttonsmall" href="https://neurobica.atlassian.net/">
+        Confluence
       </button>
     </div>
   );
