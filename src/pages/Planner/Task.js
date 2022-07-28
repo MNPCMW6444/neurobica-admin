@@ -23,8 +23,7 @@ export default function Task(props) {
         ? "yellow"
         : props.it.status % 4 === 2
         ? "Green"
-        : "brown"
-      : "red"
+      : "brown"
   );
   const [delete_aysinc, sdelete_aysinc] = useState("Delete");
 
