@@ -16,38 +16,65 @@ function Home(props) {
 
   return (
     <div className="Home">
-      <h1>BDM:</h1>
-      <br />
-      <button
-        className="rbutton"
-        onClick={() => {
-          props.setpage("ras");
-          console.log("ras");
-        }}
-      >
-        Read & Sign
-      </button>
-      <br />
-      <br />
-      <button
-        className="rbutton"
-        onClick={() => {
-          props.setpage("recp");
-          console.log("recp");
-        }}
-      >
-        Recrusive Planner
-      </button>
-      {hrefs.map((href) => (
-        <>
-          {" "}
-          <br />
-          <br />
-          <a className="rbutton" href={href.url}>
-            {href.name}
-          </a>
-        </>
-      ))}
+      <div>
+        <h1 style={{ fontSize: "8em" }}>Meeting:</h1>
+        <h2>Internal Components:</h2>
+        <br />
+        <button
+          className="rbutton"
+          onClick={() => {
+            props.setpage("ras");
+            console.log("ras");
+          }}
+        >
+          Read & Sign
+        </button>
+        <br />
+        <br />
+        <button
+          className="rbutton"
+          onClick={() => {
+            props.setpage("recp");
+            console.log("recp");
+          }}
+        >
+          Recrusive Planner
+        </button>{" "}
+        <br />
+        <br /> <br />
+        <br />
+        <h2>External Links:</h2>
+        {hrefs.map((href) => (
+          <>
+            {" "}
+            <br />
+            <a className="rbutton" href={href.url}>
+              {href.name}
+            </a>
+          </>
+        ))}
+      </div>
+      <hr />
+      <hr />
+      <hr />
+      <hr />
+      <hr />
+      <div>
+        <h1 style={{ fontSize: "8em" }}>Tools:</h1>
+        <h2>Internal Components:</h2>
+        <br />
+        <button
+          className="rbutton"
+          onClick={() => {
+            props.setpage("wt");
+            console.log("wt");
+          }}
+        >
+          Work Tracer
+        </button>
+        <br />
+        <br />
+      </div>
     </div>
   );
 }

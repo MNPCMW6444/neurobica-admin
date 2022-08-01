@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 import Home from "./pages/Home";
 import Ras from "./pages/Ras";
+import Wt from "./pages/Wt";
 import Planner from "./pages/Planner/Planner";
 import Notifications from "./pages/Notifications";
 import Login from "./pages/Login";
@@ -93,6 +94,8 @@ function App() {
           <Home setpage={setpage} />
         ) : page === "ras" ? (
           <Ras setpage={setpage} />
+        ) : page === "wt" ? (
+          <Wt setpage={setpage} />
         ) : page === "recp" ? (
           <Planner setpage={setpage} username={username} time={time} />
         ) : page === "noti" ? (
