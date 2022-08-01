@@ -22,7 +22,7 @@ export default function Task(props) {
         : props.it.status % 4 === 1
         ? "yellow"
         : props.it.status % 4 === 2
-        ? "Green"
+        ? "green"
         : "brown"
       : "red"
   );
@@ -159,6 +159,7 @@ export default function Task(props) {
       <div style={{ border: "3px solid yellow" /* borderRadius: "50px" */ }}>
         <div
           onClick={() => {
+            debugger;
             if (props.editmode && props.it.owner === props.username) status();
           }}
           style={{ borderRadius: "50px" }}
