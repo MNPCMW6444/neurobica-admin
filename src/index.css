@@ -230,6 +230,20 @@ th {
   border-radius: 50px;
 }
 
+.brownl {
+  min-height: 100%;
+  background: rgb(226, 105, 105);
+  animation: a 2s linear infinite;
+  border-radius: 50px;
+}
+
+.brown {
+  min-height: 100%;
+  background: brown;
+  animation: a 2s linear infinite;
+  border-radius: 50px;
+}
+
 .yellowl {
   min-height: 100%;
   background: rgb(255, 255, 150);
