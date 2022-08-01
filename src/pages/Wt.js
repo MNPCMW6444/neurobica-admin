@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 import domain from "../domain";
 import authHeader from "../services/auth-header";
+import { useStopwatch } from "react-timer-hook";
 
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
@@ -62,12 +63,18 @@ export default function Wt(props) {
     days = days % 30;
     months = months % 12;
 
-    return `${padTo2Digits(years)}y ${padTo2Digits(
-      months
-    )}months ${padTo2Digits(days)}d ${padTo2Digits(hours)}h ${padTo2Digits(
-      minutes
-    )}m ${padTo2Digits(seconds)}s`;
+    return {
+      years,
+      months,
+      days,
+      hours,
+      minutes,
+      seconds,
+    };
   }
+
+  const { seconds, minutes, hours, days, isRunning, start, pause, reset } =
+    useStopwatch({ autoStart: true });
 
   return (
     <div>
@@ -89,6 +96,7 @@ export default function Wt(props) {
       </div>
       <br />
       <h1>Michael:</h1>
+
       <Table>
         <Thead>
           <Tr style={{ backgroundColor: "black" }}>
@@ -102,10 +110,27 @@ export default function Wt(props) {
             {ttime.map((ttimetype) => (
               <Td>
                 <div>
-                  {convertMsToHM(ttimetype.sum) +
-                    " which is " +
-                    Math.round((ttimetype.sum / ttimesum) * 100) +
-                    "%"}
+                  {convertMsToHM(ttimetype.sum).years &&
+                    convertMsToHM(ttimetype.sum).years +
+                      "Y " +
+                      convertMsToHM(ttimetype.sum).months &&
+                    convertMsToHM(ttimetype.sum).years +
+                      "M " +
+                      convertMsToHM(ttimetype.sum).days &&
+                    convertMsToHM(ttimetype.sum).days +
+                      "D " +
+                      convertMsToHM(ttimetype.sum).hours &&
+                    convertMsToHM(ttimetype.sum).hours +
+                      "h " +
+                      convertMsToHM(ttimetype.sum).minutes &&
+                    convertMsToHM(ttimetype.sum).minutes +
+                      "m " +
+                      convertMsToHM(ttimetype.sum).seconds &&
+                    convertMsToHM(ttimetype.sum).seconds +
+                      "s" +
+                      " which is " +
+                      Math.round((ttimetype.sum / ttimesum) * 100) +
+                      "%"}
                 </div>
               </Td>
             ))}
