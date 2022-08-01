@@ -1,4 +1,19 @@
 function Home(props) {
+  hrefs = [
+    {
+      name: "PI Sheet",
+      url: "https://docs.google.com/spreadsheets/d/1vgsSeyC7jBrNFhBbti38cC-i1gjR96ijB4nWr5h6fLk/edit",
+    },
+    {
+      name: "confluence",
+      url: "https://neurobica.atlassian.net/wiki/spaces/NEUROBICA/overview",
+    },
+    {
+      name: "Add a new one here",
+      url: "mailto:cto@neurobica.online?subject='please add this link'",
+    },
+  ];
+
   return (
     <div className="Home">
       <h1>BDM:</h1>
@@ -23,19 +38,16 @@ function Home(props) {
       >
         Recrusive Planner
       </button>
-      <br />
-      <br />
-      <a
-        className="rbutton"
-        href="https://docs.google.com/spreadsheets/d/1vgsSeyC7jBrNFhBbti38cC-i1gjR96ijB4nWr5h6fLk/edit"
-      >
-        PI Sheets
-      </a>
-      <br />
-      <br />
-      <a className="rbutton" href="https://neurobica.atlassian.net/">
-        Confluence
-      </a>
+      {hrefs.map((href) => (
+        <>
+          {" "}
+          <br />
+          <br />
+          <a className="rbutton" href={href.url}>
+            {href.name}
+          </a>
+        </>
+      ))}
     </div>
   );
 }
