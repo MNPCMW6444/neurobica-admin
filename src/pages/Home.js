@@ -1,5 +1,5 @@
 function Home(props) {
-  hrefs = [
+  const hrefs = [
     {
       name: "PI Sheet",
       url: "https://docs.google.com/spreadsheets/d/1vgsSeyC7jBrNFhBbti38cC-i1gjR96ijB4nWr5h6fLk/edit",
