@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 import domain from "../domain";
 import authHeader from "../services/auth-header";
-import { useStopwatch } from "react-timer-hook";
 
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
@@ -18,12 +17,39 @@ export default function Wt(props) {
   ]);
   const [r, setr] = useState();
 
+  const [seconds, setseconds] = useState(0);
+  const [minutes, setminutes] = useState(0);
+
+  const [seconds2, setseconds2] = useState(0);
+  const [minutes2, setminutes2] = useState(0);
+
+  const [seconds3, setseconds3] = useState(0);
+  const [minutes3, setminutes3] = useState(0);
+
+  const [seconds4, setseconds4] = useState(0);
+  const [minutes4, setminutes4] = useState(0);
+
+  setTimeout(() => {
+    if (seconds >= 60) {
+      setseconds(0);
+      setminutes(minutes + 1);
+    } else setseconds(seconds + 1);
+  }, 1000);
+
   useEffect(() => {
     async function getit() {
       const res = await Axios.get(domain + "/getttime/", {
         headers: authHeader(),
       });
       setttime(res.data);
+      setseconds(convertMsToHM(res.data[0].sum).seconds);
+      setminutes(convertMsToHM(res.data[0].sum).minutes);
+      setseconds2(convertMsToHM(res.data[1].sum).seconds);
+      setminutes2(convertMsToHM(res.data[1].sum).minutes);
+      setseconds3(convertMsToHM(res.data[2].sum).seconds);
+      setminutes3(convertMsToHM(res.data[2].sum).minutes);
+      setseconds4(convertMsToHM(res.data[3].sum).seconds);
+      setminutes4(convertMsToHM(res.data[3].sum).minutes);
       setttimesum(
         res.data
           .map((o) => o.sum)
@@ -73,8 +99,39 @@ export default function Wt(props) {
     };
   }
 
-  const { seconds, minutes, hours, days, isRunning, start, pause, reset } =
-    useStopwatch({ autoStart: true });
+  ttime.map((ttimetype) =>
+    console.log(
+      ttimetype.running
+        ? (convertMsToHM(ttimetype.sum).years &&
+            convertMsToHM(ttimetype.sum).years + "Y ") +
+            (convertMsToHM(ttimetype.sum).months &&
+              convertMsToHM(ttimetype.sum).years + "M ") +
+            (convertMsToHM(ttimetype.sum).days &&
+              convertMsToHM(ttimetype.sum).days + "D ") +
+            (convertMsToHM(ttimetype.sum).hours &&
+              convertMsToHM(ttimetype.sum).hours + "h ") +
+            (minutes && minutes + "m ") +
+            (seconds && seconds + "s ") +
+            +" which is " +
+            Math.round((ttimetype.sum / ttimesum) * 100) +
+            "%"
+        : (convertMsToHM(ttimetype.sum).years &&
+            convertMsToHM(ttimetype.sum).years + "Y ") +
+            (convertMsToHM(ttimetype.sum).months &&
+              convertMsToHM(ttimetype.sum).years + "M ") +
+            (convertMsToHM(ttimetype.sum).days &&
+              convertMsToHM(ttimetype.sum).days + "D ") +
+            (convertMsToHM(ttimetype.sum).hours &&
+              convertMsToHM(ttimetype.sum).hours + "h ") +
+            (convertMsToHM(ttimetype.sum).minutes &&
+              convertMsToHM(ttimetype.sum).minutes + "m ") +
+            (convertMsToHM(ttimetype.sum).seconds &&
+              convertMsToHM(ttimetype.sum).seconds + "s") +
+            " which is " +
+            Math.round((ttimetype.sum / ttimesum) * 100) +
+            "%"
+    )
+  );
 
   return (
     <div>
@@ -109,29 +166,41 @@ export default function Wt(props) {
           <Tr>
             {ttime.map((ttimetype) => (
               <Td>
-                <div>
-                  {convertMsToHM(ttimetype.sum).years &&
-                    convertMsToHM(ttimetype.sum).years +
-                      "Y " +
-                      convertMsToHM(ttimetype.sum).months &&
-                    convertMsToHM(ttimetype.sum).years +
-                      "M " +
-                      convertMsToHM(ttimetype.sum).days &&
-                    convertMsToHM(ttimetype.sum).days +
-                      "D " +
-                      convertMsToHM(ttimetype.sum).hours &&
-                    convertMsToHM(ttimetype.sum).hours +
-                      "h " +
-                      convertMsToHM(ttimetype.sum).minutes &&
-                    convertMsToHM(ttimetype.sum).minutes +
-                      "m " +
-                      convertMsToHM(ttimetype.sum).seconds &&
-                    convertMsToHM(ttimetype.sum).seconds +
-                      "s" +
+                {ttimetype.running ? (
+                  <div>
+                    {(convertMsToHM(ttimetype.sum).years &&
+                      convertMsToHM(ttimetype.sum).years + "Y ") +
+                      (convertMsToHM(ttimetype.sum).months &&
+                        convertMsToHM(ttimetype.sum).years + "M ") +
+                      (convertMsToHM(ttimetype.sum).days &&
+                        convertMsToHM(ttimetype.sum).days + "D ") +
+                      (convertMsToHM(ttimetype.sum).hours &&
+                        convertMsToHM(ttimetype.sum).hours + "h ") +
+                      (minutes && minutes + "m ") +
+                      (seconds && seconds + "s") +
                       " which is " +
                       Math.round((ttimetype.sum / ttimesum) * 100) +
                       "%"}
-                </div>
+                  </div>
+                ) : (
+                  <div>
+                    {(convertMsToHM(ttimetype.sum).years &&
+                      convertMsToHM(ttimetype.sum).years + "Y ") +
+                      (convertMsToHM(ttimetype.sum).months &&
+                        convertMsToHM(ttimetype.sum).years + "M ") +
+                      (convertMsToHM(ttimetype.sum).days &&
+                        convertMsToHM(ttimetype.sum).days + "D ") +
+                      (convertMsToHM(ttimetype.sum).hours &&
+                        convertMsToHM(ttimetype.sum).hours + "h ") +
+                      (convertMsToHM(ttimetype.sum).minutes &&
+                        convertMsToHM(ttimetype.sum).minutes + "m ") +
+                      (convertMsToHM(ttimetype.sum).seconds &&
+                        convertMsToHM(ttimetype.sum).seconds + "s") +
+                      " which is " +
+                      Math.round((ttimetype.sum / ttimesum) * 100) +
+                      "%"}
+                  </div>
+                )}
               </Td>
             ))}
           </Tr>
@@ -148,12 +217,14 @@ export default function Wt(props) {
                         },
                         { headers: authHeader() }
                       );
+                      setr(Math.random());
                     }}
+                    disabled={ttimetype.running}
                   >
                     start
                   </button>
                   <button
-                    onclick={async () => {
+                    onClick={async () => {
                       Axios.post(
                         domain + "/stop",
                         {
@@ -161,6 +232,7 @@ export default function Wt(props) {
                         },
                         { headers: authHeader() }
                       );
+                      setr(Math.random());
                     }}
                   >
                     stop
