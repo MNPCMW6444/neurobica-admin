@@ -9,6 +9,10 @@ function Home(props) {
       url: "https://neurobica.atlassian.net/wiki/spaces/NEUROBICA/overview",
     },
     {
+      name: "Google Tasks",
+      url: "https://mail.google.com/mail/u/1/#chat/space/AAAAWAsxKy0",
+    },
+    {
       name: "Add a new one here",
       url: "mailto:cto@neurobica.online?subject='please add this link'",
     },
