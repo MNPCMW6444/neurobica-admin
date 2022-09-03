@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 function Home(props) {
   const hrefs = [
     {
@@ -14,14 +16,17 @@ function Home(props) {
     },
     {
       name: "Add a new one here",
-      url: "mailto:cto@neurobica.online?subject='please add this link'",
+      url: "mailto:coo@neurobica.online?subject='please add this link'",
+      x: true,
     },
   ];
+
+  const navigate = useNavigate();
 
   return (
     <div className="Home">
       <div>
-        <h1 style={{ fontSize: "8em" }}>Meeting:</h1>
+        <h1 style={{ fontSize: "8em" }}>Daily:</h1>
         <h2>Internal Components:</h2>
         <br />
         <button
@@ -52,7 +57,11 @@ function Home(props) {
           <>
             {" "}
             <br />
-            <a className="rbutton" href={href.url}>
+            <a
+              className="rbutton"
+              href={href.url}
+              style={href.x && { fontSize: "1.3rem" }}
+            >
               {href.name}
             </a>
           </>
@@ -64,7 +73,7 @@ function Home(props) {
       <hr />
       <hr />
       <div>
-        <h1 style={{ fontSize: "8em" }}>Tools:</h1>
+        <h1 style={{ fontSize: "8em" }}>Utilities:</h1>
         <h2>Internal Components:</h2>
         <br />
         <button
@@ -75,6 +84,16 @@ function Home(props) {
           }}
         >
           Work Tracer
+        </button>
+        <br />
+        <br />
+        <button
+          className="rbutton"
+          onClick={() => {
+            navigate("/fin");
+          }}
+        >
+          Finance
         </button>
         <br />
         <br />

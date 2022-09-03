@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
 import App from "./App";
 import PPT from "./PPT";
+import Fin from "./Fin";
 
 export default function BasicExample() {
   return (
@@ -10,6 +11,7 @@ export default function BasicExample() {
       <Routes>
         <Route exact path="/" element={<App />} />
         <Route path="/ppt" element={<PPT />} />
+        <Route path="/fin" element={<Fin />} />
       </Routes>
     </Router>
   );
