@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-function Home(props) {
+function (props) {
   const hrefs = [
     {
       name: "PI Sheet",
@@ -9,6 +9,10 @@ function Home(props) {
     {
       name: "confluence",
       url: "https://neurobica.atlassian.net/wiki/spaces/NEUROBICA/overview",
+    },
+    {
+      name: "facebook",
+      url: "https://www.facebook.com/",
     },
     {
       name: "Google Tasks",
@@ -24,7 +28,7 @@ function Home(props) {
   const navigate = useNavigate();
 
   return (
-    <div className="Home">
+    <div className="">
       <div>
         <h1 style={{ fontSize: "8em" }}>Daily:</h1>
         <h2>Internal Components:</h2>
@@ -102,4 +106,4 @@ function Home(props) {
   );
 }
 
-export default Home;
+export default ;

@@ -16,10 +16,10 @@ function Notifications(props) {
         }}
         onClick={() => {
           const back = props.setpage;
-          back("home");
+          back("");
         }}
       >
-        Return Home
+        Return 
       </button>
       <br />
       <br />
