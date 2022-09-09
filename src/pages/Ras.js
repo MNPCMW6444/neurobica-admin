@@ -261,10 +261,10 @@ function Ras(props) {
           }}
           onClick={() => {
             const back = props.setpage;
-            back("");
+            back("home");
           }}
         >
-          Return 
+          Return Home
         </button>
       </div>
       <br />
