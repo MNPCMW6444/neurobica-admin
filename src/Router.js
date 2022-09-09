@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
 import App from "./App";
 import PPT from "./PPT";
-import Fin from "./Fin";
+import Fin from "./Fin.tsx";
 
 export default function BasicExample() {
   return (
