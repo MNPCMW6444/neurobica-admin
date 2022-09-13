@@ -1,6 +1,8 @@
+import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import React from "react";
 import { useState } from "react";
+import "./formStyle.css";
 
 interface GenericFormProps {}
 
@@ -18,17 +20,25 @@ export default function GenericForm({}: GenericFormProps) {
     <Grid
       container
       direction="column"
-      justifyContent="space-around"
+      justifyContent="flex-start"
       alignItems="center"
       sx={{ height: "100vh" }}
       wrap="nowrap"
+      spacing={10}
     >
+      <Grid item>
+        <Typography variant="h1"></Typography>
+      </Grid>
+      <Grid item>
+        <Typography variant="h1">Fill the form:</Typography>
+      </Grid>
       <Grid
+        item
         container
         direction="row"
         justifyContent="center"
         alignItems="center"
-        spacing={1}
+        spacing={3}
       >
         <Grid item>
           <label>isOneTime:</label>
@@ -42,50 +52,119 @@ export default function GenericForm({}: GenericFormProps) {
           ></input>
         </Grid>
       </Grid>
-
-      <Grid item>
-        <label>oneTimeDate:</label>
-        <input
-          value={oneTimeDate}
-          onChange={(e) => setoneTimeDate(e.target.value)}
-          placeholder="oneTimeDate"
-        ></input>
+      <Grid
+        item
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={3}
+      >
+        <Grid item>
+          <label>oneTimeDate:</label>
+        </Grid>
+        <Grid item>
+          <input
+            value={oneTimeDate}
+            onChange={(e) => setoneTimeDate(e.target.value)}
+            placeholder="oneTimeDate"
+          ></input>
+        </Grid>
       </Grid>
-      <Grid item>
-        <label>recTimePer:</label>
-        <input
-          value={recTimePer}
-          onChange={(e) => setrecTimePer(e.target.value)}
-          placeholder="recTimePer"
-        ></input>
+      <Grid
+        item
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={3}
+      >
+        <Grid item>
+          <label>recTimePer:</label>
+        </Grid>
+        <Grid item>
+          <input
+            value={recTimePer}
+            onChange={(e) => setrecTimePer(e.target.value)}
+            placeholder="recTimePer"
+          ></input>
+        </Grid>
       </Grid>
-      <Grid item>
-        <label>reqTimeDay:</label>
-        <input
-          value={reqTimeDay}
-          onChange={(e) => setreqTimeDay(e.target.value)}
-          placeholder="reqTimeDay"
-        ></input>
+      <Grid
+        item
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={3}
+      >
+        <Grid item>
+          <label>reqTimeDay:</label>
+        </Grid>
+        <Grid item>
+          <input
+            value={reqTimeDay}
+            onChange={(e) => setreqTimeDay(e.target.value)}
+            placeholder="reqTimeDay"
+          ></input>
+        </Grid>
       </Grid>
-      <Grid item>
-        <label>depatments:</label>
-        <input
-          value={depatments}
-          onChange={(e) => setdepatments(e.target.value)}
-          placeholder="depatments"
-        ></input>
+      <Grid
+        item
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={3}
+      >
+        <Grid item>
+          <label>depatments:</label>
+        </Grid>
+        <Grid item>
+          <input
+            value={depatments}
+            onChange={(e) => setdepatments(e.target.value)}
+            placeholder="depatments"
+          ></input>
+        </Grid>
       </Grid>
-      <Grid item>
-        <input value={more} onChange={(e) => setmore(e.target.value)}></input>
-        placehlder="more"
+      <Grid
+        item
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={3}
+      >
+        <Grid item>
+          <label>more:</label>
+        </Grid>
+        <Grid item>
+          <input
+            value={more}
+            onChange={(e) => setmore(e.target.value)}
+            placeholder="more"
+          ></input>
+        </Grid>
       </Grid>
-      <Grid item>
-        <label>invoice:</label>
-        <input
-          value={invoice}
-          onChange={(e) => setinvoice(e.target.value)}
-          placeholder="invoice"
-        ></input>
+      <Grid
+        item
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={3}
+      >
+        <Grid item>
+          <label>invoice:</label>
+        </Grid>
+        <Grid item>
+          <input
+            value={invoice}
+            onChange={(e) => setinvoice(e.target.value)}
+            placeholder="invoice"
+          ></input>
+        </Grid>
       </Grid>
     </Grid>
   );

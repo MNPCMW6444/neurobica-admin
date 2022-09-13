@@ -1,15 +1,19 @@
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
-import ReqForm from "./ReqForm.tsx";
-import Modal from "@mui/material/Modal";
 import { useState } from "react";
+import Backdrop from "@mui/material/Backdrop";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import Fade from "@mui/material/Fade";
+import Button from "@mui/material/Button";
+import ReqForm from "./ReqForm.tsx";
 
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: "80%",
+  height: "85%",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -44,14 +48,25 @@ export default function Fin() {
           Fill a new Budget Request
         </Button>
       </Grid>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <ReqForm />
-      </Modal>
+      <Grid item>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={open}>
+            <Box sx={style}>
+              <ReqForm />
+            </Box>
+          </Fade>
+        </Modal>
+      </Grid>
     </Grid>
   );
 }
