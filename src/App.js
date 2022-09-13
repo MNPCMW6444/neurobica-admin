@@ -56,11 +56,11 @@ function App() {
     setime(t);
   }
 
-  useEffect(async () => {
+  useEffect(() => {
     async function a() {
       await checkTime();
     }
-    await a();
+    a();
   }, []);
 
   return (

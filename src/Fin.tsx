@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import GenericForm from "./GenericForm.tsx";
+import ReqForm from "./ReqForm.tsx";
 import Modal from "@mui/material/Modal";
 import { useState } from "react";
 
@@ -50,7 +50,7 @@ export default function Fin() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <GenericForm fields={["a", "b", "c"]} />
+        <ReqForm />
       </Modal>
     </Grid>
   );
