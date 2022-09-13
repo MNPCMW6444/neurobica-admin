@@ -12,7 +12,7 @@ export default function GenericForm({}: GenericFormProps) {
   const [oneTimeDate, setoneTimeDate] = useState<any>("oneTimeDate");
   const [recTimePer, setrecTimePer] = useState<any>("oneTimeDate");
   const [reqTimeDay, setreqTimeDay] = useState<any>("reqTimeDay");
-  const [depatments, setdepatments] = useState<any>("more");
+  const [departments, setdepartments] = useState<any>("more");
   const [more, setmore] = useState<any>("more");
   const [invoice, setinvoice] = useState<any>("invoice");
 
@@ -118,13 +118,13 @@ export default function GenericForm({}: GenericFormProps) {
         spacing={3}
       >
         <Grid item>
-          <label>depatments:</label>
+          <label>departments:</label>
         </Grid>
         <Grid item>
           <input
-            value={depatments}
-            onChange={(e) => setdepatments(e.target.value)}
-            placeholder="depatments"
+            value={departments}
+            onChange={(e) => setdepartments(e.target.value)}
+            placeholder="departments"
           ></input>
         </Grid>
       </Grid>
