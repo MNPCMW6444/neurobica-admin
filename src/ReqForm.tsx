@@ -8,10 +8,11 @@ interface GenericFormProps {}
 
 export default function GenericForm({}: GenericFormProps) {
   const [amount, setamount] = useState<any>("amount");
-  const [isOneTime, setisOneTime] = useState<any>("isOneTime");
-  const [oneTimeDate, setoneTimeDate] = useState<any>("oneTimeDate");
-  const [recTimePer, setrecTimePer] = useState<any>("oneTimeDate");
-  const [reqTimeDay, setreqTimeDay] = useState<any>("reqTimeDay");
+  const [isOneTime, setisOneTime] = useState<any>(false);
+  const [oneTimeDate, setoneTimeDate] = useState<any>(new Date());
+  const [monthly, setmonthly] = useState<any>(true);
+  const [reqTimeDay, setreqTimeDay] = useState<any>();
+  const [reqTimeMonth, setreqTimeMonth] = useState<any>();
   const [departments, setdepartments] = useState<any>("more");
   const [more, setmore] = useState<any>("more");
   const [invoice, setinvoice] = useState<any>("invoice");
@@ -24,13 +25,13 @@ export default function GenericForm({}: GenericFormProps) {
       alignItems="center"
       sx={{ height: "100vh" }}
       wrap="nowrap"
-      spacing={10}
+      spacing={4}
     >
       <Grid item>
         <Typography variant="h1"></Typography>
       </Grid>
       <Grid item>
-        <Typography variant="h1">Fill the form:</Typography>
+        <Typography variant="h1">Fill the Form:</Typography>
       </Grid>
       <Grid
         item
@@ -41,74 +42,102 @@ export default function GenericForm({}: GenericFormProps) {
         spacing={3}
       >
         <Grid item>
-          <label>isOneTime:</label>
+          <label>One-Time Expense?</label>
         </Grid>
         <Grid item>
           <input
-            value={isOneTime}
+            style={{ transform: "scale(2)" }}
+            checked={isOneTime}
             type="checkbox"
-            onChange={(e) => setisOneTime(e.target.value)}
-            placeholder="isOneTime"
+            onChange={() => setisOneTime(!isOneTime)}
           ></input>
         </Grid>
       </Grid>
-      <Grid
-        item
-        container
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        spacing={3}
-      >
-        <Grid item>
-          <label>oneTimeDate:</label>
+      {isOneTime && (
+        <Grid
+          item
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          spacing={3}
+        >
+          <Grid item>
+            <label>Date:</label>
+          </Grid>
+          <Grid item>
+            <input
+              value={oneTimeDate}
+              onChange={(e) => setoneTimeDate(e.target.value)}
+              placeholder="oneTimeDate"
+            ></input>
+          </Grid>
         </Grid>
-        <Grid item>
-          <input
-            value={oneTimeDate}
-            onChange={(e) => setoneTimeDate(e.target.value)}
-            placeholder="oneTimeDate"
-          ></input>
+      )}
+      {!isOneTime && (
+        <Grid
+          item
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          spacing={3}
+        >
+          <Grid item>
+            <label>{monthly ? "Monthly" : "Yearly"} Expense?</label>
+          </Grid>
+          <Grid item>
+            <input
+              style={{ transform: "scale(2)" }}
+              checked={true}
+              type="checkbox"
+              onChange={() => setmonthly(!monthly)}
+            ></input>
+          </Grid>
         </Grid>
-      </Grid>
-      <Grid
-        item
-        container
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        spacing={3}
-      >
-        <Grid item>
-          <label>recTimePer:</label>
+      )}
+      {!isOneTime && (
+        <Grid
+          item
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          spacing={3}
+        >
+          <Grid item>
+            <label>Day:</label>
+          </Grid>
+          <Grid item>
+            <input
+              value={reqTimeDay}
+              onChange={(e) => setreqTimeDay(e.target.value)}
+              placeholder="day of expence every month"
+            ></input>
+          </Grid>
         </Grid>
-        <Grid item>
-          <input
-            value={recTimePer}
-            onChange={(e) => setrecTimePer(e.target.value)}
-            placeholder="recTimePer"
-          ></input>
+      )}
+      {!isOneTime && !monthly && (
+        <Grid
+          item
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          spacing={3}
+        >
+          <Grid item>
+            <label>Month:</label>
+          </Grid>
+          <Grid item>
+            <input
+              value={reqTimeMonth}
+              onChange={(e) => setreqTimeMonth(e.target.value)}
+              placeholder="month of expence every year"
+            ></input>
+          </Grid>
         </Grid>
-      </Grid>
-      <Grid
-        item
-        container
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        spacing={3}
-      >
-        <Grid item>
-          <label>reqTimeDay:</label>
-        </Grid>
-        <Grid item>
-          <input
-            value={reqTimeDay}
-            onChange={(e) => setreqTimeDay(e.target.value)}
-            placeholder="reqTimeDay"
-          ></input>
-        </Grid>
-      </Grid>
+      )}
       <Grid
         item
         container
