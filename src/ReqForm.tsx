@@ -1,21 +1,26 @@
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
+import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import "./formStyle.css";
+import domain from "./domain";
+interface GenericFormProps {
+  closeModal: Function;
+}
 
-interface GenericFormProps {}
-
-export default function GenericForm({}: GenericFormProps) {
-  const [amount, setamount] = useState<any>("amount");
+export default function GenericForm({ closeModal }: GenericFormProps) {
+  const [amount, setamount] = useState<any>();
   const [isOneTime, setisOneTime] = useState<any>(false);
-  const [oneTimeDate, setoneTimeDate] = useState<any>(new Date());
+  const [oneTimeDate, setoneTimeDate] = useState<any>(new Date().toISOString());
   const [monthly, setmonthly] = useState<any>(true);
   const [reqTimeDay, setreqTimeDay] = useState<any>();
   const [reqTimeMonth, setreqTimeMonth] = useState<any>();
-  const [departments, setdepartments] = useState<any>("more");
-  const [more, setmore] = useState<any>("more");
-  const [invoice, setinvoice] = useState<any>("invoice");
+  const [department, setdepartment] = useState<any>("");
+  const [more, setmore] = useState<any>("");
+  // const [invoice, setinvoice] = useState<any>("invoice");
+
+  const [message, setMessage] = useState<any>("");
 
   return (
     <Grid
@@ -32,6 +37,25 @@ export default function GenericForm({}: GenericFormProps) {
       </Grid>
       <Grid item>
         <Typography variant="h1">Fill the Form:</Typography>
+      </Grid>
+      <Grid
+        item
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={3}
+      >
+        <Grid item>
+          <label>Amount:</label>
+        </Grid>
+        <Grid item>
+          <input
+            value={amount}
+            onChange={(e) => setamount(e.target.value)}
+            placeholder="amount"
+          ></input>
+        </Grid>
       </Grid>
       <Grid
         item
@@ -147,13 +171,13 @@ export default function GenericForm({}: GenericFormProps) {
         spacing={3}
       >
         <Grid item>
-          <label>departments:</label>
+          <label>Department:</label>
         </Grid>
         <Grid item>
           <input
-            value={departments}
-            onChange={(e) => setdepartments(e.target.value)}
-            placeholder="departments"
+            value={department}
+            onChange={(e) => setdepartment(e.target.value)}
+            placeholder="department"
           ></input>
         </Grid>
       </Grid>
@@ -166,7 +190,7 @@ export default function GenericForm({}: GenericFormProps) {
         spacing={3}
       >
         <Grid item>
-          <label>more:</label>
+          <label>More:</label>
         </Grid>
         <Grid item>
           <input
@@ -176,7 +200,7 @@ export default function GenericForm({}: GenericFormProps) {
           ></input>
         </Grid>
       </Grid>
-      <Grid
+      {/*   <Grid
         item
         container
         direction="row"
@@ -194,6 +218,33 @@ export default function GenericForm({}: GenericFormProps) {
             placeholder="invoice"
           ></input>
         </Grid>
+      </Grid> */}
+      <Grid item>
+        <Button
+          sx={{
+            backgroundColor: "gray",
+            color: "orange",
+            fontSize: "2rem",
+            borderRadius: "10px",
+          }}
+          onClick={async () => {
+            const res = await axios.post(domain + "/reqfin", {
+              amount,
+              isOneTime,
+              oneTimeDate,
+              monthly,
+              reqTimeDay,
+              reqTimeMonth,
+              department,
+              more,
+            });
+            setMessage(res.data._id ? "Success!" : "Error!");
+            setTimeout(() => closeModal(), 1000);
+          }}
+        >
+          Send
+        </Button>
+        <Grid item>{message}</Grid>
       </Grid>
     </Grid>
   );

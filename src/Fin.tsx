@@ -14,10 +14,11 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: "80%",
   height: "85%",
-  bgcolor: "background.paper",
+  bgcolor: "#FFF5DD",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  overflow: "scroll",
 };
 
 export default function Fin() {
@@ -50,8 +51,6 @@ export default function Fin() {
       </Grid>
       <Grid item>
         <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
           open={open}
           onClose={handleClose}
           closeAfterTransition
@@ -62,7 +61,7 @@ export default function Fin() {
         >
           <Fade in={open}>
             <Box sx={style}>
-              <ReqForm />
+              <ReqForm closeModal={handleClose} />
             </Box>
           </Fade>
         </Modal>
