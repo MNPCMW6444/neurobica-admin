@@ -8,7 +8,7 @@ function Home(props) {
 
   useEffect(() => {
     const first = async () => {
-      const res = await Axios.get(domain + "finnum");
+      const res = await Axios.get(domain + "/finnum");
       snum(res.data.r);
     };
     first();
