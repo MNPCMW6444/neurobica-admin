@@ -1,6 +1,19 @@
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import Axios from "axios";
+import domain from "../domain";
 
 function Home(props) {
+  const [num, snum] = useState();
+
+  useEffect(() => {
+    const first = async () => {
+      const res = await Axios.get(domain + "finnum");
+      snum(res.data.r);
+    };
+    first();
+  }, []);
+
   const hrefs = [
     {
       name: "PI Sheet",
@@ -96,6 +109,7 @@ function Home(props) {
           Finance
         </button>
         <br />
+        Requests Made: {num}
         <br />
       </div>
     </div>
