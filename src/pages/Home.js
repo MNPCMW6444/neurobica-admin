@@ -66,8 +66,8 @@ function Home(props) {
         <br /> <br />
         <br />
         <h2>External Links:</h2>
-        {hrefs.map((href) => (
-          <>
+        {hrefs.map((href, i) => (
+          <div key={i}>
             {" "}
             <br />
             <a
@@ -77,7 +77,7 @@ function Home(props) {
             >
               {href.name}
             </a>
-          </>
+          </div>
         ))}
       </div>
       <hr />

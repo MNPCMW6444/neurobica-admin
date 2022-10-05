@@ -157,15 +157,15 @@ export default function Wt(props) {
       <Table>
         <Thead>
           <Tr style={{ backgroundColor: "black" }}>
-            {ttime.map((ttimetype) => (
-              <Th>{ttimetype.type}</Th>
+            {ttime.map((ttimetype, i) => (
+              <Th key={i}>{ttimetype.type}</Th>
             ))}
           </Tr>
         </Thead>
         <Tbody>
           <Tr>
-            {ttime.map((ttimetype) => (
-              <Td>
+            {ttime.map((ttimetype, i) => (
+              <Td key={i}>
                 {ttimetype.running ? (
                   <div>
                     {(convertMsToHM(ttimetype.sum).years &&
@@ -205,8 +205,8 @@ export default function Wt(props) {
             ))}
           </Tr>
           <Tr>
-            {ttime.map((ttimetype) => (
-              <Td>
+            {ttime.map((ttimetype, i) => (
+              <Td key={i}>
                 <div>
                   <button
                     onClick={async () => {
